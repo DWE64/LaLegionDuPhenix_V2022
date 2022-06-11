@@ -1,4 +1,7 @@
-
+.idea/*
+###>docker###
+/docker-compose.override.yml
+###<docker###
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
