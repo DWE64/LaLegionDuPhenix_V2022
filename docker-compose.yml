@@ -1,21 +1,78 @@
 version: '3'
 
 services:
-###> doctrine/doctrine-bundle ###
+  ###> doctrine/doctrine-bundle ###
   database:
-    image: postgres:${POSTGRES_VERSION:-13}-alpine
+    image: 'mysql:latest'
+    container_name: db_ldp
+    restart: always
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ChangeMe}
-      POSTGRES_USER: ${POSTGRES_USER:-symfony}
+      MYSQL_USER: ${USER_DB}
+      MYSQL_PASSWORD: ${USER_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${USER_MDP}
+      MYSQL_DATABASE: ${DATABASE}
+    ports:
+      - '127.0.0.1:3306:3306'
     volumes:
-      - db-data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
+      - db-data:/var/lib/mysql
+  ###< doctrine/doctrine-bundle ###
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin_ldp
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - '127.0.0.1:5451:80'
+    environment:
+      PMA_HOST: database
+
+  maildev:
+    image: maildev/maildev
+    container_name: maildev_docker_ldp
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+    ports:
+      - "127.0.0.1:5452:80"
+    restart: always
+
+  www:
+    #la clé build represente le dossier de pointage ou se trouve le dockerfile
+    build: docker/php
+    container_name: php_ldp
+    restart: always
+    ports:
+      - '127.0.0.1:5453:80'
+    volumes:
+      - ./docker/php/vhosts:/etc/apache2/sites-enabled
+      - ./:/var/www/lalegionduphenix_V2022
+
+  #  node-service:
+  #    build:
+  #      context: docker
+  #      dockerfile: nodeJs/Dockerfile
+  #    container_name: nodejs_ldp
+  #    restart: always
+  #    networks:
+  #      - prod
+  #    ports:
+  #      - 3000:3000
+  #    volumes:
+  #      - docker/front:/var/www/ldp/front
+
+  node:
+    image: node:12-alpine
+    working_dir: /var/www/lalegionduphenix_V2022
+    container_name: nodejs_ldp
+    restart: always
+    volumes:
+      - .:/var/www/lalegionduphenix_V2022
+    command: sh -c 'yarn && yarn run encore prod'
+    depends_on:
+      - www
+
 
 volumes:
-###> doctrine/doctrine-bundle ###
+  ###> doctrine/doctrine-bundle ###
   db-data:
 ###< doctrine/doctrine-bundle ###
