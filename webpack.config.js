@@ -21,6 +21,16 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('vendor', './assets/styles/themeHyper/js/vendor.js')
+    .addEntry('app_template', './assets/styles/themeHyper/js/app.js')
+    .addEntry('demo_dashboard','./assets/styles/themeHyper/js/pages/demo.dashboard.js')
+    .addEntry('register', './assets/js/app/register/registration.js')
+
+    //sortie de plusieur fichier style
+    .addStyleEntry('app_core','./assets/styles/app_core.scss')
+    .addStyleEntry('app-saas','./assets/styles/themeHyper/scss/app.scss')
+    .addStyleEntry('app-dark','./assets/styles/themeHyper/scss/app-dark.scss')
+    .addStyleEntry('icons','./assets/styles/themeHyper/scss/icons.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -56,7 +66,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -69,7 +79,7 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();

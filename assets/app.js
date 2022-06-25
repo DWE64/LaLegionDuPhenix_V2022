@@ -1,12 +1,17 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+//import './styles/app_core.scss';
 
-// any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+require('bootstrap');
+const $ = require('jquery');
 
-// start the Stimulus application
-import './bootstrap';
+
+
+// intégration du theme
+require('./styles/themeHyper/js/vendorCore/bootstrap.bundle.js');
+require('./styles/themeHyper/js/vendor/jquery-jvectormap-1.2.2.min.js');
+require('./styles/themeHyper/js/vendor/jquery-jvectormap-world-mill-en.js');
+require('./styles/themeHyper/js/vendorCore/daterangepicker.js');
+require('./styles/themeHyper/js/vendorCore/select2.min.js');
+
+$(document).ready(function() {
+    $('[data-toggle="popover"]').popover();
+});

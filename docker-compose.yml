@@ -67,7 +67,7 @@ services:
     restart: always
     volumes:
       - .:/var/www/lalegionduphenix_V2022
-    command: sh -c 'yarn && yarn run encore prod'
+    command: sh -c 'yarn && yarn encore dev --watch'
     depends_on:
       - www
 

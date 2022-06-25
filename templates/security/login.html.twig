@@ -1,42 +1,117 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <body class="loading authentication-bg" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+    {# <body>#}
+    <!-- Begin page -->
+    <div class="wrapper">
+        {% include 'basicTemplate/navbar_app/_navbar_left.html.twig' %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+                {%  include 'basicTemplate/navbar_app/_navbar_top.html.twig' %}
+                <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-4 col-lg-5">
+                                <div class="card">
+
+                                    <!-- Logo -->
+                                    <div class="card-header pt-2 pb-2 text-center bg-primary">
+                                        <a href="{{ path('app_home') }}">
+                                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="125"></span>
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body p-4">
+
+                                        <div class="text-center w-75 m-auto">
+                                            <h4 class="text-dark-50 text-center pb-0 fw-bold">{{ 'common.login_send'|trans }}</h4>
+                                            <p class="text-muted mb-4">{{ 'common.ask_login_access'|trans }}</p>
+                                        </div>
+                                        <form method="post">
+                                            {% if error %}
+                                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                            {% endif %}
+
+                                            {% if app.user %}
+                                                <div class="mb-3">
+                                                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                                </div>
+                                            {% endif %}
+                                            <div class="mb-3">
+                                                <label for="emailaddress" class="form-label">{{ 'common.email'|trans }}</label>
+                                                <input type="email" value="{{ last_username }}" name="email" id="emailaddress" class="form-control" autocomplete="email" required autofocus>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <a href="#" class="text-muted float-end"><small>{{ 'common.password_lost'|trans }}</small></a>
+                                                <label for="password" class="form-label">{{ 'common.password'|trans }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input type="password" name="password" id="password" class="form-control" autocomplete="current-password" required>
+                                                    <div class="input-group-text" data-password="false">
+                                                        <span class="password-eye"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="_csrf_token"
+                                                   value="{{ csrf_token('authenticate') }}"
+                                            >
+                                            {#<div class="mb-3 mb-3">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="checkbox-signin" checked>
+                                                    <label class="form-check-label" for="checkbox-signin">Remember me</label>
+                                                </div>
+                                            </div>#}
+
+                                            <div class="mb-3 mb-0 text-center">
+                                                <button class="btn btn-primary" type="submit"> {{ 'common.login_send'|trans }} </button>
+                                            </div>
+
+                                        </form>
+                                    </div> <!-- end card-body -->
+                                </div>
+                                <!-- end card -->
+
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center">
+                                        <p class="text-muted">{{ 'common.ask_account'|trans }} <a href="#" class="text-muted ms-1"><b>{{ 'common.ask_register'|trans }}</b></a></p>
+                                    </div> <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end container -->
+                </div>
+            </div>
+            <!-- content -->
+
+            {% include 'basicTemplate/footer/_footer.html.twig' %}
+
         </div>
-    {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+    </div>
+    <!-- END wrapper -->
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+    {# include 'basicTemplate/navbar_app/_navbar_right.html.twig' #}
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('vendor') }}
+        {{ encore_entry_script_tags('app_template') }}
+    {% endblock %}
+    </body>
 {% endblock %}

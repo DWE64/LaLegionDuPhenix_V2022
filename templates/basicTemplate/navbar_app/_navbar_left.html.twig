@@ -1,0 +1,57 @@
+<!-- ========== Left Sidebar Start ========== -->
+<div class="leftside-menu">
+
+    <!-- LOGO -->
+    <a href="{{ path('app_home') }}" class="logo text-center logo-light">
+        <span class="logo-lg">
+            <img src="{{ asset('/logo/logo_officiel.svg') }}" alt="" height="150">
+        </span>
+        <span class="logo-sm">
+            <img src="{{ asset('/logo/logo_officiel.svg') }}" alt="" height="125">
+        </span>
+    </a>
+
+    <div class="h-100" id="leftside-menu-container" data-simplebar>
+
+        <!--- Sidemenu -->
+        <ul class="side-nav">
+            <li class="side-nav-item">
+                <a href="{{ path('app_home') }}" class="side-nav-link">
+                    <i class="uil-layer-group"></i>
+                    <span> {{ 'home'|trans }} </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="{{ path('app_login') }}" class="side-nav-link">
+                    <i class="uil-layer-group"></i>
+                    <span> {{ 'login'|trans }} </span>
+                </a>
+            </li>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li class="side-nav-item">
+                    <a href="#" class="side-nav-link">
+                        <i class="uil-layer-group"></i>
+                        <span> {# {{ 'user.safe.validation'|trans }} #}</span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="{{ path('app_logout') }}" class="side-nav-link">
+                        <i class="uil-layer-group"></i>
+                        <span> {{ 'logout'|trans }} </span>
+                    </a>
+                </li>
+            {% endif %}
+            <li class="side-nav-item">
+                <a href="#" class="side-nav-link">
+                    <i class="uil-layer-group"></i>
+                    <span> {{ 'mentions.legales'|trans }} </span>
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>
+<!-- Left Sidebar End -->
