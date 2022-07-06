@@ -24,6 +24,7 @@ Encore
     .addEntry('vendor', './assets/styles/themeHyper/js/vendor.js')
     .addEntry('app_template', './assets/styles/themeHyper/js/app.js')
     .addEntry('demo_dashboard','./assets/styles/themeHyper/js/pages/demo.dashboard.js')
+    .addEntry('demo_datatable','./assets/styles/themeHyper/js/pages/demo.datatable-init.js')
     .addEntry('register', './assets/js/app/register/registration.js')
 
     //sortie de plusieur fichier style

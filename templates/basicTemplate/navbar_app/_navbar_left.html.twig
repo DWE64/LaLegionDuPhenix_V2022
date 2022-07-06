@@ -27,13 +27,15 @@
                     <span> {{ 'login'|trans }} </span>
                 </a>
             </li>
-            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if is_granted('ROLE_BUREAU') %}
                 <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
+                    <a href="{{ path('app_home_admin') }}" class="side-nav-link">
                         <i class="uil-layer-group"></i>
-                        <span> {# {{ 'user.safe.validation'|trans }} #}</span>
+                        <span> {{ 'admin.pannel'|trans }}</span>
                     </a>
                 </li>
+            {% endif %}
+            {% if is_granted('ROLE_USER') %}
                 <li class="side-nav-item">
                     <a href="{{ path('app_logout') }}" class="side-nav-link">
                         <i class="uil-layer-group"></i>

@@ -1,0 +1,59 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Hello AdminManageUserController!{% endblock %}
+
+{% block section %}
+<div class="container-fluid">
+
+    <div class="tab-content">
+        <div class="tab-pane show active" id="basic-datatable-preview">
+            <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                <thead>
+                <tr>
+                    <th>email</th>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <th>Role</th>
+                    {% endif %}
+                    <th>Name</th>
+                    <th>firstname</th>
+                    <th>Age</th>
+                    <th>adress</th>
+                    <th>Member Status</th>
+                    <th>Registration date in Association</th>
+                    <th>Is Member</th>
+                    <th>Seniority</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.email }}</td>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <td>{# {{ user.roles }}#} - </td>
+                        {% endif %}
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{# {{ user.birthday }} #} date a convertir</td>
+                        <td>{{ user.adress }} - {{ user.postalCode }} {{ user.city }}</td>
+                        <td>{{ user.memberStatus }}</td>
+                        <td>{# {{ user.associationRegistrationDate }}#} date a convertir</td>
+                        <td>{{ user.isAssociationMember }}</td>
+                        <td>{{ user.memberSeniority }}</td>
+                        <td>{# {{ user.createdAt }}#} date a convertir</td>
+                        <td>{# {{ user.updatedAt }}#} date a convertir</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div> <!-- end preview-->
+
+    </div> <!-- end tab-content-->
+</div>
+{% endblock %}
+
+        {% block javascripts %}
+            {{ parent() }}
+            {{ encore_entry_script_tags('demo_datatable') }}
+        {% endblock %}
