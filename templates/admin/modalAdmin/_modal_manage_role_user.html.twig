@@ -1,0 +1,45 @@
+{% block buttonModalManageRoleUser %}
+    <button type="button" class="btn btn-outline-primary btn-sm btn-modal" data-bs-toggle="modal"
+            data-bs-target="#user-manage-role-modal-{{ user.id }}" data-id="{{ user.id }}">
+        <i class="mdi mdi-pencil-outline"></i>
+    </button>
+{% endblock %}
+{% block modalManageRoleUser %}
+    <div id="user-manage-role-modal-{{ user.id }}" class="modal fade edit-role-modal" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content js-manage-role-user">
+
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="{{ path('app_home_admin') }}">
+                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="125"></span>
+                        </a>
+                    </div>
+
+                    <form id="edit_role_form" class="ps-3 pe-3 edit_role_form" role="form"
+                          method="POST"
+                          action="{{ path('app_admin_manage_role_user_edit',{id: user.id}) }}"
+                          data-url="{{ path('app_admin_manage_role_user_edit',{id: user.id}) }}">
+
+                        <div class="mb-2">
+                            <label for="role" class="form-label">{{ 'admin.user.manage.role'|trans }}</label>
+                            {# <select id="inputState" class="form-select check-oldest load-seniority-{{ user.id }}" data-url="{{ path('app_admin_manage_user_checked_oldest',{id: user.id}) }}">
+                            </select> #}
+                            <select id="role" class="form-select" name="role">
+                                {% for role in allRoles %}
+                                    <option value="{{ role }}">{{ role }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3 text-center">
+                            <button class="btn btn-primary" type="submit">{{ 'admin.user.manage.button_update'|trans }}</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}

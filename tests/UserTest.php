@@ -87,13 +87,13 @@ class UserTest extends TestCase
         $this->assertInstanceOf(User::class, $response);
         $this->assertEquals($value, $this->user->getCity());
     }
-    public function testGetAdress():void
+    public function testGetAddress():void
     {
         $value ='7 chemin de loung';
-        $response = $this->user->setAdress($value);
+        $response = $this->user->setAddress($value);
 
         $this->assertInstanceOf(User::class, $response);
-        $this->assertEquals($value, $this->user->getAdress());
+        $this->assertEquals($value, $this->user->getAddress());
     }
     public function testGetMemberStatus():void
     {

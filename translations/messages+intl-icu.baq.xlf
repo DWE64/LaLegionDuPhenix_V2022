@@ -1,70 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+  <file source-language="fr" target-language="baq" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="2LF5Eg5" resname="user.safe">
-        <source>user.safe</source>
-        <target>__user.safe</target>
-      </trans-unit>
-      <trans-unit id="QoghNQ6" resname="login">
-        <source>login</source>
-        <target>__login</target>
-      </trans-unit>
-      <trans-unit id="rFZJyJT" resname="user.safe.validation">
-        <source>user.safe.validation</source>
-        <target>__user.safe.validation</target>
-      </trans-unit>
-      <trans-unit id="ACcM9j_" resname="logout">
-        <source>logout</source>
-        <target>__logout</target>
-      </trans-unit>
-      <trans-unit id="QqV4.6Q" resname="mentions.legales">
-        <source>mentions.legales</source>
-        <target>__mentions.legales</target>
-      </trans-unit>
-      <trans-unit id="HgHdfrZ" resname="french.language">
-        <source>french.language</source>
-        <target>__french.language</target>
-      </trans-unit>
-      <trans-unit id="tfyvCKY" resname="english.language">
-        <source>english.language</source>
-        <target>__english.language</target>
-      </trans-unit>
-      <trans-unit id="X6vUoqv" resname="ukrainian.language">
-        <source>ukrainian.language</source>
-        <target>__ukrainian.language</target>
-      </trans-unit>
-      <trans-unit id="TL0W75Z" resname="common.login_send">
-        <source>common.login_send</source>
-        <target>__common.login_send</target>
-      </trans-unit>
-      <trans-unit id="vSTsB0k" resname="common.ask_login_access">
-        <source>common.ask_login_access</source>
-        <target>__common.ask_login_access</target>
-      </trans-unit>
-      <trans-unit id="H9ihxDB" resname="common.email">
-        <source>common.email</source>
-        <target>__common.email</target>
-      </trans-unit>
-      <trans-unit id="5YNNrhw" resname="common.password_lost">
-        <source>common.password_lost</source>
-        <target>__common.password_lost</target>
-      </trans-unit>
-      <trans-unit id="A0qOHkS" resname="common.password">
-        <source>common.password</source>
-        <target>__common.password</target>
-      </trans-unit>
-      <trans-unit id="u9bgzJ8" resname="common.ask_account">
-        <source>common.ask_account</source>
-        <target>__common.ask_account</target>
-      </trans-unit>
-      <trans-unit id="yZ8nq8Y" resname="common.ask_register">
-        <source>common.ask_register</source>
-        <target>__common.ask_register</target>
-      </trans-unit>
       <trans-unit id="g8UfIa_" resname="page.admin.home">
         <source>page.admin.home</source>
         <target>__page.admin.home</target>
@@ -145,6 +85,10 @@
         <source>admin.user.manage.city</source>
         <target>__admin.user.manage.city</target>
       </trans-unit>
+      <trans-unit id="QoghNQ6" resname="login">
+        <source>login</source>
+        <target>__login</target>
+      </trans-unit>
       <trans-unit id="bNf4bJZ" resname="admin.home">
         <source>admin.home</source>
         <target>__admin.home</target>
@@ -157,6 +101,18 @@
         <source>home.return</source>
         <target>__home.return</target>
       </trans-unit>
+      <trans-unit id="ACcM9j_" resname="logout">
+        <source>logout</source>
+        <target>__logout</target>
+      </trans-unit>
+      <trans-unit id="HgHdfrZ" resname="french.language">
+        <source>french.language</source>
+        <target>__french.language</target>
+      </trans-unit>
+      <trans-unit id="tfyvCKY" resname="english.language">
+        <source>english.language</source>
+        <target>__english.language</target>
+      </trans-unit>
       <trans-unit id="TqFAWIF" resname="home">
         <source>home</source>
         <target>__home</target>
@@ -164,6 +120,38 @@
       <trans-unit id="30eucQh" resname="admin.pannel">
         <source>admin.pannel</source>
         <target>__admin.pannel</target>
+      </trans-unit>
+      <trans-unit id="QqV4.6Q" resname="mentions.legales">
+        <source>mentions.legales</source>
+        <target>__mentions.legales</target>
+      </trans-unit>
+      <trans-unit id="TL0W75Z" resname="common.login_send">
+        <source>common.login_send</source>
+        <target>__common.login_send</target>
+      </trans-unit>
+      <trans-unit id="vSTsB0k" resname="common.ask_login_access">
+        <source>common.ask_login_access</source>
+        <target>__common.ask_login_access</target>
+      </trans-unit>
+      <trans-unit id="H9ihxDB" resname="common.email">
+        <source>common.email</source>
+        <target>__common.email</target>
+      </trans-unit>
+      <trans-unit id="5YNNrhw" resname="common.password_lost">
+        <source>common.password_lost</source>
+        <target>__common.password_lost</target>
+      </trans-unit>
+      <trans-unit id="A0qOHkS" resname="common.password">
+        <source>common.password</source>
+        <target>__common.password</target>
+      </trans-unit>
+      <trans-unit id="u9bgzJ8" resname="common.ask_account">
+        <source>common.ask_account</source>
+        <target>__common.ask_account</target>
+      </trans-unit>
+      <trans-unit id="yZ8nq8Y" resname="common.ask_register">
+        <source>common.ask_register</source>
+        <target>__common.ask_register</target>
       </trans-unit>
     </body>
   </file>

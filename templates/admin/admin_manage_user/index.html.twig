@@ -1,0 +1,100 @@
+{% extends 'admin/base.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_user.html.twig' %}
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    {% use 'admin/modalAdmin/_modal_manage_role_user.html.twig' %}
+{% endif %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block section %}
+    <div class="container-fluid">
+
+        <div class="tab-content">
+            <div class="tab-pane show active" id="basic-datatable-preview">
+                <h1>{{ title }}</h1>
+                <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>{{ 'admin.user.manage.email'|trans }}</th>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <th>{{ 'admin.user.manage.role'|trans }}</th>
+                        {% endif %}
+                        <th>{{ 'admin.user.manage.member_status'|trans }}</th>
+                        <th>{{ 'admin.user.manage.registration_date_in_association'|trans }}</th>
+                        <th>{{ 'admin.user.manage.is_member'|trans }}</th>
+                        <th>{{ 'admin.user.manage.created_at'|trans }}</th>
+                        <th>{{ 'admin.user.manage.updated_at'|trans }}</th>
+                        <th>{{ 'admin.user.manage.name'|trans }}</th>
+                        <th>{{ 'admin.user.manage.firstname'|trans }}</th>
+                        <th>{{ 'admin.user.manage.birthday'|trans }}</th>
+                        <th>{{ 'admin.user.manage.address'|trans }}</th>
+                        <th>{{ 'admin.user.manage.seniority'|trans }}</th>
+                        <th>{{ 'admin.user.manage.action'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.email }}</td>
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <td>
+                                    <p class="user-roles-{{ user.id }}">
+                                        {% for role in user.roles %}
+                                            {{ role }},
+                                        {% endfor %}
+                                    </p>
+                                    {% block buttonModalManageRoleUser %}
+                                        {{ parent() }}
+                                    {% endblock %}
+                                </td>
+                            {% endif %}
+                            <td class="user-memberStatus-{{ user.id }}">{{ user.memberStatus }}</td>
+                            <td class="user-associationRegistrationDate-{{ user.id }}">{{ (user.associationRegistrationDate is not null)? user.associationRegistrationDate|date("d/m/Y") : '-' }}</td>
+                            <td>
+                                <div>
+                                    <input type="checkbox" id="switch{{ user.id }}"
+                                           name="switch-button-user-{{ user.id }}" {{ (user.isAssociationMember)? 'checked':'' }}
+                                           data-switch="success"
+                                           data-url="{{ path('app_admin_manage_user_change_status_member_association',{id: user.id}) }}"
+                                           class="switch_is_member_association"
+                                    />
+                                    <label for="switch{{ user.id }}" data-on-label="Yes" data-off-label="No"
+                                           class="mb-0 d-block"></label>
+                                </div>
+                            </td>
+                            <td>{{ user.createdAt|date("d/m/Y") }}</td>
+                            <td class="user-updatedAt-{{ user.id }}">{{ (user.updatedAt is not null)? user.updatedAt|date("d/m/Y") : '-' }}</td>
+                            <td class="user-name-{{ user.id }}">{{ user.name }}</td>
+                            <td class="user-firstname-{{ user.id }}">{{ user.firstname }}</td>
+                            <td class="user-birthday-{{ user.id }}">{{ (user.birthday is not null)? user.birthday|date("d/m/Y") : '-' }}</td>
+                            <td class="user-address-{{ user.id }}">{{ user.address }} - {{ user.postalCode }} {{ user.city }}</td>
+                            <td class="user-member-seniority-{{ user.id }}">
+                                {{ (user.memberSeniority is not null)? user.memberSeniority : '-' }}
+                            </td>
+                            <td>
+                                {% block buttonModalManageUser %}
+                                    {{ parent() }}
+                                {% endblock %}
+                            </td>
+                            {% block modalManageUser %}
+                                {{ parent() }}
+                            {% endblock %}
+                            {% block modalManageRoleUser %}
+                                {{ parent() }}
+                            {% endblock %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div> <!-- end preview-->
+
+        </div> <!-- end tab-content-->
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('demo_datatable') }}
+    {{ encore_entry_script_tags('modalManageUserApp') }}
+    {{ encore_entry_script_tags('adminManageUser') }}
+{% endblock %}
