@@ -1,0 +1,72 @@
+{% block buttonModalManageUser %}
+    <button type="button" class="btn btn-outline-primary btn-sm btn-modal" data-bs-toggle="modal"
+            data-bs-target="#user-manage-modal-{{ user.id }}" data-id="{{ user.id }}">
+        <i class="mdi mdi-pencil-outline"></i>
+    </button>
+{% endblock %}
+{% block modalManageUser %}
+    <div id="user-manage-modal-{{ user.id }}" class="modal fade check-seniority-modal" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content js-manage-user">
+
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="{{ path('app_home_admin') }}">
+                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="125"></span>
+                        </a>
+                    </div>
+
+                    <form id="edit_user_form" class="ps-3 pe-3 edit_user_form" role="form"
+                          method="POST"
+                          action="{{ path('app_admin_manage_user_edit',{id: user.id}) }}"
+                          data-url="{{ path('app_admin_manage_user_edit',{id: user.id}) }}">
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">{{ 'admin.user.manage.name'|trans }}</label>
+                            <input type="text" id="name" name="name" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="firstname" class="form-label">{{ 'admin.user.manage.firstname'|trans }}</label>
+                            <input type="text" id="firstname" name="firstname" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="birthday" class="form-label">{{ 'admin.user.manage.birthday'|trans }}</label>
+                            <input class="form-control" id="birthday" type="date" name="birthday">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">{{ 'admin.user.manage.address'|trans }}</label>
+                            <input type="text" id="address" class="form-control" name="address">
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="mb-3 col-md-6">
+                                <label for="zip" class="form-label">{{ 'admin.user.manage.zip'|trans }}</label>
+                                <input type="text" class="form-control" id="zip" name="zip">
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="city" class="form-label">{{ 'admin.user.manage.city'|trans }}</label>
+                                <input type="text" class="form-control" id="city" name="city">
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="seniority" class="form-label">{{ 'admin.user.manage.seniority'|trans }}</label>
+                            {# <select id="inputState" class="form-select check-oldest load-seniority-{{ user.id }}" data-url="{{ path('app_admin_manage_user_checked_oldest',{id: user.id}) }}">
+                            </select> #}
+                            <select id="seniority" class="form-select" name="seniority">
+                                {% for status in seniorityStatus %}
+                                    <option value="{{ status }}">{{ status }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3 text-center">
+                            <button class="btn btn-primary" type="submit">{{ 'admin.user.manage.button_update'|trans }}</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}

@@ -27,6 +27,12 @@ Encore
     .addEntry('demo_datatable','./assets/styles/themeHyper/js/pages/demo.datatable-init.js')
     .addEntry('register', './assets/js/app/register/registration.js')
 
+    /*
+     * admin user manage
+     */
+    .addEntry('modalManageUserApp', './assets/js/admin/manageUser/modalManageUserApp.js')
+    .addEntry('adminManageUser', './assets/js/admin/manageUser/manageUser.js')
+
     //sortie de plusieur fichier style
     .addStyleEntry('app_core','./assets/styles/app_core.scss')
     .addStyleEntry('app-saas','./assets/styles/themeHyper/scss/app.scss')

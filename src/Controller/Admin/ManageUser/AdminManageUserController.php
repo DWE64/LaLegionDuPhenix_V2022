@@ -2,14 +2,22 @@
 
 namespace App\Controller\Admin\ManageUser;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Service\StatusService;
+use DateTime;
+use DateTimeImmutable;
+use JetBrains\PhpStorm\Deprecated;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Config\Framework\SerializerConfig;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[IsGranted('ROLE_BUREAU')]
+#[IsGranted('ROLE_STAFF')]
 class AdminManageUserController extends AbstractController
 {
     private TranslatorInterface $translator;
@@ -24,10 +32,233 @@ class AdminManageUserController extends AbstractController
     #[Route('/admin/manage/user', name: 'app_admin_manage_user')]
     public function index(): Response
     {
-        return $this->render('admin/admin_manage_user/index.html.twig', [
-            'title' => $this->translator->trans('page.admin.list_user'),
-            'users' => $this->userRepository->findAll()
-        ]);
+        return $this->render(
+            'admin/admin_manage_user/index.html.twig',
+            [
+                'title' => $this->translator->trans('page.admin.list_user'),
+                'users' => $this->userRepository->findAll(),
+                'seniorityStatus' => [
+                    StatusService::MEMBER_NEW,
+                    StatusService::MEMBER_OLD
+                ],
+                'allRoles' => [
+                    'ROLE_PLAYER',
+                    'ROLE_GAMEMASTER',
+                    'ROLE_MEMBER_REPRESENT',
+                    'ROLE_STAFF'
+                ]
+            ]
+        );
     }
 
+    #[Route('/admin/manager/user/{id}/change_status_is_association_member',
+        name: 'app_admin_manage_user_change_status_member_association',
+        methods: [
+            'GET',
+            'POST'
+        ]
+    )]
+    public function changeStatusMemberAssociation(
+        Request $request,
+        User $user
+    ): JsonResponse {
+        if ($request->isXmlHttpRequest()) {
+            $date = new DateTimeImmutable('now');
+
+            if ($user->isIsAssociationMember()) {
+                $user->setIsAssociationMember(false);
+                $user->setMemberStatus(StatusService::MEMBER_NOT_REGISTER);
+                $user->setAssociationRegistrationDate(null);
+                $message = [
+                    'id' => $user->getId(),
+                    'status' => StatusService::MEMBER_INACTIVE,
+                    'updatedAt' => $date->format('d/m/Y'),
+                    'associationRegistrationDate' => '-',
+                    'memberStatus' => StatusService::MEMBER_NOT_REGISTER
+                ];
+            } else {
+                $user->setIsAssociationMember(true);
+                $registrationDate = new DateTime('now');
+                $user->setMemberStatus(StatusService::MEMBER_REGISTER);
+                $user->setAssociationRegistrationDate($registrationDate);
+                $message = [
+                    'id' => $user->getId(),
+                    'status' => StatusService::MEMBER_ACTIVE,
+                    'updatedAt' => $date->format('d/m/Y'),
+                    'associationRegistrationDate' => $registrationDate->format('d/m/Y'),
+                    'memberStatus' => StatusService::MEMBER_REGISTER
+                ];
+            }
+
+            $user->setUpdatedAt($date);
+            $this->userRepository->add($user, true);
+
+            return new JsonResponse($message, Response::HTTP_OK, []);
+        } else {
+            $message = Response::HTTP_NOT_MODIFIED;
+            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+        }
+    }
+
+    #[Route('/admin/manager/user/{id}/checked_oldest',
+        name: 'app_admin_manage_user_checked_oldest',
+        methods: [
+            'GET'
+        ]
+    )]
+    #[Deprecated]
+    public function checkedOldest(
+        Request $request,
+        User $user
+    ): JsonResponse {
+        if ($request->isXmlHttpRequest()) {
+            if ($user->getMemberSeniority() != null) {
+                $arrayStatus = ($user->getMemberSeniority(
+                    ) === StatusService::MEMBER_NEW) ? [StatusService::MEMBER_OLD] : [StatusService::MEMBER_NEW];
+            } else {
+                $arrayStatus = [
+                    StatusService::MEMBER_NEW,
+                    StatusService::MEMBER_OLD
+                ];
+            }
+            $message = [
+                'id' => $user->getId(),
+                'seniority' => $arrayStatus
+            ];
+
+            return new JsonResponse($message, Response::HTTP_OK, []);
+        } else {
+            $message = Response::HTTP_NOT_MODIFIED;
+            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+        }
+    }
+
+    #[Route('/admin/manager/user/{id}/edit',
+        name: 'app_admin_manage_user_edit',
+        methods: [
+            'GET',
+            'POST',
+            'UPDATE'
+        ]
+    )]
+    public function editUser(
+        Request $request,
+        User $user
+    ): JsonResponse {
+        if ($request->isXmlHttpRequest()) {
+            $date = new DateTimeImmutable('now');
+            $message = [
+                'id' => $user->getId(),
+                'updatedAt' => $date->format('d/m/Y')
+            ];
+            if ($request->request->get('name')) {
+                $user->setName($request->request->get('name'));
+                $message += [
+                    'name' => $user->getName()
+                ];
+            }
+            if ($request->request->get('firstname')) {
+                $user->setFirstname($request->request->get('firstname'));
+                $message += [
+                    'firstname' => $user->getFirstname()
+                ];
+            }
+            if ($request->request->get('birthday')) {
+                $birthday = new DateTime($request->request->get('birthday'));
+                $user->setBirthday($birthday);
+                $message += [
+                    'birthday' => $user->getBirthday()->format('d/m/Y')
+                ];
+            }
+            if ($request->request->get('address')) {
+                $user->setAddress($request->request->get('address'));
+                $message += [
+                    'address' => $user->getAddress()
+                ];
+            }
+            if ($request->request->get('city')) {
+                $user->setCity($request->request->get('city'));
+                $message += [
+                    'city' => $user->getCity()
+                ];
+            }
+            if ($request->request->get('zip')) {
+                $user->setPostalCode($request->request->get('zip'));
+                $message += [
+                    'zip' => $user->getPostalCode()
+                ];
+            }
+            if ($request->request->get('seniority')) {
+                $status = ($request->request->get('seniority')===StatusService::MEMBER_NEW)? StatusService::MEMBER_NEW : StatusService::MEMBER_OLD;
+                $user->setMemberSeniority($status);
+                $message += [
+                    'member-seniority' => $user->getMemberSeniority()
+                ];
+            }
+
+            $user->setUpdatedAt($date);
+            $this->userRepository->add($user, true);
+
+            return new JsonResponse($message, Response::HTTP_OK, []);
+        } else {
+            $message = Response::HTTP_NOT_MODIFIED;
+            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+        }
+    }
+
+    #[Route('/admin/manager/user/{id}/edit/role',
+        name: 'app_admin_manage_role_user_edit',
+        methods: [
+            'GET',
+            'POST',
+            'UPDATE'
+        ]
+    )]
+    #[IsGranted('ROLE_SUPER_ADMIN')]
+    public function editRoleUser(
+        Request $request,
+        User $user
+    ): JsonResponse {
+        if ($request->isXmlHttpRequest()) {
+            $date = new DateTimeImmutable('now');
+            $message = [
+                'id' => $user->getId(),
+                'updatedAt' => $date->format('d/m/Y')
+            ];
+            if ($request->request->get('role')) {
+                $userRole=$user->getRoles();
+                $authorization=true;
+
+                foreach ($userRole as $role){
+                    if($role==="ROLE_SUPER_ADMIN"){
+                        $authorization=false;
+                        break;
+                    }
+                }
+                if(!$authorization){
+                    $message="assign role forbidden, impossible to change role SUPER ADMIN";
+                    return new JsonResponse($message, Response::HTTP_FORBIDDEN, []);
+                }else{
+                    $role=['ROLE_USER', $request->request->get('role')];
+                    $user->setRoles($role);
+                }
+                $this->userRepository->add($user, true);
+                $listRole='';
+                foreach ($user->getRoles() as $role){
+                    $listRole.=$role.' - ';
+                }
+                $message += [
+                    'roles' => $listRole
+                ];
+            }
+
+            $user->setUpdatedAt($date);
+            $this->userRepository->add($user, false);
+
+            return new JsonResponse($message, Response::HTTP_OK, []);
+        } else {
+            $message = Response::HTTP_NOT_MODIFIED;
+            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+        }
+    }
 }

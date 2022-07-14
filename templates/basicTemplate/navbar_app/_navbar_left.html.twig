@@ -27,7 +27,7 @@
                     <span> {{ 'login'|trans }} </span>
                 </a>
             </li>
-            {% if is_granted('ROLE_BUREAU') %}
+            {% if is_granted('ROLE_STAFF') %}
                 <li class="side-nav-item">
                     <a href="{{ path('app_home_admin') }}" class="side-nav-link">
                         <i class="uil-layer-group"></i>

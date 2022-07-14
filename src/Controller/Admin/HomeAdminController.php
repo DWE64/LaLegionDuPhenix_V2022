@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[IsGranted('ROLE_BUREAU')]
+#[IsGranted('ROLE_STAFF')]
 class HomeAdminController extends AbstractController
 {
     private TranslatorInterface $translator;
