@@ -33,6 +33,12 @@ Encore
     .addEntry('modalManageUserApp', './assets/js/admin/manageUser/modalManageUserApp.js')
     .addEntry('adminManageUser', './assets/js/admin/manageUser/manageUser.js')
 
+    /*
+     * admin game manage
+     */
+    .addEntry('modalManageGameApp', './assets/js/admin/manageGame/modalManageGameApp.js')
+    .addEntry('adminManageGame', './assets/js/admin/manageGame/manageGame.js')
+
     //sortie de plusieur fichier style
     .addStyleEntry('app_core','./assets/styles/app_core.scss')
     .addStyleEntry('app-saas','./assets/styles/themeHyper/scss/app.scss')

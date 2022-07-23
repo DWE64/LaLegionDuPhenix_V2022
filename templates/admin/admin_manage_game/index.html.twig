@@ -1,0 +1,77 @@
+{% extends 'admin/base.html.twig' %}
+
+{% use 'admin/modalAdmin/_modal_manage_game_add.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_add_player.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_delete_player.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_change_status.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_edit.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block section %}
+<div class="container-fluid js-manage-game">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h1 class="page-title">{{ title }}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row mb-2">
+        <div class="col-sm-4">
+            {% block buttonModalManageGameAdd %}
+                {{ parent() }}
+            {% endblock %}
+        </div>
+        <div class="col-sm-8">
+            <div class="text-sm-end">
+                <div class="btn-group mb-3">
+                    <button type="button" class="btn btn-primary button-filter" data-filter="all">{{ 'admin.game.filter_all'|trans }}</button>
+                </div>
+                <div class="btn-group mb-3 ms-1">
+                    <button type="button" class="btn btn-light button-filter" data-filter="NEW_GAME">{{ 'admin.game.filter_new'|trans }}</button>
+                    <button type="button" class="btn btn-light button-filter" data-filter="ACTIVE_GAME">{{ 'admin.game.filter_ongoing'|trans }}</button>
+                    <button type="button" class="btn btn-light button-filter" data-filter="FINISH_GAME">{{ 'admin.game.filter_finish'|trans }}</button>
+                </div>
+            </div>
+        </div><!-- end col-->
+    </div>
+    <!-- end row-->
+
+    <div class="row list-game">
+        {% if games is not empty %}
+            {% for game in games %}
+                {% if game.picture is defined and game.picture is not null %}
+                    {% include 'admin/admin_manage_game/_template_game_card_with_picture.html.twig' %}
+                {% else %}
+                    {% include 'admin/admin_manage_game/_template_game_card_without_picture.html.twig' %}
+                {% endif %}
+
+                {% block modalManageGameEdit %}
+                    {{ parent() }}
+                {% endblock %}
+                {% block modalManageGameAddPlayer %}
+                    {{ parent() }}
+                {% endblock %}
+                {% block modalManageGameDeletePlayer %}
+                    {{ parent() }}
+                {% endblock %}
+                {% block modalManageGameChangeStatus %}
+                    {{ parent() }}
+                {% endblock %}
+            {% endfor %}
+        {% endif %}
+        {% block modalManageGameAdd %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+    {% endblock %}
+    {% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('modalManageGameApp') }}
+    {{ encore_entry_script_tags('adminManageGame') }}
+{% endblock %}

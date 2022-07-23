@@ -46,11 +46,14 @@ class Game
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $updatedAt;
 
-    #[ORM\ManyToMany(targetEntity: StatusUserInGame::class, mappedBy: 'games')]
+    #[ORM\ManyToMany(targetEntity: StatusUserInGame::class, mappedBy: 'games', cascade: ['persist', 'remove'])]
     private $statusUserInGames;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private $gameMasterCommentary;
+
+    #[ORM\OneToOne(inversedBy: 'game', targetEntity: GamePicture::class, cascade: ['persist', 'remove'])]
+    private $picture;
 
     public function __construct()
     {
@@ -231,6 +234,18 @@ class Game
     public function setGameMasterCommentary(?string $gameMasterCommentary): self
     {
         $this->gameMasterCommentary = $gameMasterCommentary;
+
+        return $this;
+    }
+
+    public function getPicture(): ?GamePicture
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?GamePicture $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

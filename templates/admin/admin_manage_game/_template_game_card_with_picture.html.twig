@@ -1,0 +1,113 @@
+{% use 'admin/modalAdmin/_modal_manage_game_edit.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_add_player.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_delete_player.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_change_status.html.twig' %}
+
+<div class="col-md-6 col-xxl-3 js-filter js-manage-game-delete game-{{ game.id }}" id="game-{{ game.id }}"
+     data-id="game-{{ game.id }}"
+     data-value="{{ game.id }}">
+    <!-- project card -->
+    <div class="card d-block">
+        <!-- project-thumbnail -->
+        {% if game.picture.gamePicture is not null %}
+            <img class="card-img-top game-picture-{{ game.id }}"
+                 src="{{ asset('pictures/games/' ~ game.picture.gamePicture) }}" alt="project image cap">
+        {% else %}
+            <img class="card-img-top game-picture-{{ game.id }}"
+                 src="{{ asset('pictures/games/defaultGamePicture.jpg') }}" alt="project image cap">
+        {% endif %}
+        <div class="card-img-overlay">
+            {% if game.gameStatus == 'FINISH_GAME' %}
+                <div class="badge bg-success mb-3 game-status-{{ game.id }}"
+                     data-value="{{ game.gameStatus }}">{{ 'common.game.finish'|trans }}</div>
+            {% elseif game.gameStatus == 'ACTIVE_GAME' %}
+                <div class="badge bg-primary mb-3 game-status-{{ game.id }}"
+                     data-value="{{ game.gameStatus }}">{{ 'common.game.ongoing'|trans }}</div>
+            {% else %}
+                <div class="badge bg-warning mb-3 game-status-{{ game.id }}"
+                     data-value="{{ game.gameStatus }}">{{ 'common.game.new'|trans }}</div>
+            {% endif %}
+        </div>
+
+        <div class="card-body position-relative">
+            <div class="dropdown card-widgets">
+                <a href="#" class="dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="dripicons-dots-3"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <!-- item-->
+                    {% block buttonModalManageGameEdit %}
+                        {{ parent() }}
+                    {% endblock %}
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item delete-game"
+                       data-url="{{ path('app_admin_manage_game_delete',{gameId: game.id}) }}"><i
+                                class="mdi mdi-delete me-1"></i>{{ 'admin.game.delete'|trans }}</a>
+                    <!-- item-->
+                    {% block buttonModalManageGameAddPlayer %}
+                        {{ parent() }}
+                    {% endblock %}
+                    <!-- item-->
+                    {% block buttonModalManageGameDeletePlayer %}
+                        {{ parent() }}
+                    {% endblock %}
+                    <!-- item-->
+                    {% block buttonModalManageGameChangeStatus %}
+                        {{ parent() }}
+                    {% endblock %}
+                </div>
+            </div>
+            <!-- project title-->
+            <h4 class="mt-0">
+                <a href="{{ path('app_admin_manage_game_view',{gameId: game.id}) }}"
+                   class="text-title game-title-{{ game.id }}">{{ game.title }}</a>
+            </h4>
+            <p class="text-muted font-12 mb-3">{{ 'common.game.master'|trans }} <span
+                        class="game-gameMaster-{{ game.id }}">{{ game.gameMaster.firstname }} {{ game.gameMaster.name }}</span>
+            </p>
+            <p class="text-muted font-13 mb-3 game-description-{{ game.id }}">{{ game.description }}
+            </p>
+            <p class="text-muted font-13 mb-3">
+                <i class="mdi mdi-account-minus me-1"></i> : <span
+                        class="game-minPlaceGame-{{ game.id }}">{{ game.minGamePlace }}</span>
+            </p>
+            <p class="text-muted font-13 mb-3">
+                <i class="mdi mdi-account-multiple-plus me-1"></i> : <span
+                        class="game-maxPlaceGame-{{ game.id }}">{{ game.maxGamePlace }}</span>
+            </p>
+            <p class="text-muted font-13 mb-3">
+                {{ 'common.game.assignedPlace'|trans }} <span
+                        class="game-assignedGamePlace-{{ game.id }}">{{ game.assignedPlace }}</span> / <span
+                        class="game-maxPlaceGame-{{ game.id }}">{{ game.maxGamePlace }}</span>
+            </p>
+
+            <!-- project detail-->
+            <div class="mb-3" id="tooltip-container">
+                {% if game.players is defined and game.players is not empty %}
+                    {% for user in game.players %}
+                        <a href="javascript:void(0);" data-bs-container="#tooltip-container7" data-bs-toggle="tooltip"
+                           data-bs-placement="top" title="{{ user.name }} {{ user.firstname }}" class="d-inline-block">
+                            {% if user.profilPicture is not null and user.profilPicture.profilPicture is not null %}
+                                <img src="{{ asset('pictures/users/' ~ user.profilPicture.profilPicture) }}"
+                                     class="rounded-circle avatar-xs" alt="friend">
+                            {% else %}
+                                <img src="{{ asset('pictures/users/imgProfilDefault.jpg') }}"
+                                     class="rounded-circle avatar-xs" alt="friend">
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div> <!-- end card-body-->
+
+        <div class="card-footer">
+            <p class="text-muted font-11 mb-0">
+                {{ 'admin.game.createdAt'|trans }} {{ game.createdAt|date("d/m/Y") }}
+            </p>
+            <p class="text-muted font-11">
+                {{ 'admin.game.updatedAt'|trans }} <span
+                        class="game-updatedAt-{{ game.id }}">{{ (game.updatedAt is not null)? game.updatedAt|date("d/m/Y") : '-' }}</span>
+            </p>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->

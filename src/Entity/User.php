@@ -69,8 +69,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'players')]
     private $playersGames;
 
-    #[ORM\ManyToMany(targetEntity: StatusUserInGame::class, mappedBy: 'user')]
+    #[ORM\ManyToMany(targetEntity: StatusUserInGame::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
     private $statusUserInGames;
+
+    #[ORM\OneToOne(inversedBy: 'user', targetEntity: ProfilPicture::class, cascade: ['persist', 'remove'])]
+    private $profilPicture;
 
     public function __construct()
     {
@@ -376,6 +379,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->statusUserInGames->removeElement($statusUserInGame)) {
             $statusUserInGame->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getProfilPicture(): ?ProfilPicture
+    {
+        return $this->profilPicture;
+    }
+
+    public function setProfilPicture(?ProfilPicture $profilPicture): self
+    {
+        $this->profilPicture = $profilPicture;
 
         return $this;
     }

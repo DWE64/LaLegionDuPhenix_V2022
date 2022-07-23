@@ -1,0 +1,67 @@
+{% block buttonModalManageGameAdd %}
+    <button type="button" class="btn btn-danger rounded-pill btn-modal" data-bs-toggle="modal"
+            data-bs-target="#game-manage-modal-add">
+        <i class="mdi mdi-plus"></i>{{ 'admin.game.add_game'|trans }}
+    </button>
+{% endblock %}
+{% block modalManageGameAdd %}
+    <div id="game-manage-modal-add" class="modal fade game-manage-modal-add" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content js-manage-game-add">
+
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="{{ path('app_home_admin') }}">
+                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="125"></span>
+                        </a>
+                    </div>
+
+                    <form id="add_game_form" class="ps-3 pe-3 add_game_form" role="form"
+                          method="POST"
+                          action="{{ path('app_admin_manage_game_add') }}"
+                          data-url="{{ path('app_admin_manage_game_add') }}">
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">{{ 'admin.game.manage.title'|trans }}</label>
+                            <input type="text" id="title" name="title" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description"
+                                   class="form-label">{{ 'admin.game.manage.description'|trans }}</label>
+                            <textarea class="form-control" id="description" name="description" rows="10"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gameMaster"
+                                   class="form-label">{{ 'admin.game.manage.game_master'|trans }}</label>
+                            <select class="form-select" id="gameMaster" name="gameMaster">
+                                {% for user in users %}
+                                    <option value="{{ user.id }}">{{ user.firstname }} {{ user.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="row g-2">
+                            <div class="mb-3 col-md-6">
+                                <label for="minGamePlace"
+                                       class="form-label">{{ 'admin.game.manage.min_game_place'|trans }}</label>
+                                <input class="form-control" id="minGamePlace" type="number" name="minGamePlace">
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="maxGamePlace"
+                                       class="form-label">{{ 'admin.game.manage.max_game_place'|trans }}</label>
+                                <input class="form-control" id="maxGamePlace" type="number" name="maxGamePlace">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <button class="btn btn-primary"
+                                    type="submit">{{ 'admin.game.manage.button_add'|trans }}</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}

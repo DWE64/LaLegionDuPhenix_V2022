@@ -1,0 +1,45 @@
+{% block buttonModalManageGameChangeStatus %}
+    <button type="button" class="dropdown-item btn btn-modal" data-bs-toggle="modal"
+            data-bs-target="#game-manage-modal-change-status-{{ game.id }}">
+        <i class="mdi mdi-cog-outline"></i> {{ 'admin.game.change_status'|trans }}
+    </button>
+{% endblock %}
+{% block modalManageGameChangeStatus %}
+    <div id="game-manage-modal-change-status-{{ game.id }}" class="modal fade game-manage-modal-change-status-{{ game.id }}" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content js-manage-game-change-status">
+
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="{{ path('app_home_admin') }}">
+                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="125"></span>
+                        </a>
+                    </div>
+
+                    <form id="change_status_game_form" class="ps-3 pe-3 change_status_game_form" role="form"
+                          method="POST"
+                          action="{{ path('app_admin_manage_game_change_status',{gameId: game.id}) }}"
+                          data-url="{{ path('app_admin_manage_game_change_status',{gameId: game.id}) }}"
+                          data-id-game="{{ game.id }}"
+                    >
+                        <div class="mb-2">
+                            <label for="statusGame" class="form-label">{{ 'admin.game.manage.change_status_game'|trans }}</label>
+                            <select id="statusGame" class="form-select" name="statusGame">
+                                {% for status in allStatus %}
+                                    <option value="{{ status }}">{{ status }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3 text-center">
+                            <button class="btn btn-primary"
+                                    type="submit">{{ 'admin.game.manage.button_change_status'|trans }}</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}
