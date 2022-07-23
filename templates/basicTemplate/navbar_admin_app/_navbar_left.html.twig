@@ -16,7 +16,7 @@
         <!--- Sidemenu -->
         <ul class="side-nav">
             <li class="side-nav-item">
-                <a href="{{ path('app_admin_manage_user') }}" class="side-nav-link">
+                <a href="{{ path('app_home_admin') }}" class="side-nav-link">
                     <i class="uil-layer-group"></i>
                     <span> {{ 'admin.home'|trans }} </span>
                 </a>
@@ -25,6 +25,12 @@
                 <a href="{{ path('app_admin_manage_user') }}" class="side-nav-link">
                     <i class="uil-layer-group"></i>
                     <span> {{ 'admin.user.manage'|trans }}</span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="{{ path('app_admin_manage_game') }}" class="side-nav-link">
+                    <i class="uil-layer-group"></i>
+                    <span> {{ 'admin.game.manage'|trans }}</span>
                 </a>
             </li>
             <li class="side-nav-item">

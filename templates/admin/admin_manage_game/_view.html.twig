@@ -1,0 +1,258 @@
+{% extends 'admin/base.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_edit.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_add_player.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_delete_player.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_game_change_status.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block section %}
+
+    <div class="container-fluid js-manage-game">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">{{ title }}</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-xxl-8 col-lg-6">
+                <!-- project card -->
+                <div class="card d-block">
+                    <div class="card-body">
+                        <div class="dropdown float-end">
+                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="dripicons-dots-3"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                {% block buttonModalManageGameEdit %}
+                                    {{ parent() }}
+                                {% endblock %}
+                                <!-- item-->
+                                {% block buttonModalManageGameAddPlayer %}
+                                    {{ parent() }}
+                                {% endblock %}
+                                <!-- item-->
+                                {% block buttonModalManageGameDeletePlayer %}
+                                    {{ parent() }}
+                                {% endblock %}
+                                <!-- item-->
+                                {% block buttonModalManageGameChangeStatus %}
+                                    {{ parent() }}
+                                {% endblock %}
+                            </div>
+                        </div>
+                        <!-- project title-->
+                        <h3 class="mt-0 game-title-{{ game.id }}">
+                            {{ game.title }}
+                        </h3>
+                        {% if game.gameStatus == 'FINISH_GAME' %}
+                            <div class="badge bg-success mb-3 game-status-{{ game.id }}"
+                                 data-value="{{ game.gameStatus }}">{{ 'common.game.finish'|trans }}</div>
+                        {% elseif game.gameStatus == 'ACTIVE_GAME' %}
+                            <div class="badge bg-primary mb-3 game-status-{{ game.id }}"
+                                 data-value="{{ game.gameStatus }}">{{ 'common.game.ongoing'|trans }}</div>
+                        {% else %}
+                            <div class="badge bg-warning mb-3 game-status-{{ game.id }}"
+                                 data-value="{{ game.gameStatus }}">{{ 'common.game.new'|trans }}</div>
+                        {% endif %}
+
+                        <h5>{{ 'admin.game.description'|trans }}</h5>
+
+                        <p class="text-muted mb-2 game-description-{{ game.id }}">
+                            {{ game.description }}
+                        </p>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-4">
+                                    <h5>{{ 'admin.game.createdAt'|trans }}</h5>
+                                    <p>{{ game.createdAt|date("d/m/Y") }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-4">
+                                    <h5>{{ 'admin.game.updatedAt'|trans }}</h5>
+                                    <p>
+                                        <span class="game-updatedAt-{{ game.id }}">{{ (game.updatedAt is not null)? game.updatedAt|date("d/m/Y") : '-' }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-4">
+                                    <h5>{{ 'common.game.master'|trans }}</h5>
+                                    <p>
+                                        <span class="game-gameMaster-{{ game.id }}">{{ game.gameMaster.firstname }} {{ game.gameMaster.name }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-4">
+                                    <h5>{{ 'admin.game.minGamePlace'|trans }}</h5>
+                                    <p><i class="mdi mdi-account-minus me-1"></i> :
+                                        <span class="game-minPlaceGame-{{ game.id }}">{{ game.minGamePlace }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-4">
+                                    <h5>{{ 'admin.game.maxGamePlace'|trans }}</h5>
+                                    <p><i class="mdi mdi-account-multiple-plus me-1"></i> :
+                                        <span class="game-maxPlaceGame-{{ game.id }}">{{ game.maxGamePlace }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-4">
+                                    <h5>{{ 'common.game.assignedPlace'|trans }}</h5>
+                                    <p>
+                                        <span class="game-assignedGamePlace-{{ game.id }}">{{ game.assignedPlace }}</span>
+                                        / <span class="game-maxGamePlace-{{ game.id }}">{{ game.maxGamePlace }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tooltip-container">
+                            <h5>{{ 'admin.game.player'|trans }}</h5>
+                            {% if game.players is defined and game.players is not empty %}
+                                {% for user in game.players %}
+                                    <a href="javascript:void(0);" data-bs-container="#tooltip-container"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="top" title="{{ user.name }} {{ user.firstname }}"
+                                       class="d-inline-block">
+                                        {% if user.profilPicture is not null and user.profilPicture.profilPicture is not null %}
+                                            <img src="{{ asset('pictures/users/' ~ user.profilPicture.profilPicture) }}"
+                                                 class="rounded-circle img-thumbnail avatar-sm" alt="friend">
+                                        {% else %}
+                                            <img src="{{ asset('pictures/users/imgProfilDefault.jpg') }}"
+                                                 class="rounded-circle img-thumbnail avatar-sm" alt="friend">
+                                        {% endif %}
+                                    </a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    </div> <!-- end card-body-->
+
+                </div> <!-- end card-->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">{{ 'admin.game.players_status'|trans }}</h5>
+
+                        <table class="table table-centered table-responsive mx-0 px-0 mb-0">
+                            <thead>
+                            <tr>
+                                <th>{{ 'admin.user.manage.name'|trans }}</th>
+                                <th>{{ 'admin.user.manage.firstname'|trans }}</th>
+                                <th>{{ 'admin.user.manage.isPresent'|trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if game.statusUserInGames is not empty %}
+                                {% for status in game.statusUserInGames %}
+                                    {% for user in status.user %}
+                                    <tr>
+                                        <td>{{ user.name }}</td>
+                                        <td>{{ user.firstname }}</td>
+                                        <td>
+                                            <div>
+                                                <input type="checkbox" id="switch{{ user.id }}"
+                                                       name="switch-button-user-{{ user.id }}"
+                                                       data-switch="success"
+                                                       data-url="{{ path('app_admin_manage_user_change_status_game',{idStatus: status.id}) }}"
+                                                       data-userId="{{ user.id }}"
+                                                       data-gameId="{{ game.id }}"
+                                                       class="player-switch-check"
+                                                       {{ (status.isPresent)? 'checked' : '' }}
+                                                />
+                                                <label for="switch{{ user.id }}" data-on-label="Yes" data-off-label="No"
+                                                       class="mb-0 d-block"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                        {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end card-->
+
+                {% if game.gameMasterCommentary is not null and  game.gameMasterCommentary !='' %}
+                    <div class="card">
+                    <div class="card-body">
+                        <h4 class="mt-0 mb-3">{{ 'admin.game.comment'|trans }}</h4>
+
+                        {% if game.gameMaster is not null %}
+                        <div class="d-flex align-items-start mt-2">
+                            {% if game.gameMaster.profilPicture is not null and game.gameMaster.profilPicture.profilPicture is not null %}
+                                <img src="{{ asset('pictures/users/' ~ game.gameMaster.profilPicture.profilPicture) }}"
+                                     class="me-3 avatar-sm rounded-circle" alt="{{ game.gameMaster.firstname }} {{ game.gameMaster.name }}">
+                            {% else %}
+                                <img src="{{ asset('pictures/users/imgProfilDefault.jpg') }}"
+                                     class="me-3 avatar-sm rounded-circle" alt="{{ game.gameMaster.firstname }} {{ game.gameMaster.name }}">
+                            {% endif %}
+                            <div class="w-100 overflow-hidden">
+                                <h5 class="mt-0 game-user-comment-{{ game.id }}">{{ game.gameMaster.firstname }} {{ game.gameMaster.name }}</h5>
+                                <span class="game-comment-{{ game.id }}">{{ game.gameMasterCommentary }}
+                                </span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div> <!-- end card-body-->
+                </div>
+                {% endif %}
+                <!-- end card-->
+
+            </div> <!-- end col -->
+
+            <div class="col-lg-6 col-xxl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">{{ 'admin.game.game_picture'|trans }}</h5>
+                        <div dir="ltr">
+                            {% if game.picture is not null %}
+                                <img class="card-img-top game-picture-{{ game.id }}"
+                                     src="{{ asset('pictures/games/' ~ game.picture.gamePicture) }}" alt="project image cap">
+                            {% else %}
+                                <img class="card-img-top game-picture-{{ game.id }}"
+                                     src="{{ asset('pictures/games/defaultGamePicture.jpg') }}" alt="project image cap">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- end row -->
+        {% block modalManageGameEdit %}
+            {{ parent() }}
+        {% endblock %}
+        {% block modalManageGameAddPlayer %}
+            {{ parent() }}
+        {% endblock %}
+        {% block modalManageGameDeletePlayer %}
+            {{ parent() }}
+        {% endblock %}
+        {% block modalManageGameChangeStatus %}
+            {{ parent() }}
+        {% endblock %}
+    </div> <!-- container -->
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('modalManageGameApp') }}
+    {{ encore_entry_script_tags('adminManageGame') }}
+{% endblock %}

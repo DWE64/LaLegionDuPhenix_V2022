@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     app.locales: [fr, en]
+    user_picture_profil: '%kernel.project_dir%/public/pictures/users'
+    game_picture: '%kernel.project_dir%/public/pictures/games'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -20,5 +22,9 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Service\FileUploader:
+        arguments:
+            $gamePictureDirectory: '%game_picture%'
+            $userPictureDirectory: '%user_picture_profil%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

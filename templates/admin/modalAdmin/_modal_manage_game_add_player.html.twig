@@ -1,0 +1,53 @@
+{% block buttonModalManageGameAddPlayer %}
+    <button type="button" class="dropdown-item btn btn-modal" data-bs-toggle="modal"
+            data-bs-target="#game-manage-modal-add-player-{{ game.id }}">
+        <i class="mdi mdi-account-plus me-1"></i>{{ 'admin.game.add_user'|trans }}
+    </button>
+{% endblock %}
+{% block modalManageGameAddPlayer %}
+    <div id="game-manage-modal-add-player-{{ game.id }}" class="modal fade game-manage-modal-add-player-{{ game.id }}"
+         tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content js-manage-game-add-player">
+
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="{{ path('app_home_admin') }}">
+                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="125"></span>
+                        </a>
+                    </div>
+
+                    <form id="add_player_game_form" class="ps-3 pe-3 add_player_game_form" role="form"
+                          method="POST"
+                          action="{{ path('app_admin_manage_game_add_player',{gameId: game.id}) }}"
+                          data-url="{{ path('app_admin_manage_game_add_player',{gameId: game.id}) }}"
+                          data-id-game="{{ game.id }}"
+                    >
+
+                        <p class="text-center mt-2 mb-4">{{ 'admin.game.manage.game_player'|trans }}</p>
+                        {% for user in users %}
+                            <div class="mb-1 form-check">
+                                <input type="checkbox"
+                                       class="form-check-input check-game-{{ game.id }}-player-{{ user.id }}"
+                                       id="check-game-{{ game.id }}-player-{{ user.id }}" name="player"
+                                       value="{{ user.id }}"
+                                       {% if user in game.players %} checked {% endif %}>
+                                <label class="form-check-label"
+                                       for="check-game-{{ game.id }}-player-{{ user.id }}">{{ user.firstname }} {{ user.name }}</label>
+                            </div>
+                        {% endfor %}
+                        <div class="mb-3 text-center">
+                            <button class="btn btn-primary"
+                                    type="submit">
+                               {{ 'admin.game.manage.button_add_player'|trans }}
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use App\Entity\Game;
+use App\Entity\ProfilPicture;
 use App\Entity\StatusUserInGame;
 use App\Entity\User;
 use DateTime;
@@ -187,5 +188,14 @@ class UserTest extends TestCase
         $this->assertInstanceOf(User::class, $response);
         $this->assertCount(0, $this->user->getStatusUserInGames());
         $this->assertFalse($this->user->getStatusUserInGames()->contains($value));
+    }
+
+    public function testGetUser(): void
+    {
+        $value = new ProfilPicture();
+        $response = $this->user->setProfilPicture($value);
+
+        $this->assertInstanceOf(User::class, $response);
+        $this->assertInstanceOf(ProfilPicture::class, $this->user->getProfilPicture());
     }
 }
