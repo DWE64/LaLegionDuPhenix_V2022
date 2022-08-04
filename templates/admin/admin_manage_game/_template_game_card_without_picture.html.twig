@@ -9,6 +9,7 @@
     <!-- project card -->
     <div class="card d-block">
         <div class="card-body">
+            <span class="game-picture-{{ game.id }}"></span>
             <div class="dropdown card-widgets">
                 <a href="#" class="dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="dripicons-dots-3"></i>
@@ -98,3 +99,15 @@
         </div>
     </div> <!-- end card-->
 </div> <!-- end col -->
+{% block modalManageGameEdit %}
+    {{ parent() }}
+{% endblock %}
+{% block modalManageGameAddPlayer %}
+    {{ parent() }}
+{% endblock %}
+{% block modalManageGameDeletePlayer %}
+    {{ parent() }}
+{% endblock %}
+{% block modalManageGameChangeStatus %}
+    {{ parent() }}
+{% endblock %}

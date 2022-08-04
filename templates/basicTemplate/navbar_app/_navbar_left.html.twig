@@ -37,6 +37,12 @@
             {% endif %}
             {% if is_granted('ROLE_USER') %}
                 <li class="side-nav-item">
+                    <a href="{{ path('app_profil')}}" class="side-nav-link">
+                        <i class="uil-layer-group"></i>
+                        <span> {{ 'my_account'|trans }} </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
                     <a href="{{ path('app_logout') }}" class="side-nav-link">
                         <i class="uil-layer-group"></i>
                         <span> {{ 'logout'|trans }} </span>

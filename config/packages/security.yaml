@@ -33,6 +33,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_STAFF }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/profil, roles: ROLE_USER }
 
     role_hierarchy:
         ROLE_PLAYER: ROLE_USER

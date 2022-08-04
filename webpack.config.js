@@ -25,6 +25,7 @@ Encore
     .addEntry('app_template', './assets/styles/themeHyper/js/app.js')
     .addEntry('demo_dashboard','./assets/styles/themeHyper/js/pages/demo.dashboard.js')
     .addEntry('demo_datatable','./assets/styles/themeHyper/js/pages/demo.datatable-init.js')
+    .addEntry('demo_profile','./assets/styles/themeHyper/js/pages/demo.profile.js')
     .addEntry('register', './assets/js/app/register/registration.js')
 
     /*
@@ -38,6 +39,13 @@ Encore
      */
     .addEntry('modalManageGameApp', './assets/js/admin/manageGame/modalManageGameApp.js')
     .addEntry('adminManageGame', './assets/js/admin/manageGame/manageGame.js')
+
+    /*
+     * profil manage
+     */
+    .addEntry('modalProfilApp', './assets/js/app/profil/modalProfilApp.js')
+    .addEntry('profilGameApp', './assets/js/app/profil/profilGameApp.js')
+    .addEntry('profilWrapper', './assets/js/app/profil/profilWrapper.js')
 
     //sortie de plusieur fichier style
     .addStyleEntry('app_core','./assets/styles/app_core.scss')

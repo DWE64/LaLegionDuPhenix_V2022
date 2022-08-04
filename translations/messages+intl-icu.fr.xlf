@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="ACcM9j_" resname="logout">
         <source>logout</source>
-        <target>__logout</target>
+        <target>deconnexion</target>
       </trans-unit>
       <trans-unit id="QqV4.6Q" resname="mentions.legales">
         <source>mentions.legales</source>
