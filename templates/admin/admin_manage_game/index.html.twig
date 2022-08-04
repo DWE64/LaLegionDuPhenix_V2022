@@ -50,19 +50,6 @@
                 {% else %}
                     {% include 'admin/admin_manage_game/_template_game_card_without_picture.html.twig' %}
                 {% endif %}
-
-                {% block modalManageGameEdit %}
-                    {{ parent() }}
-                {% endblock %}
-                {% block modalManageGameAddPlayer %}
-                    {{ parent() }}
-                {% endblock %}
-                {% block modalManageGameDeletePlayer %}
-                    {{ parent() }}
-                {% endblock %}
-                {% block modalManageGameChangeStatus %}
-                    {{ parent() }}
-                {% endblock %}
             {% endfor %}
         {% endif %}
         {% block modalManageGameAdd %}

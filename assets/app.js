@@ -13,6 +13,7 @@ require('./styles/themeHyper/js/vendor/jquery.dataTables.min.js');
 require('./styles/themeHyper/js/vendor/dataTables.bootstrap5.js');
 require('./styles/themeHyper/js/vendor/responsive.bootstrap5.min.js');
 require('./styles/themeHyper/js/vendor/dataTables.responsive.min.js');
+require('./styles/themeHyper/js/vendor/Chart.bundle.min.js');
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();

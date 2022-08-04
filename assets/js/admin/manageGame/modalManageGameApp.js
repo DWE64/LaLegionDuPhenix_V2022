@@ -120,15 +120,8 @@ const jQuery = require('jquery');
                     if (data.description !== undefined) {
                         $('.game-description-' + data.id).text(data.description);
                     }
-                    if (data.gameMaster.id !== undefined) {
-                        let game_master = '';
-                        if (data.gameMaster.firstname !== undefined) {
-                            game_master.concat(data.gameMaster.firstname + ' ');
-                        }
-                        if (data.gameMaster.name !== undefined) {
-                            game_master.concat(data.gameMaster.name);
-                        }
-                        $('.game-gameMaster-' + data.id).text(game_master);
+                    if (data.gameMaster !== undefined) {
+                        $('.game-gameMaster-' + data.id).text(data.gameMaster);
                     }
                     if (data.minPlaceGame !== undefined) {
                         $('.game-minPlaceGame-' + data.id).text(data.minPlaceGame);

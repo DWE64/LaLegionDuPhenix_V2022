@@ -1,0 +1,283 @@
+{% extends baseTemplate %}
+
+{% use 'app/modalApp/_modal_profil_user.html.twig' %}
+
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block section %}
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">{{ title }}</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Profile -->
+                <div class="card bg-primary">
+                    <div class="card-body profile-user-box">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <div class="avatar-lg">
+                                            {% if app.user.profilPicture is not null and app.user.profilPicture.profilPicture is not null %}
+                                                <img src="{{ asset('pictures/users/' ~ app.user.profilPicture.profilPicture) }}"
+                                                     class="rounded-circle img-thumbnail user-picture-{{ app.user.id }}">
+                                            {% else %}
+                                                <img src="{{ asset('pictures/users/imgProfilDefault.jpg') }}"
+                                                     class="rounded-circle img-thumbnail user-picture-{{ app.user.id }}">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <h4 class="mt-1 mb-1 text-white">{{ app.user.firstname }} {{ app.user.name }}</h4>
+                                            <p class="font-13 text-white-50"> {{ app.user.email }}</p>
+                                            <p class="font-13 text-white-50"> {{ 'common.is_member'|trans }} {{ (app.user.isAssociationMember)? 'common.member_true'|trans : 'common.member_false'|trans }}</p>
+
+                                            <ul class="mb-0 list-inline text-light">
+                                                {% if is_granted('ROLE_GAMEMASTER') %}
+                                                    {% if app.user.games is not empty %}
+                                                        {% for game in app.user.games %}
+                                                            <li class="list-inline-item me-3">
+                                                                <h5 class="mb-1">{{ game.title }}</h5>
+                                                                <p class="mb-0 font-13 text-white-50">{{ 'common.master'|trans }}</p>
+                                                            </li>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% if is_granted('ROLE_PLAYER') %}
+                                                    {% if app.user.playersGames is not empty %}
+                                                        {% for game in app.user.playersGames %}
+                                                            <li class="list-inline-item me-3">
+                                                                <h5 class="mb-1">{{ game.title }}</h5>
+                                                                <p class="mb-0 font-13 text-white-50">{{ 'common.player'|trans }}</p>
+                                                            </li>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end col-->
+
+                            <div class="col-sm-4">
+                                <div class="text-center mt-sm-0 mt-3 text-sm-end">
+                                    {% block buttonModalProfilUser %}
+                                        {{ parent() }}
+                                    {% endblock %}
+                                </div>
+                            </div> <!-- end col-->
+                        </div> <!-- end row -->
+
+                    </div> <!-- end card-body/ profile-user-box-->
+                </div><!--end profile/ card -->
+            </div> <!-- end col-->
+        </div>
+        <!-- end row -->
+
+
+        <div class="row">
+            <div class="col-xl-4">
+                <!-- Personal-Information -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0 mb-3">{{ 'common.personnal_information'|trans }}</h4>
+
+                        <div class="text-start">
+                            <p class="text-muted"><strong>{{ 'common.fullname'|trans }} :</strong> <span
+                                        class="ms-2 user-name-firstname-{{ app.user.id }}">{{ app.user.firstname }} {{ app.user.name }}</span>
+                            </p>
+
+                            <p class="text-muted"><strong>{{ 'common.birthday'|trans }} :</strong> <span
+                                        class="ms-2 user-birthday-{{ app.user.id }}">{{ (app.user.birthday is not null)? app.user.birthday|date("d/m/Y") : '-' }}</span>
+                            </p>
+
+                            <p class="text-muted"><strong>{{ 'common.address'|trans }} :</strong><span
+                                        class="ms-2 user-address-{{ app.user.id }}">{{ app.user.address }}</span></p>
+
+                            <p class="text-muted"><strong>{{ 'common.city'|trans }} :</strong> <span
+                                        class="ms-2 user-city-{{ app.user.id }}">{{ app.user.city }}</span></p>
+
+                            <p class="text-muted"><strong>{{ 'common.postal_code'|trans }} :</strong>
+                                <span class="ms-2 user-postal-code-{{ app.user.id }}"> {{ app.user.postalCode }} </span>
+                            </p>
+
+                            <p class="text-muted"><strong>{{ 'common.mail'|trans }} :</strong> <span
+                                        class="ms-2 ">{{ app.user.email }}</span></p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Personal-Information -->
+            </div> <!-- end col-->
+            <div class="col-xl-8 js-profil-game">
+
+                {% if is_granted('ROLE_GAMEMASTER') %}
+                    {% if app.user.games is not empty %}
+                        {% for game in app.user.games %}
+                            {% if game.gameStatus != 'FINISH_GAME' %}
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title mb-3">{{ game.title }}</h4>
+                                        <h5>
+                                            <span class="badge badge-success-lighten">{{ 'common.game.master'|trans }}</span>
+                                        </h5>
+                                        {% if game.gameStatus == 'ACTIVE_GAME' %}
+                                            <div class="badge bg-primary mb-3 game-status-{{ game.id }}"
+                                                 data-value="{{ game.gameStatus }}">{{ 'common.game.ongoing'|trans }}</div>
+                                        {% else %}
+                                            <div class="badge bg-warning mb-3 game-status-{{ game.id }}"
+                                                 data-value="{{ game.gameStatus }}">{{ 'common.game.new'|trans }}</div>
+                                        {% endif %}
+                                        <div class="table-responsive js-target-game-{{ game.id }}">
+                                            {% if game.gameMasterCommentary is not null %}
+                                                <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    {{ game.gameMasterCommentary }}
+                                                </div>
+                                            {% endif %}
+                                            <table class="table table-hover table-centered mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{ 'common.user_list'|trans }}</th>
+                                                    <th>{{ 'common.user_is_present'|trans }}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% if game.statusUserInGames is not empty %}
+                                                    {% for status in game.statusUserInGames %}
+                                                        {% for player in status.user %}
+                                                            <tr>
+                                                                <td>{{ player.firstname }} {{ player.name }}
+                                                                    {% if (player==game.gameMaster) %}
+                                                                        <span class="badge badge-success-lighten">{{ 'common.game.master'|trans }}</span>
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td>
+                                                                    <div>
+                                                                        <input type="checkbox"
+                                                                               id="switch-{{ game.id }}-{{ game.gameMaster.id }}-{{ player.id }}"
+                                                                               name="switch-button-user-{{ game.id }}-{{ game.gameMaster.id }}-{{ player.id }}" {{ (status.isPresent)? 'checked':'' }}
+                                                                               data-switch="success"
+                                                                               class="master-switch-check"
+                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game',{idStatus: status.id}) }}"
+                                                                                {{ (player != game.gameMaster)? 'disabled' : '' }}
+                                                                        />
+                                                                        <label for="switch-{{ game.id }}-{{ game.gameMaster.id }}-{{ player.id }}"
+                                                                               data-on-label="Yes" data-off-label="No"
+                                                                               class="mb-0 d-block"></label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div> <!-- end table responsive-->
+                                        <form id="form_post_message_game" class="ps-3 pe-3 form_post_message_game" role="form"
+                                              method="POST"
+                                              action="{{ path('app_profil_user_post_message_game_master',{idGame: game.id}) }}"
+                                              data-url="{{ path('app_profil_user_post_message_game_master',{idGame: game.id}) }}"
+                                        >
+                                            <div class="mb-3">
+                                                <label for="message_master" class="form-label">Text area</label>
+                                                <textarea class="form-control" id="message_master" name="message_master" rows="5"></textarea>
+                                            </div>
+                                            <div class="mb-3 text-center">
+                                                <button class="btn btn-primary"
+                                                        type="submit">{{ 'profil.game.post_message'|trans }}</button>
+                                            </div>
+                                        </form>
+                                    </div> <!-- end col-->
+                                </div> <!-- end row-->
+
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+                <!-- end col -->
+
+                {% if is_granted('ROLE_PLAYER') %}
+                    {% if app.user.playersGames is not empty %}
+                        {% for game in app.user.playersGames %}
+                            {% if game.gameStatus != 'FINISH_GAME' %}
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title mb-3">{{ game.title }}</h4>
+
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-centered mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{ 'common.user_list'|trans }}</th>
+                                                    <th>{{ 'common.user_is_present'|trans }}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% if game.statusUserInGames is not empty %}
+                                                    {% for status in game.statusUserInGames %}
+                                                        {% for player in status.user %}
+                                                            <tr>
+                                                                <td>{{ player.firstname }} {{ player.name }}
+                                                                    {% if (player==game.gameMaster) %}
+                                                                        <span class="badge badge-success-lighten">{{ 'common.game.master'|trans }}</span>
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td>
+                                                                    <div>
+                                                                        <input type="checkbox"
+                                                                               id="switch-{{ game.id }}-{{ player.id }}"
+                                                                               name="switch-{{ game.id }}-{{ player.id }}" {{ (status.isPresent)? 'checked':'' }}
+                                                                               data-switch="success"
+                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game',{idStatus: status.id}) }}"
+                                                                               class="player-switch-check"
+                                                                                {{ (app.user != player)? 'disabled' : '' }}
+                                                                        />
+                                                                        <label for="switch-{{ game.id }}-{{ player.id }}"
+                                                                               data-on-label="Yes" data-off-label="No"
+                                                                        ></label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div> <!-- end table responsive-->
+                                    </div> <!-- end col-->
+                                </div> <!-- end row-->
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <!-- end col -->
+
+        </div>
+        <!-- end row -->
+
+    </div> <!-- container -->
+    {% block modalProfilUser %}
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('demo_profile') }}
+    {{ encore_entry_script_tags('modalProfilApp') }}
+    {{ encore_entry_script_tags('profilGameApp') }}
+    {{ encore_entry_script_tags('profilWrapper') }}
+{% endblock %}

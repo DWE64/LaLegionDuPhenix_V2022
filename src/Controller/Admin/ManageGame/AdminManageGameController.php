@@ -94,13 +94,13 @@ class AdminManageGameController extends AbstractController
             }
             if ($request->request->get('gameMaster')) {
                 $user=$this->user_repo->find($request->request->get('gameMaster'));
+                $statusUserInGame = new StatusUserInGame();
+                $statusUserInGame->addUser($user);
+                $statusUserInGame->setIsPresent(true);
+                $game->addStatusUserInGame($statusUserInGame);
                 $game->setGameMaster($user);
                 $message += [
-                    'gameMaster' => [
-                        'id'=>$game->getGameMaster()->getId(),
-                        'firstname' => $game->getGameMaster()->getFirstname(),
-                        'name'=> $game->getGameMaster()->getName()
-                    ]
+                    'gameMaster' => $game->getGameMaster()->getFirstname().' '.$game->getGameMaster()->getName()
                 ];
             }
             if ($request->request->get('minGamePlace')) {
@@ -130,7 +130,13 @@ class AdminManageGameController extends AbstractController
             $message+=[
                 'id' => $game->getId(),
                 'view'=>$this->renderView($view,[
-                    'game' => $game
+                    'game' => $game,
+                    'users' => $this->user_repo->findAll(),
+                    'allStatus'=>[
+                        StatusService::NEW_GAME,
+                        StatusService::ACTIVE_GAME,
+                        StatusService::FINISH_GAME
+                    ]
                 ])
             ];
 
@@ -208,14 +214,25 @@ class AdminManageGameController extends AbstractController
                 ];
             }
             if ($request->request->get('gameMaster')) {
+                foreach ($game->getStatusUserInGames() as $status){
+                    foreach ($status->getUser() as $userStatus){
+                        if($game->getGameMaster() === $userStatus){
+                            $status->removeUser($game->getGameMaster());
+                            $game->removeStatusUserInGame($status);
+                            $this->repo_status_user->remove($status);
+                        }
+                    }
+                }
+
                 $user=$this->user_repo->find($request->request->get('gameMaster'));
+
+                $statusUserInGame = new StatusUserInGame();
+                $statusUserInGame->addUser($user);
+                $statusUserInGame->setIsPresent(true);
+                $game->addStatusUserInGame($statusUserInGame);
                 $game->setGameMaster($user);
                 $message += [
-                    'gameMaster' => [
-                        'id'=>$game->getGameMaster()->getId(),
-                        'firstname' => $game->getGameMaster()->getFirstname(),
-                        'name'=> $game->getGameMaster()->getName()
-                    ]
+                    'gameMaster' => $game->getGameMaster()->getFirstname().' '.$game->getGameMaster()->getName()
                 ];
             }
             if ($request->request->get('minGamePlace')) {
