@@ -38,7 +38,27 @@
                                    class="form-label">{{ 'admin.game.manage.game_master'|trans }}</label>
                             <select class="form-select" id="gameMaster" name="gameMaster">
                                 {% for user in users %}
-                                    <option value="{{ user.id }}">{{ user.firstname }} {{ user.name }}</option>
+                                    {% if user not in game.players %}
+                                        <option value="{{ user.id }}" {% if user == game.gameMaster %} selected="selected" {% endif %}>{{ user.firstname }} {{ user.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="weekSlot"
+                                   class="form-label">{{ 'admin.game.manage.week_slot'|trans }}</label>
+                            <select class="form-select" id="weekSlot" name="weekSlot">
+                                {% for week in weekSlot %}
+                                    <option value="{{ week }}">{{ week }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hourSlot"
+                                   class="form-label">{{ 'admin.game.manage.hour_slot'|trans }}</label>
+                            <select class="form-select" id="hourSlot" name="hourSlot">
+                                {% for slot in hourSlot %}
+                                    <option value="{{ slot }}">{{ slot }}</option>
                                 {% endfor %}
                             </select>
                         </div>

@@ -27,15 +27,17 @@
 
                         <p class="text-center mt-2 mb-4">{{ 'admin.game.manage.game_player'|trans }}</p>
                         {% for user in users %}
+                            {% if user != game.gameMaster %}
                             <div class="mb-1 form-check">
                                 <input type="checkbox"
                                        class="form-check-input check-game-{{ game.id }}-player-{{ user.id }}"
                                        id="check-game-{{ game.id }}-player-{{ user.id }}" name="player"
                                        value="{{ user.id }}"
-                                       {% if user in game.players %} checked {% endif %}>
+                                       {% if user in game.players %} checked disabled {% endif %}>
                                 <label class="form-check-label"
                                        for="check-game-{{ game.id }}-player-{{ user.id }}">{{ user.firstname }} {{ user.name }}</label>
                             </div>
+                            {% endif %}
                         {% endfor %}
                         <div class="mb-3 text-center">
                             <button class="btn btn-primary"

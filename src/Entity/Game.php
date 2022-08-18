@@ -55,6 +55,12 @@ class Game
     #[ORM\OneToOne(inversedBy: 'game', targetEntity: GamePicture::class, cascade: ['persist', 'remove'])]
     private $picture;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $weekSlots;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $halfDaySlots;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
@@ -246,6 +252,30 @@ class Game
     public function setPicture(?GamePicture $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getWeekSlots(): ?string
+    {
+        return $this->weekSlots;
+    }
+
+    public function setWeekSlots(?string $weekSlots): self
+    {
+        $this->weekSlots = $weekSlots;
+
+        return $this;
+    }
+
+    public function getHalfDaySlots(): ?string
+    {
+        return $this->halfDaySlots;
+    }
+
+    public function setHalfDaySlots(?string $halfDaySlots): self
+    {
+        $this->halfDaySlots = $halfDaySlots;
 
         return $this;
     }

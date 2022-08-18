@@ -27,4 +27,13 @@ class StatusService
     const NEW_GAME = "NEW_GAME";
     const ACTIVE_GAME = "ACTIVE_GAME";
     const FINISH_GAME = "FINISH_GAME";
+
+    /*
+     * Selection creneaux
+     */
+    const SLOT_WEEK_PAIR="CRENEAU_1";
+    const SLOT_WEEK_ODD="CRENEAU_2";
+
+    const SLOT_AFTERNOON="APREM";
+    const SLOT_EVENING="SOIR";
 }

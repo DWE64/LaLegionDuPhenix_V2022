@@ -123,6 +123,12 @@ const jQuery = require('jquery');
                     if (data.gameMaster !== undefined) {
                         $('.game-gameMaster-' + data.id).text(data.gameMaster);
                     }
+                    if (data.weekSlot !== undefined) {
+                        $('.game-weekSlot-' + data.id).text(data.weekSlot);
+                    }
+                    if (data.hourSlot !== undefined) {
+                        $('.game-hourSlot-' + data.id).text(data.hourSlot);
+                    }
                     if (data.minPlaceGame !== undefined) {
                         $('.game-minPlaceGame-' + data.id).text(data.minPlaceGame);
                     }
