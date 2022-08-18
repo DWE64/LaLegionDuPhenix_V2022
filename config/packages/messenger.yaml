@@ -12,6 +12,7 @@ framework:
                 retry_strategy:
                     max_retries: 3
                     multiplier: 2
+                    delay: 60000
             failed: 'doctrine://default?queue_name=failed'
             # sync: 'sync://'
 
@@ -21,4 +22,16 @@ framework:
             Symfony\Component\Notifier\Message\SmsMessage: async
 
             # Route your messages to the transports
-            # 'App\Message\YourMessage': async
+            App\Message\MailRegistration: async
+            App\Message\MailValidationInscription: async
+            App\Message\MailRemoveInscription: async
+            App\Message\MailUpdateUserByAdmin: async
+            App\Message\MailAddNewGame: async
+            App\Message\MailEditGame: async
+            App\Message\MailDeleteGame: async
+            App\Message\MailNewGameComment: async
+            App\Message\MailAddGameMasterToGame: async
+            App\Message\MailDeleteGameMasterToGame: async
+            App\Message\MailAddUserToGame: async
+            App\Message\MailDeleteUserToGame: async
+            App\Message\MailRefreshStatusGame: async

@@ -3,6 +3,9 @@
 namespace App\Controller\Admin\ManageUser;
 
 use App\Entity\User;
+use App\Message\MailRemoveInscription;
+use App\Message\MailUpdateUserByAdmin;
+use App\Message\MailValidationInscription;
 use App\Repository\UserRepository;
 use App\Service\StatusService;
 use DateTime;
@@ -13,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Config\Framework\SerializerConfig;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -22,11 +26,16 @@ class AdminManageUserController extends AbstractController
 {
     private TranslatorInterface $translator;
     private UserRepository $userRepository;
+    private MessageBusInterface $bus;
 
-    public function __construct(TranslatorInterface $translator, UserRepository $userRepository)
-    {
+    public function __construct(
+        TranslatorInterface $translator,
+        UserRepository $userRepository,
+        MessageBusInterface $bus
+    ) {
         $this->translator = $translator;
         $this->userRepository = $userRepository;
+        $this->bus = $bus;
     }
 
     #[Route('/admin/manage/user', name: 'app_admin_manage_user')]
@@ -76,6 +85,15 @@ class AdminManageUserController extends AbstractController
                     'associationRegistrationDate' => '-',
                     'memberStatus' => StatusService::MEMBER_NOT_REGISTER
                 ];
+                $urlContact = $request->getSchemeAndHttpHost() . $this->generateUrl('app_contact');
+                $this->bus->dispatch(
+                    new MailRemoveInscription(
+                        $user->getEmail(),
+                        $user->getName(),
+                        $user->getFirstname(),
+                        $urlContact
+                    )
+                );
             } else {
                 $user->setIsAssociationMember(true);
                 $registrationDate = new DateTime('now');
@@ -88,6 +106,15 @@ class AdminManageUserController extends AbstractController
                     'associationRegistrationDate' => $registrationDate->format('d/m/Y'),
                     'memberStatus' => StatusService::MEMBER_REGISTER
                 ];
+                $urlProfil = $request->getSchemeAndHttpHost() . $this->generateUrl('app_profil');
+                $this->bus->dispatch(
+                    new MailValidationInscription(
+                        $user->getEmail(),
+                        $user->getName(),
+                        $user->getFirstname(),
+                        $urlProfil
+                    )
+                );
             }
 
             $user->setUpdatedAt($date);
@@ -189,7 +216,9 @@ class AdminManageUserController extends AbstractController
                 ];
             }
             if ($request->request->get('seniority')) {
-                $status = ($request->request->get('seniority')===StatusService::MEMBER_NEW)? StatusService::MEMBER_NEW : StatusService::MEMBER_OLD;
+                $status = ($request->request->get(
+                        'seniority'
+                    ) === StatusService::MEMBER_NEW) ? StatusService::MEMBER_NEW : StatusService::MEMBER_OLD;
                 $user->setMemberSeniority($status);
                 $message += [
                     'member-seniority' => $user->getMemberSeniority()
@@ -199,6 +228,18 @@ class AdminManageUserController extends AbstractController
             $user->setUpdatedAt($date);
             $this->userRepository->add($user, true);
 
+            $urlContact = $request->getSchemeAndHttpHost() . $this->generateUrl('app_contact');
+            $urlProfil = $request->getSchemeAndHttpHost() . $this->generateUrl('app_profil');
+
+            $this->bus->dispatch(
+                new MailUpdateUserByAdmin(
+                    $user->getEmail(),
+                    $user->getName(),
+                    $user->getFirstname(),
+                    $urlContact,
+                    $urlProfil
+                )
+            );
             return new JsonResponse($message, Response::HTTP_OK, []);
         } else {
             $message = Response::HTTP_NOT_MODIFIED;
@@ -226,26 +267,26 @@ class AdminManageUserController extends AbstractController
                 'updatedAt' => $date->format('d/m/Y')
             ];
             if ($request->request->get('role')) {
-                $userRole=$user->getRoles();
-                $authorization=true;
+                $userRole = $user->getRoles();
+                $authorization = true;
 
-                foreach ($userRole as $role){
-                    if($role==="ROLE_SUPER_ADMIN"){
-                        $authorization=false;
+                foreach ($userRole as $role) {
+                    if ($role === "ROLE_SUPER_ADMIN") {
+                        $authorization = false;
                         break;
                     }
                 }
-                if(!$authorization){
-                    $message="assign role forbidden, impossible to change role SUPER ADMIN";
+                if (!$authorization) {
+                    $message = "assign role forbidden, impossible to change role SUPER ADMIN";
                     return new JsonResponse($message, Response::HTTP_FORBIDDEN, []);
-                }else{
-                    $role=['ROLE_USER', $request->request->get('role')];
+                } else {
+                    $role = ['ROLE_USER', $request->request->get('role')];
                     $user->setRoles($role);
                 }
                 $this->userRepository->add($user, true);
-                $listRole='';
-                foreach ($user->getRoles() as $role){
-                    $listRole.=$role.' - ';
+                $listRole = '';
+                foreach ($user->getRoles() as $role) {
+                    $listRole .= $role . ' - ';
                 }
                 $message += [
                     'roles' => $listRole

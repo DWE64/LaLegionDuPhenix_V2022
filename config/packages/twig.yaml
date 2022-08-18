@@ -3,7 +3,9 @@ twig:
     form_themes: ['bootstrap_5_layout.html.twig']
     globals:
         locales: '%app.locales%'
-
+    paths:
+        '%kernel.project_dir%/public/logo': images
+        '%kernel.project_dir%/assets/styles': templateCustom
 when@test:
     twig:
         strict_variables: true

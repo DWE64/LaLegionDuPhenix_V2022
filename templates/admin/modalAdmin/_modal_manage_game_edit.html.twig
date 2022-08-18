@@ -38,7 +38,9 @@
                                    class="form-label">{{ 'admin.game.manage.game_master'|trans }}</label>
                             <select class="form-select" id="gameMaster" name="gameMaster">
                                 {% for user in users %}
-                                    <option value="{{ user.id }}">{{ user.firstname }} {{ user.name }}</option>
+                                    {% if user not in game.players %}
+                                        <option value="{{ user.id }}" {% if user == game.gameMaster %} selected="selected" {% endif %}>{{ user.firstname }} {{ user.name }}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
