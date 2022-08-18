@@ -68,6 +68,14 @@ class AdminManageGameController extends AbstractController
                     StatusService::NEW_GAME,
                     StatusService::ACTIVE_GAME,
                     StatusService::FINISH_GAME
+                ],
+                'weekSlot'=>[
+                    StatusService::SLOT_WEEK_PAIR,
+                    StatusService::SLOT_WEEK_ODD
+                ],
+                'hourSlot'=>[
+                    StatusService::SLOT_AFTERNOON,
+                    StatusService::SLOT_EVENING
                 ]
             ]
         );
@@ -89,6 +97,14 @@ class AdminManageGameController extends AbstractController
                     StatusService::NEW_GAME,
                     StatusService::ACTIVE_GAME,
                     StatusService::FINISH_GAME
+                ],
+                'weekSlot'=>[
+                    StatusService::SLOT_WEEK_PAIR,
+                    StatusService::SLOT_WEEK_ODD
+                ],
+                'hourSlot'=>[
+                    StatusService::SLOT_AFTERNOON,
+                    StatusService::SLOT_EVENING
                 ]
             ]
         );
@@ -125,6 +141,28 @@ class AdminManageGameController extends AbstractController
                 $game->setGameMaster($user);
                 $message += [
                     'gameMaster' => $game->getGameMaster()->getFirstname() . ' ' . $game->getGameMaster()->getName()
+                ];
+            }
+            if($request->request->get('weekSlot')){
+                if($request->request->get('weekSlot')===StatusService::SLOT_WEEK_PAIR){
+                    $game->setWeekSlots(StatusService::SLOT_WEEK_PAIR);
+                }
+                if($request->request->get('weekSlot')===StatusService::SLOT_WEEK_ODD){
+                    $game->setWeekSlots(StatusService::SLOT_WEEK_ODD);
+                }
+                $message += [
+                    'weekSlot' => $game->getWeekSlots()
+                ];
+            }
+            if($request->request->get('hourSlot')){
+                if($request->request->get('hourSlot')===StatusService::SLOT_AFTERNOON){
+                    $game->setHalfDaySlots(StatusService::SLOT_AFTERNOON);
+                }
+                if($request->request->get('hourSlot')===StatusService::SLOT_EVENING){
+                    $game->setHalfDaySlots(StatusService::SLOT_EVENING);
+                }
+                $message += [
+                    'hourSlot' => $game->getWeekSlots()
                 ];
             }
             if ($request->request->get('minGamePlace')) {
@@ -189,6 +227,14 @@ class AdminManageGameController extends AbstractController
                             StatusService::NEW_GAME,
                             StatusService::ACTIVE_GAME,
                             StatusService::FINISH_GAME
+                        ],
+                        'weekSlot'=>[
+                            StatusService::SLOT_WEEK_PAIR,
+                            StatusService::SLOT_WEEK_ODD
+                        ],
+                        'hourSlot'=>[
+                            StatusService::SLOT_AFTERNOON,
+                            StatusService::SLOT_EVENING
                         ]
                     ]
                 )
@@ -314,6 +360,29 @@ class AdminManageGameController extends AbstractController
                         $game->getTitle()
                     )
                 );
+            }
+
+            if($request->request->get('weekSlot')){
+                if($request->request->get('weekSlot')===StatusService::SLOT_WEEK_PAIR){
+                    $game->setWeekSlots(StatusService::SLOT_WEEK_PAIR);
+                }
+                if($request->request->get('weekSlot')===StatusService::SLOT_WEEK_ODD){
+                    $game->setWeekSlots(StatusService::SLOT_WEEK_ODD);
+                }
+                $message += [
+                    'weekSlot' => $game->getWeekSlots()
+                ];
+            }
+            if($request->request->get('hourSlot')){
+                if($request->request->get('hourSlot')===StatusService::SLOT_AFTERNOON){
+                    $game->setHalfDaySlots(StatusService::SLOT_AFTERNOON);
+                }
+                if($request->request->get('hourSlot')===StatusService::SLOT_EVENING){
+                    $game->setHalfDaySlots(StatusService::SLOT_EVENING);
+                }
+                $message += [
+                    'hourSlot' => $game->getHalfDaySlots()
+                ];
             }
             if ($request->request->get('minGamePlace')) {
                 $game->setMinGamePlace($request->request->get('minGamePlace'));
