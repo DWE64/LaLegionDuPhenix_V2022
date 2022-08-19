@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block register %}
+    <div class="auth-fluid">
+        <!--Auth fluid left content -->
+        <div class="auth-fluid-form-box">
+            <div class="align-items-center d-flex h-100">
+                <div class="card-body">
+
+                    <!-- Logo -->
+                    <div class="auth-brand text-center text-lg-center mb-4">
+                        <a href="{{ path('app_home') }}" class="logo-dark">
+                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="85"></span>
+                        </a>
+                        <a href="{{ path('app_home') }}" class="logo-light">
+                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="85"></span>
+                        </a>
+                    </div>
+
+                    <!-- title-->
+                    <h4 class="mt-5">{{ title }}</h4>
+                    <p class="text-muted mb-4">{{ 'registration.invit_to_create_account'|trans }}</p>
+
+                    <!-- form -->
+                    {{ form_start(registrationForm) }}
+                        {{ form_row(registrationForm.name) }}
+                        {{ form_row(registrationForm.firstname) }}
+                        {{ form_row(registrationForm.birthday) }}
+                        {{ form_row(registrationForm.address) }}
+                        {{ form_row(registrationForm.postalCode) }}
+                        {{ form_row(registrationForm.city) }}
+                        {{ form_row(registrationForm.email) }}
+                        {{ form_row(registrationForm.plainPassword) }}
+                        {{ form_row(registrationForm.agreeTerms) }}
+                        <div class="mb-0 d-grid text-center">
+                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-account-circle"></i> {{ 'common.register'|trans }}</button>
+                        </div>
+                    {{ form_end(registrationForm) }}
+                    <!-- end form-->
+
+                    <!-- Footer-->
+                    <footer class="footer footer-alt">
+                        <p class="text-muted">{{ 'registration.already_account'|trans }} <a href="{{ path('app_login') }}" class="text-muted ms-1"><b>{{ 'login'|trans }}</b></a></p>
+                    </footer>
+
+                </div> <!-- end .card-body -->
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+        </div>
+        <!-- end auth-fluid-form-box-->
+
+        <!-- Auth fluid right content -->
+        <div class="auth-fluid-right text-center">
+            <div class="auth-user-testimonial">
+                <h2 class="mb-3">{{ 'registration.title_baseline'|trans }}</h2>
+                <p class="lead"><i class="mdi mdi-format-quote-open"></i> {{ 'registration.text_baseline'|trans }} <i class="mdi mdi-format-quote-close"></i>
+                </p>
+            </div> <!-- end auth-user-testimonial-->
+        </div>
+        <!-- end Auth fluid right content -->
+    </div>
+
+{% endblock %}

@@ -23,36 +23,37 @@
     {% block body %}
         <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
         {# <body>#}
+        {% block register %}
         <!-- Begin page -->
-        <div class="wrapper">
-            {% include 'basicTemplate/navbar_app/_navbar_left.html.twig' %}
+            <div class="wrapper">
+                {% include 'basicTemplate/navbar_app/_navbar_left.html.twig' %}
 
-            <!-- ============================================================== -->
-            <!-- Start Page Content here -->
-            <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Start Page Content here -->
+                <!-- ============================================================== -->
 
-            <div class="content-page">
-                <div class="content">
-                    {%  include 'basicTemplate/navbar_app/_navbar_top.html.twig' %}
+                <div class="content-page">
+                    <div class="content">
+                        {%  include 'basicTemplate/navbar_app/_navbar_top.html.twig' %}
 
-                    {% block section %}
+                        {% block section %}
 
-                    {% endblock %}
+                        {% endblock %}
+                    </div>
+                    <!-- content -->
+
+                    {% include 'basicTemplate/footer/_footer.html.twig' %}
+
                 </div>
-                <!-- content -->
 
-                {% include 'basicTemplate/footer/_footer.html.twig' %}
+                <!-- ============================================================== -->
+                <!-- End Page content -->
+                <!-- ============================================================== -->
+
 
             </div>
-
-            <!-- ============================================================== -->
-            <!-- End Page content -->
-            <!-- ============================================================== -->
-
-
-        </div>
         <!-- END wrapper -->
-
+        {% endblock %}
         {# include 'basicTemplate/navbar_app/_navbar_right.html.twig' #}
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}
