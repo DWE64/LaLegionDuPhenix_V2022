@@ -1,65 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app_core') }}
-            {{ encore_entry_link_tags('icons') }}
-            {{ encore_entry_link_tags('app-saas', attributes={'id':'light-style'}) }}
-            {{ encore_entry_link_tags('app-dark', attributes={'id':'dark-style'}) }}
-            <!--<link href="{{ asset('/build/app-saas.css') }}" rel="stylesheet" type="text/css" id="light-style" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app_core') }}
+        {{ encore_entry_link_tags('icons') }}
+        {{ encore_entry_link_tags('app-saas', attributes={'id':'light-style'}) }}
+        {{ encore_entry_link_tags('app-dark', attributes={'id':'dark-style'}) }}
+        <!--<link href="{{ asset('/build/app-saas.css') }}" rel="stylesheet" type="text/css" id="light-style" />
         <link href="{{ asset('/build/app-dark.css') }}" rel="stylesheet" type="text/css" id="dark-style" />-->
-        {% endblock %}
+    {% endblock %}
 
-        <!--<link rel="shortcut icon" href="themeHyper/images/favicon.ico">-->
-        <link rel="shortcut icon" href="logo/logo.svg">
+    <!--<link rel="shortcut icon" href="themeHyper/images/favicon.ico">-->
+    <link rel="shortcut icon" href="{{ asset('/logo/logo_officiel.svg') }}">
 
 
-    </head>
-    {% block body %}
-        <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
-        {# <body>#}
-        {% block register %}
+</head>
+{% block body %}
+    <body class="loading {% if app.request.attributes.get('_route') == 'app_contact' %} contact-background {% endif %}"
+          data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+    {# <body> #}
+    {% block register %}
         <!-- Begin page -->
-            <div class="wrapper">
-                {% include 'basicTemplate/navbar_app/_navbar_left.html.twig' %}
+        <div class="wrapper">
+            {% include 'basicTemplate/navbar_app/_navbar_left.html.twig' %}
 
-                <!-- ============================================================== -->
-                <!-- Start Page Content here -->
-                <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
 
-                <div class="content-page">
-                    <div class="content">
-                        {%  include 'basicTemplate/navbar_app/_navbar_top.html.twig' %}
+            <div class="content-page">
+                <div class="content">
+                    {% include 'basicTemplate/navbar_app/_navbar_top.html.twig' %}
 
-                        {% block section %}
+                    {% block section %}
 
-                        {% endblock %}
-                    </div>
-                    <!-- content -->
-
-                    {% include 'basicTemplate/footer/_footer.html.twig' %}
-
+                    {% endblock %}
                 </div>
+                <!-- content -->
 
-                <!-- ============================================================== -->
-                <!-- End Page content -->
-                <!-- ============================================================== -->
-
+                {% include 'basicTemplate/footer/_footer.html.twig' %}
 
             </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
         <!-- END wrapper -->
-        {% endblock %}
-        {# include 'basicTemplate/navbar_app/_navbar_right.html.twig' #}
-        {{ encore_entry_script_tags('app') }}
-        {% block javascripts %}
-            {{ encore_entry_script_tags('vendor') }}
-            {{ encore_entry_script_tags('app_template') }}
-        {% endblock %}
-        </body>
     {% endblock %}
+    {# include 'basicTemplate/navbar_app/_navbar_right.html.twig' #}
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('vendor') }}
+        {{ encore_entry_script_tags('app_template') }}
+    {% endblock %}
+    </body>
+{% endblock %}
 </html>

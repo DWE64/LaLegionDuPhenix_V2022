@@ -3,5 +3,74 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block section %}
-
+    <div class="container-fluid mx-0 px-0">
+        <div class="row justify-content-evenly mt-3 mb-5 mx-0 px-3">
+            <div class="col-md-3 col-6 contact-bloc-info px-1 mx-1 my-1">
+                <img class="col-md-3 col-3" src="{{ asset('/appTheme/images/icon/phone.svg') }}">
+                <p class="text-center mx-0 px-0 my-0 py-0">06.66.69.15.57</p>
+            </div>
+            <div class="col-md-3 col-6 contact-bloc-info px-1 mx-1 my-1">
+                <img class="col-md-3 col-3" src="{{ asset('/appTheme/images/icon/pointer-map.svg') }}">
+                <p class="text-center mx-0 px-0 my-0 py-0">Si&egrave;ge: 6 all&eacute;e des fleurs - 64600 Anglet</p>
+                <p class="text-center mx-0 px-0 my-0 py-0">Local: 6 rue Albert le Barillier - 64600 Anglet</p>
+            </div>
+            <div class="col-md-3 col-6 contact-bloc-info px-1 mx-1 my-1">
+                <img class="col-md-3 col-3" src="{{ asset('/appTheme/images/icon/messenger.svg') }}">
+                <p class="text-center mx-0 px-0 my-0 py-0">Retrouvez-nous sur notre</p>
+                <p class="text-center mx-0 px-0 my-0 py-0"><a href="http://lalegionduphenix.forumprod.com/">Forum</a>
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-between mx-0 px-3 mt-5">
+            <div class="col-md-6 col-12 mx-0 px-3 my-1">
+                <h3 class="contact-title">{{ 'page.contact.form_title'|trans }}</h3>
+                <form class="contact-form" id="contact-form" role="form"
+                      method="POST"
+                      action="{{ path('app_contact') }}"
+                      data-url="{{ path('app_contact') }}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">{{ 'page.contact.form_name'|trans }}</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">{{ 'page.contact.form_firstname'|trans }}</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">{{ 'page.contact.form_phone'|trans }}</label>
+                        <input type="text" id="phone" name="phone" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">{{ 'page.contact.form_email'|trans }}</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">{{ 'page.contact.form_subject'|trans }}</label>
+                        <input type="text" id="subject" name="subject" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">{{ 'page.contact.form_content'|trans }}</label>
+                        <textarea class="form-control" id="message" name="message" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-lpd">{{ 'page.contact.form_submit'|trans }}</button>
+                </form>
+                <div class="row justify-content-center my-2">
+                    <div class="col-md-1 col-2">
+                        <img src="{{ asset('/appTheme/images/icon/facebook.svg') }}">
+                    </div>
+                    <div class="col-md-1 col-2">
+                        <img src="{{ asset('/appTheme/images/icon/instagram.svg') }}">
+                    </div>
+                    <div class="col-md-1 col-2">
+                        <img src="{{ asset('/appTheme/images/icon/discord.svg') }}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12 mx-0 px-3 my-1">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2047.0223731116482!2d-1.514303420961198!3d43.48299792972747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5140052eef8f15%3A0xc2e89d48d574293e!2s6+Rue+Albert+le+Barillier%2C+64600+Anglet!5e0!3m2!1sfr!2sfr!4v1534453047568"
+                        width="100%" height="100%" frameborder="0" class="google-iframe" id="carteIframe"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 {% endblock %}
