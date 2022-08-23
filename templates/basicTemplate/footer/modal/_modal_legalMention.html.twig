@@ -1,0 +1,42 @@
+{% block modalLegalMentionButton %}
+    <button type="button" class="btn btn-sm btn-lpd btn-modal col-lg-2 col-md-3 col-4" data-bs-toggle="modal"
+            data-bs-target="#legal-mention-modal">
+        {{ 'mentions.legales'|trans }}
+    </button>
+{% endblock %}
+
+{% block modalLegalMention %}
+    <div id="legal-mention-modal" class="modal fade" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4">
+                        <a href="{{ path('app_home_admin') }}">
+                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="125"></span>
+                        </a>
+                    </div>
+                    <div class="row justify-content-center mx-0 px-2">
+                        <h2>Qui sommes-nous ?</h2>
+                        <p>L’adresse de notre site est : <a href="https://www.lalegionduphenix.com">https://www.lalegionduphenix.com</a></p>
+                        <br>
+                        <h2>Donn&eacute;es enregistr&eacute;es</h2>
+                        <p>Lors de votre enregistrement sur notre site, pour le bon fonctionnementde l'application, nous collectons un nom, un pr&eacute;nom, une date de naissance, une adresse, un code postal, un ville, et un mail.</p>
+                        <p>Aucune de ces donn&eacute;es ne sera utilis&eacute;es a une autre fin que celle du fonctionnement de l'application.</p>
+                        <br>
+                        <h2>M&eacute;dias</h2>
+                        <p>Nous d&eacute;clinons toute responsabilit&eacute;e en cas de t&eacute;l&eacute;chargement d'image par nos utilisateur qui ne seraient pas libre de droit.</p>
+                        <p>Par ailleurs, toute les images pr&eacute;sentes sur le site, sont la propri&eacute;t&eacute; de l'association "La L&eacute;gion du Ph&eacute;nix" et ne peuvent en aucun cas &ecirc;tre utilis&eacute;es sans l'accord de l'association.</p>
+                        <br>
+                        <h2>Dur&eacute;es de stockage de vos donn&eacute;es</h2>
+                        <p>Pour les utilisateurs qui s’inscrivent sur notre site (le cas &eacute;ch&eacute;ant), nous stockons les donn&eacute;es personnelles indiqu&eacute;es dans leur profil. Tous les comptes peuvent voir, modifier ou supprimer leurs informations personnelles à tout moment (à l’exception de leur identifiant). Les gestionnaires du site peuvent aussi voir et modifier ces informations.</p>
+                        <br>
+                        <h2>Les droits que vous avez sur vos donn&eacute;es</h2>
+                        <p>Si vous avez un compte sur le site, vous pouvez demander &agrave; recevoir un fichier contenant toutes les donn&eacute;es personnelles que nous poss&eacute;dons &agrave; votre sujet, incluant celles que vous nous avez fournies. Vous pouvez &eacute;galement demander la suppression des donn&eacute;es personnelles vous concernant. Cela ne prend pas en compte les donn&eacute;es stock&eacute;es &agrave; des fins administratives, l&eacute;gales ou pour des raisons de s&eacute;curit&eacute;.</p>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}

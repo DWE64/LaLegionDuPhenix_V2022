@@ -1,5 +1,40 @@
 //import du theme
 //inutile ici car tout les fichier scss sont initialisé indépendamment
+
+@font-face {
+  font-family: "Aladin";
+  src: url("appTheme/fonts/Aladin-Regular.ttf") /*format("truetype")*/;
+}
+@font-face {
+  font-family: "Hatolie";
+  src: url("appTheme/fonts/Hatolie.ttf") /*format("truetype")*/;
+}
+
 body{
   overflow-y: scroll !important;
 }
+h1{
+  font-family: Hatolie !important;
+  font-weight: lighter !important;
+  font-size: 2.25rem;
+}
+h2, h3{
+  font-family: Aladin !important;
+  font-weight: normal !important;
+}
+
+.btn-lpd{
+  background-color: #eb673a !important;
+  color:#ffffff !important;
+  &:hover{
+    background-color: #f8eac3 !important;
+    color:#000000 !important;
+  }
+  &:active{
+    background-color: #f8eac3 !important;
+    color:#000000 !important;
+  }
+}
+@import "appTheme/scss/homepage.scss";
+@import "appTheme/scss/contact.scss";
+@import "appTheme/scss/activity.scss";

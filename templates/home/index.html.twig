@@ -3,5 +3,33 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block section %}
-
+    <section class="homepage_section">
+        <div class="row mx-0 px-0 w-100">
+            <aside class="col-12 mx-0 px-0 homepage_aside_header">
+                <div class="row mx-0 px-0">
+                    <h1 class="col-10 homepage_title">{{ 'homepage.title_baseline'|trans }}</h1>
+                    <h2 class="col-10 homepage_subtitle">{{ 'homepage.subtitle_baseline'|trans }}</h2>
+                    <a href="#presentation" class="col-12"><i class="uil-angle-down homepage_section_baseline_icon"></i></a>
+                </div>
+            </aside>
+            <aside class="col-12 mx-0 px-0">
+                <div class="row mx-0 px-0 justify-content-center presentation mx-0 px-0" id="presentation">
+                    <h2 class="homepage_title_presentation col-12 mt-3 mx-0 px-0 text-center">{{ 'homepage.title_presentation'|trans }}</h2>
+                    <p class="text-center homepage_text_presentation">{{ 'homepage.description_presentation'|trans }}</p>
+                </div>
+            </aside>
+        </div>
+    </section>
+    <section class="container-fluid homepage_section_explain">
+        <div class="row mx-0 px-0 explain-jdr " id="explainJdr">
+            <img src="{{ asset('/appTheme/images/diceHomePage.png') }}" class="col-md-6 col-12 img-fluid my-0 mx-0 px-0 img-explain-jdr"/>
+            <div class="col-md-6 col-12 mx-0 px-0 bg-explain-jdr my-0 py-2">
+                <div class="row justify-content-center mx-0 px-2">
+                    <h2 class="homepage_title_explain col-12 my-2 mx-0 px-0 text-center">{{ 'homepage.title_explain'|trans }}</h2>
+                    <p class="text-center homepage_text_explain">{{ 'homepage.description_explain'|trans }}</p>
+                    <a href="{{ path('app_activity') }}" class="btn btn-lpd col-lg-2 col-md-3 col-4 my-2">{{ 'homepage.button_begin'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -7,7 +7,7 @@
             <img src="{{ asset('/logo/logo_officiel.svg') }}" alt="" height="150">
         </span>
         <span class="logo-sm">
-            <img src="{{ asset('/logo/logo_officiel.svg') }}" alt="" height="125">
+            <img src="{{ asset('/logo/logo_officiel.svg') }}" alt="" height="50">
         </span>
     </a>
 
@@ -19,6 +19,18 @@
                 <a href="{{ path('app_home') }}" class="side-nav-link">
                     <i class="uil-layer-group"></i>
                     <span> {{ 'home'|trans }} </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="{{ path('app_activity') }}" class="side-nav-link">
+                    <i class="uil-layer-group"></i>
+                    <span> {{ 'activity'|trans }} </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="{{ path('app_contact') }}" class="side-nav-link">
+                    <i class="uil-layer-group"></i>
+                    <span> {{ 'contact'|trans }} </span>
                 </a>
             </li>
             {% if is_granted('ROLE_STAFF') %}
@@ -49,19 +61,14 @@
                         <span> {{ 'login'|trans }} </span>
                     </a>
                 </li>
+                <li class="side-nav-item">
+                    <a href="{{ path('app_register') }}" class="side-nav-link">
+                        <i class="uil-layer-group"></i>
+                        <span> {{ 'register'|trans }} </span>
+                    </a>
+                </li>
             {% endif %}
-            <li class="side-nav-item">
-                <a href="{{ path('app_contact') }}" class="side-nav-link">
-                    <i class="uil-layer-group"></i>
-                    <span> {{ 'common.contact'|trans }} </span>
-                </a>
-            </li>
-            <li class="side-nav-item">
-                <a href="#" class="side-nav-link">
-                    <i class="uil-layer-group"></i>
-                    <span> {{ 'mentions.legales'|trans }} </span>
-                </a>
-            </li>
+
         </ul>
         <div class="clearfix"></div>
 

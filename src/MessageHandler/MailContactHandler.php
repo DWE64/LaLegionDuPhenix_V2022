@@ -24,7 +24,7 @@ class MailContactHandler extends AbstractMessageHandler
                     [
                         'firstname' => $mail->getFirstname(),
                         'name' => $mail->getName(),
-                        'email' => $mail->getEmail(),
+                        'mail' => $mail->getEmail(),
                         'phone' => $mail->getPhone(),
                         'content' => $mail->getContent()
                     ]

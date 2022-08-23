@@ -47,6 +47,18 @@ Encore
     .addEntry('profilGameApp', './assets/js/app/profil/profilGameApp.js')
     .addEntry('profilWrapper', './assets/js/app/profil/profilWrapper.js')
 
+    /*
+     * contact
+     */
+    .addEntry('contactApp', './assets/js/app/contact/contactApp.js')
+    .addEntry('contactWrapper', './assets/js/app/contact/contactWrapper.js')
+
+    /*
+     * activity
+     */
+    .addEntry('activityApp', './assets/js/app/activity/activityApp.js')
+    .addEntry('activityWrapper', './assets/js/app/activity/activityWrapper.js')
+
     //sortie de plusieur fichier style
     .addStyleEntry('app_core','./assets/styles/app_core.scss')
     .addStyleEntry('app-saas','./assets/styles/themeHyper/scss/app.scss')

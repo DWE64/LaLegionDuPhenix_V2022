@@ -3,9 +3,9 @@
 //
 
 //Background left-sidebar
-$bg-leftbar:                      linear-gradient(135deg,#8f75da 0,#727cf5 60%);
+$bg-leftbar:                     rgb(248,234,195,0.5);
 $bg-leftbar-light:                #ffffff;
-$bg-leftbar-dark:                 #3a444e;
+$bg-leftbar-dark:                 rgb(248,234,195,0.5);//#3a444e
 $bg-topnav:                         linear-gradient(to bottom, #8f75da, #727cf5);
 
 // Deatched left sidenav
@@ -44,9 +44,9 @@ $menu-item-dark-hover:            #727cf5;
 $menu-item-dark-active:           #727cf5;
 
 // Dark sidenav Menu item color
-$sidebar-dark-menu-item:          #8391a2;
-$sidebar-dark-menu-item-hover:    #bccee4;
-$sidebar-dark-menu-item-active:   #ffffff;
+$sidebar-dark-menu-item:          #3F1915;//#8391a2
+$sidebar-dark-menu-item-hover:    #CC3333;//#bccee4
+$sidebar-dark-menu-item-active:   #EB673A;//ffffff
 
 // Rightbar
 $rightbar-width:                    280px;
@@ -105,7 +105,7 @@ $chat-secondary-user-bg:          #404954;
 
 // User authentication Background
 $auth-bg:                         #404954;
-$auth-bg-pattern-img:               url("../../../images/bg-pattern-dark.png");
+$auth-bg-pattern-img:               url("../../../../appTheme/images/loginBg.png");//url("../../../images/bg-pattern-dark.png")
 
 // Apex chart
 $apex-grid-color:                 #404954;
