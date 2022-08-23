@@ -51,7 +51,7 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <a href="#" class="text-muted float-end"><small>{{ 'common.password_lost'|trans }}</small></a>
+                                                {# <a href="#" class="text-muted float-end"><small>{{ 'common.password_lost'|trans }}</small></a>#}
                                                 <label for="password" class="form-label">{{ 'common.password'|trans }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <input type="password" name="password" id="password" class="form-control" autocomplete="current-password" required>
@@ -71,7 +71,7 @@
                                             </div>#}
 
                                             <div class="mb-3 mb-0 text-center">
-                                                <button class="btn btn-primary" type="submit"> {{ 'common.login_send'|trans }} </button>
+                                                <button class="btn btn-lpd" type="submit"> {{ 'common.login_send'|trans }} </button>
                                             </div>
 
                                         </form>
@@ -81,7 +81,7 @@
 
                                 <div class="row mt-3">
                                     <div class="col-12 text-center">
-                                        <p class="text-muted">{{ 'common.ask_account'|trans }} <a href="#" class="text-muted ms-1"><b>{{ 'common.ask_register'|trans }}</b></a></p>
+                                        <p class="text-muted">{{ 'common.ask_account'|trans }} <a href="{{ path('app_register') }}" class="text-muted ms-1"><b>{{ 'common.ask_register'|trans }}</b></a></p>
                                     </div> <!-- end col -->
                                 </div>
                                 <!-- end row -->

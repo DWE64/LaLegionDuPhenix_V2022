@@ -21,6 +21,18 @@
                     <span> {{ 'home'|trans }} </span>
                 </a>
             </li>
+            <li class="side-nav-item">
+                <a href="{{ path('app_activity') }}" class="side-nav-link">
+                    <i class="uil-layer-group"></i>
+                    <span> {{ 'activity'|trans }} </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="{{ path('app_contact') }}" class="side-nav-link">
+                    <i class="uil-layer-group"></i>
+                    <span> {{ 'contact'|trans }} </span>
+                </a>
+            </li>
             {% if is_granted('ROLE_STAFF') %}
                 <li class="side-nav-item">
                     <a href="{{ path('app_home_admin') }}" class="side-nav-link">
@@ -56,18 +68,7 @@
                     </a>
                 </li>
             {% endif %}
-            <li class="side-nav-item">
-                <a href="{{ path('app_contact') }}" class="side-nav-link">
-                    <i class="uil-layer-group"></i>
-                    <span> {{ 'common.contact'|trans }} </span>
-                </a>
-            </li>
-            <li class="side-nav-item">
-                <a href="#" class="side-nav-link">
-                    <i class="uil-layer-group"></i>
-                    <span> {{ 'mentions.legales'|trans }} </span>
-                </a>
-            </li>
+
         </ul>
         <div class="clearfix"></div>
 

@@ -1,0 +1,48 @@
+.activity_header_row{
+  background: url("../images/activityBg.png") center;
+  background-size: cover;
+  @media (min-width: 1441px){
+    min-height:50vh;
+  }
+  @media (min-width: 769px) and (max-width: 1440.99px){
+    min-height:30vh;
+  }
+  @media (min-width: 426px) and (max-width: 768.99px){
+    min-height:30vh;
+  }
+  @media (min-width: 321px) and (max-width: 425.99px){
+    min-height:20vh;
+  }
+  @media (max-width: 320.99px){
+    min-height:10vh;
+  }
+}
+.activity_title{
+  color:#ffffff;
+  @media (min-width: 1441px){
+    font-size: 10rem;
+    top:18%;
+  }
+  @media (min-width: 769px) and (max-width: 1440.99px){
+    font-size: 7rem;
+    top:18%;
+  }
+  @media (min-width: 426px) and (max-width: 768.99px){
+    font-size: 5rem;
+    top:18%;
+  }
+  @media (min-width: 321px) and (max-width: 425.99px){
+    font-size: 3rem;
+    top:18%;
+  }
+  @media (max-width: 320.99px){
+    font-size: 2.25rem;
+    top:18%;
+  }
+  position:relative;
+  left:13%;
+  padding: 0px;
+  margin: 0px;
+  max-width:100%;
+  width:100%;
+}

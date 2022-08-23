@@ -36,7 +36,7 @@
 .content-page {
     margin-left: $leftbar-width;
     overflow: hidden;
-    padding: $topbar-height 12px 65px;
+    padding: $topbar-height 0px 65px;//$topbar-height 12px 65px
     min-height: 100vh;
 }
 
@@ -845,7 +845,7 @@ body[data-leftbar-theme="dark"] {
         background: $bg-leftbar-dark;
 
         .logo {
-            background: $bg-leftbar-dark !important;
+            //background: $bg-leftbar-dark !important;
         }
     }
 

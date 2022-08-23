@@ -1,62 +1,31 @@
 //import du theme
 //inutile ici car tout les fichier scss sont initialisé indépendamment
+
+@font-face {
+  font-family: "Aladin";
+  src: url("appTheme/fonts/Aladin-Regular.ttf") /*format("truetype")*/;
+}
+@font-face {
+  font-family: "Hatolie";
+  src: url("appTheme/fonts/Hatolie.ttf") /*format("truetype")*/;
+}
+
 body{
   overflow-y: scroll !important;
 }
-.contact-background{
-  background: url("appTheme/images/contactBg.png") center;
-  background-size: cover;
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
+h1{
+  font-family: Hatolie !important;
+  font-weight: lighter !important;
+  font-size: 2.25rem;
 }
-.contact-bloc-info{
-  background-color: #b23f36;
-  color: #ffffff;
-  font-size: 13pt;
-  min-height:200px;
-  max-height:100%;
-  height:auto;
-  border-radius: 20px;
-  img{
-    position: relative;
-    top:10%;
-    left:37.5%;
-  }
-  p{
-    position: relative;
-    top:20%;
-    a{
-      color:#ffffff;
-    }
-    a:hover{
-      color: #f8eac3;
-    }
-    a:active{
-      color:#ffffff;
-    }
-  }
+h2, h3{
+  font-family: Aladin !important;
+  font-weight: normal !important;
 }
-.contact-title{
-  font-size: 22pt;
-  color:#3f1915;
-  text-align: center;
-}
-.contact-form{
-  div{
-    label{
-      color:#3f1915;
-    }
-  }
-}
-.google-iframe{
-  border: 10px solid #f8eac3;
-  border-radius: 15px;
-}
+
 .btn-lpd{
   background-color: #eb673a !important;
-  color:#000000 !important;
+  color:#ffffff !important;
   &:hover{
     background-color: #f8eac3 !important;
     color:#000000 !important;
@@ -66,3 +35,6 @@ body{
     color:#000000 !important;
   }
 }
+@import "appTheme/scss/homepage.scss";
+@import "appTheme/scss/contact.scss";
+@import "appTheme/scss/activity.scss";

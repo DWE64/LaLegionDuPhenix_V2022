@@ -1,0 +1,66 @@
+<div class="col-md-6 col-xxl-3 js-filter js-manage-game-delete game-{{ game.id }}" id="game-{{ game.id }}"
+     data-id="game-{{ game.id }}"
+     data-value="{{ game.id }}">
+    <!-- project card -->
+    <div class="card d-block">
+        <!-- project-thumbnail -->
+        {% if game.picture.gamePicture is not null %}
+            <img class="card-img-top game-picture-{{ game.id }}"
+                 src="{{ asset('pictures/games/' ~ game.picture.gamePicture) }}" alt="project image cap">
+        {% else %}
+            <img class="card-img-top game-picture-{{ game.id }}"
+                 src="{{ asset('pictures/games/defaultGamePicture.jpg') }}" alt="project image cap">
+        {% endif %}
+        <div class="card-img-overlay">
+            {% if game.gameStatus == 'FINISH_GAME' %}
+                <div class="badge bg-success mb-3 game-status-{{ game.id }}"
+                     data-value="{{ game.gameStatus }}">{{ 'activity.finish'|trans }}</div>
+            {% elseif game.gameStatus == 'ACTIVE_GAME' %}
+                <div class="badge bg-primary mb-3 game-status-{{ game.id }}"
+                     data-value="{{ game.gameStatus }}">{{ 'activity.ongoing'|trans }}</div>
+            {% else %}
+                <div class="badge bg-warning mb-3 game-status-{{ game.id }}"
+                     data-value="{{ game.gameStatus }}">{{ 'activity.new'|trans }}</div>
+            {% endif %}
+        </div>
+
+        <div class="card-body position-relative">
+            <!-- project title-->
+            <h4 class="mt-0">
+                {{ game.title }}
+            </h4>
+            <p class="text-muted font-12 mb-3">{{ 'activity.slots'|trans }} <span
+                        class="game-weekSlot-{{ game.id }}">{{ game.weekSlots }}</span> - <span
+                        class="game-hourSlot-{{ game.id }}">{{ game.halfDaySlots }}</span></p>
+            <p class="text-muted font-12 mb-3">{{ 'activity.master'|trans }} <span
+                        class="game-gameMaster-{{ game.id }}">{{ game.gameMaster.firstname }} {{ game.gameMaster.name }}</span>
+            </p>
+            <p class="text-muted font-13 mb-3 game-description-{{ game.id }}">{{ game.description }}
+            </p>
+            <p class="text-muted font-13 mb-3">
+                {{ 'activity.assignedPlace'|trans }} <span
+                        class="game-assignedGamePlace-{{ game.id }}">{{ game.assignedPlace }}</span> / <span
+                        class="game-maxPlaceGame-{{ game.id }}">{{ game.maxGamePlace }}</span>
+            </p>
+
+            <!-- project detail-->
+            <div class="mb-3" id="tooltip-container">
+                {% if game.players is defined and game.players is not empty %}
+                    {% for user in game.players %}
+                        {% if user.profilPicture is not null and user.profilPicture.profilPicture is not null %}
+                            <img src="{{ asset('pictures/users/' ~ user.profilPicture.profilPicture) }}"
+                                 class="rounded-circle avatar-xs" alt="friend">
+                        {% else %}
+                            <img src="{{ asset('pictures/users/imgProfilDefault.jpg') }}"
+                                 class="rounded-circle avatar-xs" alt="friend">
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div> <!-- end card-body-->
+
+        <div class="card-footer row mx-0 px-0 my-0 py-0 justify-content-end">
+            <a href="{{ path('app_contact') }}" class="btn btn-lpd col-12">{{ "activity.more_information"|trans }}</a>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->

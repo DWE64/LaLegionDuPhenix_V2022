@@ -5,165 +5,746 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="2LF5Eg5" resname="user.safe">
-        <source>user.safe</source>
-        <target>__user.safe</target>
-      </trans-unit>
       <trans-unit id="QoghNQ6" resname="login">
         <source>login</source>
-        <target>__login</target>
-      </trans-unit>
-      <trans-unit id="rFZJyJT" resname="user.safe.validation">
-        <source>user.safe.validation</source>
-        <target>__user.safe.validation</target>
+        <target>Connexion</target>
       </trans-unit>
       <trans-unit id="ACcM9j_" resname="logout">
         <source>logout</source>
-        <target>deconnexion</target>
+        <target>Déconnexion</target>
       </trans-unit>
       <trans-unit id="QqV4.6Q" resname="mentions.legales">
         <source>mentions.legales</source>
-        <target>__mentions.legales</target>
+        <target>Mentions légales</target>
       </trans-unit>
       <trans-unit id="HgHdfrZ" resname="french.language">
         <source>french.language</source>
-        <target>__french.language</target>
+        <target>Français</target>
       </trans-unit>
       <trans-unit id="tfyvCKY" resname="english.language">
         <source>english.language</source>
-        <target>__english.language</target>
-      </trans-unit>
-      <trans-unit id="X6vUoqv" resname="ukrainian.language">
-        <source>ukrainian.language</source>
-        <target>__ukrainian.language</target>
+        <target>Anglais</target>
       </trans-unit>
       <trans-unit id="TL0W75Z" resname="common.login_send">
         <source>common.login_send</source>
-        <target>__common.login_send</target>
+        <target>Connexion</target>
       </trans-unit>
       <trans-unit id="vSTsB0k" resname="common.ask_login_access">
         <source>common.ask_login_access</source>
-        <target>__common.ask_login_access</target>
+        <target>Saisissez votre email et votre mot de passe</target>
       </trans-unit>
       <trans-unit id="H9ihxDB" resname="common.email">
         <source>common.email</source>
-        <target>__common.email</target>
+        <target>Email</target>
       </trans-unit>
       <trans-unit id="5YNNrhw" resname="common.password_lost">
         <source>common.password_lost</source>
-        <target>__common.password_lost</target>
+        <target>Mot de passe oublié?</target>
       </trans-unit>
       <trans-unit id="A0qOHkS" resname="common.password">
         <source>common.password</source>
-        <target>__common.password</target>
+        <target>Mot de passe</target>
       </trans-unit>
       <trans-unit id="u9bgzJ8" resname="common.ask_account">
         <source>common.ask_account</source>
-        <target>__common.ask_account</target>
+        <target>Vous n'avez pas de compte? </target>
       </trans-unit>
       <trans-unit id="yZ8nq8Y" resname="common.ask_register">
         <source>common.ask_register</source>
-        <target>__common.ask_register</target>
+        <target>Enregistrez-vous!</target>
       </trans-unit>
       <trans-unit id="g8UfIa_" resname="page.admin.home">
         <source>page.admin.home</source>
-        <target>__page.admin.home</target>
+        <target>Panneau administrateur</target>
       </trans-unit>
       <trans-unit id="92bMB2G" resname="page.admin.list_user">
         <source>page.admin.list_user</source>
-        <target>__page.admin.list_user</target>
+        <target>Liste des utilisateurs</target>
       </trans-unit>
       <trans-unit id="Mkt7e3B" resname="page.home">
         <source>page.home</source>
-        <target>__page.home</target>
+        <target>Accueil</target>
       </trans-unit>
       <trans-unit id="AYTlYPK" resname="page.login">
         <source>page.login</source>
-        <target>__page.login</target>
+        <target>Connexion</target>
       </trans-unit>
       <trans-unit id="5e1Fwng" resname="admin.user.manage.email">
         <source>admin.user.manage.email</source>
-        <target>__admin.user.manage.email</target>
+        <target>Email</target>
       </trans-unit>
       <trans-unit id="owNZvY7" resname="admin.user.manage.role">
         <source>admin.user.manage.role</source>
-        <target>__admin.user.manage.role</target>
+        <target>Accès utilisateur</target>
       </trans-unit>
       <trans-unit id=".jYmnp3" resname="admin.user.manage.member_status">
         <source>admin.user.manage.member_status</source>
-        <target>__admin.user.manage.member_status</target>
+        <target>Status du membre</target>
       </trans-unit>
       <trans-unit id="rf1z.BJ" resname="admin.user.manage.registration_date_in_association">
         <source>admin.user.manage.registration_date_in_association</source>
-        <target>__admin.user.manage.registration_date_in_association</target>
+        <target>Date d'inscription à l'association</target>
       </trans-unit>
       <trans-unit id="EmKtKN3" resname="admin.user.manage.is_member">
         <source>admin.user.manage.is_member</source>
-        <target>__admin.user.manage.is_member</target>
+        <target>Membre ?</target>
       </trans-unit>
       <trans-unit id="i3WLqdN" resname="admin.user.manage.created_at">
         <source>admin.user.manage.created_at</source>
-        <target>__admin.user.manage.created_at</target>
+        <target>Crée le</target>
       </trans-unit>
       <trans-unit id="kMWMnTi" resname="admin.user.manage.updated_at">
         <source>admin.user.manage.updated_at</source>
-        <target>__admin.user.manage.updated_at</target>
+        <target>Mis à jour le</target>
       </trans-unit>
       <trans-unit id="uQ8ZDoA" resname="admin.user.manage.name">
         <source>admin.user.manage.name</source>
-        <target>__admin.user.manage.name</target>
+        <target>Nom</target>
       </trans-unit>
       <trans-unit id="8FCVAl0" resname="admin.user.manage.firstname">
         <source>admin.user.manage.firstname</source>
-        <target>__admin.user.manage.firstname</target>
+        <target>Prénom</target>
       </trans-unit>
       <trans-unit id="qFa3.yC" resname="admin.user.manage.birthday">
         <source>admin.user.manage.birthday</source>
-        <target>__admin.user.manage.birthday</target>
+        <target>Date de naissance</target>
       </trans-unit>
       <trans-unit id="LJUr7VR" resname="admin.user.manage.address">
         <source>admin.user.manage.address</source>
-        <target>__admin.user.manage.address</target>
+        <target>Adresse</target>
       </trans-unit>
       <trans-unit id="CNHnDH_" resname="admin.user.manage.seniority">
         <source>admin.user.manage.seniority</source>
-        <target>__admin.user.manage.seniority</target>
+        <target>Ancienneté</target>
       </trans-unit>
       <trans-unit id="_lFCzkA" resname="admin.user.manage.action">
         <source>admin.user.manage.action</source>
-        <target>__admin.user.manage.action</target>
+        <target>Action</target>
       </trans-unit>
       <trans-unit id="yB.lAmO" resname="admin.user.manage.button_update">
         <source>admin.user.manage.button_update</source>
-        <target>__admin.user.manage.button_update</target>
+        <target>Mettre à jour</target>
       </trans-unit>
       <trans-unit id="Y48xn6o" resname="admin.user.manage.zip">
         <source>admin.user.manage.zip</source>
-        <target>__admin.user.manage.zip</target>
+        <target>Code postal</target>
       </trans-unit>
       <trans-unit id="eAaiV7n" resname="admin.user.manage.city">
         <source>admin.user.manage.city</source>
-        <target>__admin.user.manage.city</target>
+        <target>Ville</target>
       </trans-unit>
       <trans-unit id="bNf4bJZ" resname="admin.home">
         <source>admin.home</source>
-        <target>__admin.home</target>
+        <target>Panneau administrateur</target>
       </trans-unit>
       <trans-unit id="SL06KG5" resname="admin.user.manage">
         <source>admin.user.manage</source>
-        <target>__admin.user.manage</target>
+        <target>Gestion des utilisateurs</target>
       </trans-unit>
       <trans-unit id="7T3RPLh" resname="home.return">
         <source>home.return</source>
-        <target>__home.return</target>
+        <target>Retour au site</target>
       </trans-unit>
       <trans-unit id="TqFAWIF" resname="home">
         <source>home</source>
-        <target>__home</target>
+        <target>Accueil</target>
       </trans-unit>
       <trans-unit id="30eucQh" resname="admin.pannel">
         <source>admin.pannel</source>
-        <target>__admin.pannel</target>
+        <target>Panneau administrateur</target>
+      </trans-unit>
+      <trans-unit id="meNyI2B" resname="page.admin.list_game">
+        <source>page.admin.list_game</source>
+        <target>Liste des jeux</target>
+      </trans-unit>
+      <trans-unit id="yfEpttE" resname="page.admin.view_game">
+        <source>page.admin.view_game</source>
+        <target>Voir le jeu</target>
+      </trans-unit>
+      <trans-unit id="qmrG34N" resname="common.success.delete">
+        <source>common.success.delete</source>
+        <target>Suppression réussie</target>
+      </trans-unit>
+      <trans-unit id="CjfmMUE" resname="page.app.profil_user">
+        <source>page.app.profil_user</source>
+        <target>Mon profil</target>
+      </trans-unit>
+      <trans-unit id="i1fZlj_" resname="page.profil.message_success_status_change">
+        <source>page.profil.message_success_status_change</source>
+        <target>Status modifié avec succès</target>
+      </trans-unit>
+      <trans-unit id="rDbM7UZ" resname="page.profil.message_error_status_change">
+        <source>page.profil.message_error_status_change</source>
+        <target>Erreur lors du changement de status</target>
+      </trans-unit>
+      <trans-unit id="E5JHdYu" resname="page.contact">
+        <source>page.contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="65cQ5b7" resname="page.contact.message_send_success">
+        <source>page.contact.message_send_success</source>
+        <target>Message envoyé avec succès</target>
+      </trans-unit>
+      <trans-unit id="Ez4sJDA" resname="page.contact.message_error_input_incomplete">
+        <source>page.contact.message_error_input_incomplete</source>
+        <target>Erreur - Formulaire incomplet</target>
+      </trans-unit>
+      <trans-unit id="j7GZN7v" resname="page.contact.message_error_async">
+        <source>page.contact.message_error_async</source>
+        <target>Erreur lors de l'envoi du message</target>
+      </trans-unit>
+      <trans-unit id="iyE05he" resname="page.contact.recaptcha_message_error_async">
+        <source>page.contact.recaptcha_message_error_async</source>
+        <target>Erreur lors de l'autentification du recaptcha</target>
+      </trans-unit>
+      <trans-unit id="t5KtrlA" resname="page.registration">
+        <source>page.registration</source>
+        <target>S'enregistrer</target>
+      </trans-unit>
+      <trans-unit id="nUj0Zwa" resname="contact.name">
+        <source>contact.name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="Tv6v0w." resname="contact.firstname">
+        <source>contact.firstname</source>
+        <target>Prénom</target>
+      </trans-unit>
+      <trans-unit id="_YxHlKI" resname="contact.phone">
+        <source>contact.phone</source>
+        <target>Téléphone</target>
+      </trans-unit>
+      <trans-unit id="M0Heh8N" resname="contact.subject">
+        <source>contact.subject</source>
+        <target>Sujet</target>
+      </trans-unit>
+      <trans-unit id="hKhfywF" resname="contact.mail_placeholder">
+        <source>contact.mail_placeholder</source>
+        <target>votre mail</target>
+      </trans-unit>
+      <trans-unit id="092zwah" resname="contact.mail">
+        <source>contact.mail</source>
+        <target>Mail</target>
+      </trans-unit>
+      <trans-unit id="UAo39T2" resname="contact.message">
+        <source>contact.message</source>
+        <target>Votre message</target>
+      </trans-unit>
+      <trans-unit id="rhPm3yJ" resname="registration.name">
+        <source>registration.name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="SltqMZN" resname="registration.firstname">
+        <source>registration.firstname</source>
+        <target>Prénom</target>
+      </trans-unit>
+      <trans-unit id="VOj0Irl" resname="registration.birthday">
+        <source>registration.birthday</source>
+        <target>Date de naissance</target>
+      </trans-unit>
+      <trans-unit id="gj9xb1P" resname="registration.address">
+        <source>registration.address</source>
+        <target>Adresse</target>
+      </trans-unit>
+      <trans-unit id="NurGVeM" resname="registration.postal_code">
+        <source>registration.postal_code</source>
+        <target>Code postal</target>
+      </trans-unit>
+      <trans-unit id="cpmS.W3" resname="registration.city">
+        <source>registration.city</source>
+        <target>Ville</target>
+      </trans-unit>
+      <trans-unit id="JvSD4Us" resname="registration.mail_placeholder">
+        <source>registration.mail_placeholder</source>
+        <target>votre mail</target>
+      </trans-unit>
+      <trans-unit id="9rU2xOM" resname="registration.mail">
+        <source>registration.mail</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="9uT4VTC" resname="registration.password">
+        <source>registration.password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="5xzjwDF" resname="registration.message_password">
+        <source>registration.message_password</source>
+        <target>Mot de passe incorrecte</target>
+      </trans-unit>
+      <trans-unit id="8KM9Xwv" resname="registration.message_term_agree">
+        <source>registration.message_term_agree</source>
+        <target>Acceptez les conditions</target>
+      </trans-unit>
+      <trans-unit id="1ibvqyK" resname="registration.accept_term_agree">
+        <source>registration.accept_term_agree</source>
+        <target>Acceptez les conditions</target>
+      </trans-unit>
+      <trans-unit id="IFgIu1X" resname="mail.subject.add_gameMaster_to_game">
+        <source>mail.subject.add_gameMaster_to_game</source>
+        <target>Maitre de jeu ajouté avec succès</target>
+      </trans-unit>
+      <trans-unit id="w5Y58ax" resname="mail.subject.add_new_game">
+        <source>mail.subject.add_new_game</source>
+        <target>Nouveau jeu créé</target>
+      </trans-unit>
+      <trans-unit id="8XZRUIv" resname="mail.subject.add_user_to_game">
+        <source>mail.subject.add_user_to_game</source>
+        <target>Nouveau joueur ajouté</target>
+      </trans-unit>
+      <trans-unit id="2h3bJB6" resname="mail.subject.delete_game">
+        <source>mail.subject.delete_game</source>
+        <target>Suppression de jeu</target>
+      </trans-unit>
+      <trans-unit id="NT0LEoQ" resname="mail.subject.delete_gameMaster_to_game">
+        <source>mail.subject.delete_gameMaster_to_game</source>
+        <target>Retrait du Maitre de jeu d'une partie</target>
+      </trans-unit>
+      <trans-unit id="C9Grsm." resname="mail.subject.delete_user_to_game">
+        <source>mail.subject.delete_user_to_game</source>
+        <target>Suppression d'un joueur de la partie</target>
+      </trans-unit>
+      <trans-unit id="5fKCAqL" resname="mail.subject.edit_game">
+        <source>mail.subject.edit_game</source>
+        <target>Jeu modifié</target>
+      </trans-unit>
+      <trans-unit id="Rtt3XnE" resname="mail.subject.refresh_status_to_game">
+        <source>mail.subject.refresh_status_to_game</source>
+        <target>Actualisation de votre status à vos parties</target>
+      </trans-unit>
+      <trans-unit id="IWc62GV" resname="mail.subject.refresh_status_game">
+        <source>mail.subject.refresh_status_game</source>
+        <target>Actualisation de votre status à vos parties</target>
+      </trans-unit>
+      <trans-unit id="NBwjBEN" resname="mail.subject.registration">
+        <source>mail.subject.registration</source>
+        <target>Enregistrement réussi</target>
+      </trans-unit>
+      <trans-unit id="xMUla5x" resname="mail.subject.remove_inscription">
+        <source>mail.subject.remove_inscription</source>
+        <target>Inscription supprimé</target>
+      </trans-unit>
+      <trans-unit id="5sL5brs" resname="mail.subject.profil_edit_by_admin">
+        <source>mail.subject.profil_edit_by_admin</source>
+        <target>Profil modifié par un administrateur</target>
+      </trans-unit>
+      <trans-unit id="uP253S7" resname="mail.subject.validation_inscription">
+        <source>mail.subject.validation_inscription</source>
+        <target>Inscription validée</target>
+      </trans-unit>
+      <trans-unit id="Dgv_vkk" resname="admin.game.filter_all">
+        <source>admin.game.filter_all</source>
+        <target>Tous les jeux</target>
+      </trans-unit>
+      <trans-unit id="1ajaDt8" resname="admin.game.filter_new">
+        <source>admin.game.filter_new</source>
+        <target>Nouveaux jeux</target>
+      </trans-unit>
+      <trans-unit id="VQ1Ny3." resname="admin.game.filter_ongoing">
+        <source>admin.game.filter_ongoing</source>
+        <target>Jeux en cours</target>
+      </trans-unit>
+      <trans-unit id="ZbHtsZ6" resname="admin.game.filter_finish">
+        <source>admin.game.filter_finish</source>
+        <target>Jeux finis</target>
+      </trans-unit>
+      <trans-unit id="UlZ4fjM" resname="admin.game.manage.button_delete_player">
+        <source>admin.game.manage.button_delete_player</source>
+        <target>Supprimer un joueur</target>
+      </trans-unit>
+      <trans-unit id="vypshwj" resname="admin.game.delete">
+        <source>admin.game.delete</source>
+        <target>Supprimer le jeu</target>
+      </trans-unit>
+      <trans-unit id="AVO0o9K" resname="common.game.finish">
+        <source>common.game.finish</source>
+        <target>Terminé</target>
+      </trans-unit>
+      <trans-unit id="V7c_JCI" resname="common.game.ongoing">
+        <source>common.game.ongoing</source>
+        <target>En cours</target>
+      </trans-unit>
+      <trans-unit id="lP1OD7v" resname="common.game.new">
+        <source>common.game.new</source>
+        <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="SFbKvCT" resname="common.game.slots">
+        <source>common.game.slots</source>
+        <target>Créneau</target>
+      </trans-unit>
+      <trans-unit id="pCXAxwn" resname="common.game.master">
+        <source>common.game.master</source>
+        <target>Maitre de jeu</target>
+      </trans-unit>
+      <trans-unit id="IZh8dfa" resname="common.game.assignedPlace">
+        <source>common.game.assignedPlace</source>
+        <target>Place attribuées</target>
+      </trans-unit>
+      <trans-unit id="RO.nL.u" resname="admin.game.createdAt">
+        <source>admin.game.createdAt</source>
+        <target>Créé le</target>
+      </trans-unit>
+      <trans-unit id="pL31fbN" resname="admin.game.updatedAt">
+        <source>admin.game.updatedAt</source>
+        <target>Modifié le</target>
+      </trans-unit>
+      <trans-unit id="22.G8B0" resname="admin.game.description">
+        <source>admin.game.description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="MsJxF7R" resname="admin.game.minGamePlace">
+        <source>admin.game.minGamePlace</source>
+        <target>Joueurs minimum</target>
+      </trans-unit>
+      <trans-unit id="55bp_hr" resname="admin.game.maxGamePlace">
+        <source>admin.game.maxGamePlace</source>
+        <target>Joueurs maximum</target>
+      </trans-unit>
+      <trans-unit id="6UghOc." resname="admin.game.player">
+        <source>admin.game.player</source>
+        <target>Joueurs</target>
+      </trans-unit>
+      <trans-unit id="PCoCzP0" resname="admin.game.member_status">
+        <source>admin.game.member_status</source>
+        <target>Status du joueur</target>
+      </trans-unit>
+      <trans-unit id="uM9XdRx" resname="admin.user.manage.isPresent">
+        <source>admin.user.manage.isPresent</source>
+        <target>Présence</target>
+      </trans-unit>
+      <trans-unit id="J9Eb3os" resname="admin.game.comment">
+        <source>admin.game.comment</source>
+        <target>Commentaire</target>
+      </trans-unit>
+      <trans-unit id="ZuhTaaJ" resname="admin.game.game_picture">
+        <source>admin.game.game_picture</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id=".9Pt1XH" resname="admin.game.add_game">
+        <source>admin.game.add_game</source>
+        <target>Ajouter</target>
+      </trans-unit>
+      <trans-unit id="tx0ojZx" resname="admin.game.manage.title">
+        <source>admin.game.manage.title</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="Jp5QnoL" resname="admin.game.manage.description">
+        <source>admin.game.manage.description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="7_YYSjM" resname="admin.game.manage.game_master">
+        <source>admin.game.manage.game_master</source>
+        <target>Maitre du jeu</target>
+      </trans-unit>
+      <trans-unit id="e8HO4Ve" resname="admin.game.manage.week_slot">
+        <source>admin.game.manage.week_slot</source>
+        <target>Semaine</target>
+      </trans-unit>
+      <trans-unit id="cKMWwq7" resname="admin.game.manage.hour_slot">
+        <source>admin.game.manage.hour_slot</source>
+        <target>Créneau</target>
+      </trans-unit>
+      <trans-unit id="aTBRPAe" resname="admin.game.manage.min_game_place">
+        <source>admin.game.manage.min_game_place</source>
+        <target>Place minimum</target>
+      </trans-unit>
+      <trans-unit id="Ns_Bk3j" resname="admin.game.manage.max_game_place">
+        <source>admin.game.manage.max_game_place</source>
+        <target>Place maximum</target>
+      </trans-unit>
+      <trans-unit id="LxG9wJG" resname="admin.game.manage.button_add">
+        <source>admin.game.manage.button_add</source>
+        <target>Ajouter</target>
+      </trans-unit>
+      <trans-unit id="w9Z3Eci" resname="admin.game.add_user">
+        <source>admin.game.add_user</source>
+        <target>Ajouter un joueur</target>
+      </trans-unit>
+      <trans-unit id="RSQCksD" resname="admin.game.manage.game_player">
+        <source>admin.game.manage.game_player</source>
+        <target>Joueurs</target>
+      </trans-unit>
+      <trans-unit id="VeRGvwB" resname="admin.game.manage.button_add_player">
+        <source>admin.game.manage.button_add_player</source>
+        <target>Ajouter</target>
+      </trans-unit>
+      <trans-unit id="0eQrlMP" resname="admin.game.change_status">
+        <source>admin.game.change_status</source>
+        <target>Modifier le status</target>
+      </trans-unit>
+      <trans-unit id="2w7vBeY" resname="admin.game.manage.change_status_game">
+        <source>admin.game.manage.change_status_game</source>
+        <target>Status du jeu</target>
+      </trans-unit>
+      <trans-unit id="UKPrHHu" resname="admin.game.manage.button_change_status">
+        <source>admin.game.manage.button_change_status</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="1xlQXUl" resname="admin.game.delete_user">
+        <source>admin.game.delete_user</source>
+        <target>Supprimer un joueur</target>
+      </trans-unit>
+      <trans-unit id="GiTXfV8" resname="admin.game.manage.delete_game_player">
+        <source>admin.game.manage.delete_game_player</source>
+        <target>Joueurs</target>
+      </trans-unit>
+      <trans-unit id="fdExMEU" resname="admin.game.edit">
+        <source>admin.game.edit</source>
+        <target>Modifier le jeu</target>
+      </trans-unit>
+      <trans-unit id="fM8hH5_" resname="admin.game.manage.button_edit">
+        <source>admin.game.manage.button_edit</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="dMZLYRX" resname="contact.send_failed">
+        <source>contact.send_failed</source>
+        <target>Envoi echoué</target>
+      </trans-unit>
+      <trans-unit id="3vNR7SK" resname="contact.send_failed_message">
+        <source>contact.send_failed_message</source>
+        <target>Votre message ne nous est pas parvenu, veuillez réessayer !</target>
+      </trans-unit>
+      <trans-unit id="L5OnaqV" resname="contact.send_failed_button">
+        <source>contact.send_failed_button</source>
+        <target>Continuer</target>
+      </trans-unit>
+      <trans-unit id="A5LbPcd" resname="user.profil.edit_button">
+        <source>user.profil.edit_button</source>
+        <target>Modifier mon profil</target>
+      </trans-unit>
+      <trans-unit id="Kg0NB29" resname="user.profil.name">
+        <source>user.profil.name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="vLmIqUP" resname="user.profil.firstname">
+        <source>user.profil.firstname</source>
+        <target>Prénom</target>
+      </trans-unit>
+      <trans-unit id="IC7ZJSf" resname="user.profil.birthday">
+        <source>user.profil.birthday</source>
+        <target>Date de naissance</target>
+      </trans-unit>
+      <trans-unit id="9kU56Ts" resname="user.profil.address">
+        <source>user.profil.address</source>
+        <target>Adresse</target>
+      </trans-unit>
+      <trans-unit id="kv.rfmQ" resname="user.profil.zip">
+        <source>user.profil.zip</source>
+        <target>Code postal</target>
+      </trans-unit>
+      <trans-unit id="MdydxbL" resname="user.profil.city">
+        <source>user.profil.city</source>
+        <target>Ville</target>
+      </trans-unit>
+      <trans-unit id="bYcEOc4" resname="user.profil.button_update">
+        <source>user.profil.button_update</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="XA6AMTP" resname="contact.send_success">
+        <source>contact.send_success</source>
+        <target>Envoi avec succès</target>
+      </trans-unit>
+      <trans-unit id="M8I6mQk" resname="contact.send_success_message">
+        <source>contact.send_success_message</source>
+        <target>Votre message a bien été envoyé.</target>
+      </trans-unit>
+      <trans-unit id="UpE97I2" resname="contact.send_success_button">
+        <source>contact.send_success_button</source>
+        <target>Continuer</target>
+      </trans-unit>
+      <trans-unit id="IjWy2zV" resname="common.is_member">
+        <source>common.is_member</source>
+        <target>Membre ?</target>
+      </trans-unit>
+      <trans-unit id="0r6QCQ_" resname="common.member_true">
+        <source>common.member_true</source>
+        <target>Oui</target>
+      </trans-unit>
+      <trans-unit id="kM89f0i" resname="common.member_false">
+        <source>common.member_false</source>
+        <target>Non</target>
+      </trans-unit>
+      <trans-unit id="WTx7e.o" resname="common.master">
+        <source>common.master</source>
+        <target>Maitre du jeu</target>
+      </trans-unit>
+      <trans-unit id="JguR1mH" resname="common.player">
+        <source>common.player</source>
+        <target>Joueurs</target>
+      </trans-unit>
+      <trans-unit id="6XLNXeE" resname="common.personnal_information">
+        <source>common.personnal_information</source>
+        <target>Informations personnelles</target>
+      </trans-unit>
+      <trans-unit id="5qRF4ZU" resname="common.fullname">
+        <source>common.fullname</source>
+        <target>Identité</target>
+      </trans-unit>
+      <trans-unit id="wKAnVSp" resname="common.birthday">
+        <source>common.birthday</source>
+        <target>Date de naissance</target>
+      </trans-unit>
+      <trans-unit id="kzcvmZ7" resname="common.address">
+        <source>common.address</source>
+        <target>Adresse</target>
+      </trans-unit>
+      <trans-unit id="BDdly_V" resname="common.city">
+        <source>common.city</source>
+        <target>Ville</target>
+      </trans-unit>
+      <trans-unit id="P4nF6Hv" resname="common.postal_code">
+        <source>common.postal_code</source>
+        <target>Code postal</target>
+      </trans-unit>
+      <trans-unit id="aZT2OUQ" resname="common.mail">
+        <source>common.mail</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="pHvPA1P" resname="common.user_list">
+        <source>common.user_list</source>
+        <target>Liste des utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="07cq.UZ" resname="common.user_is_present">
+        <source>common.user_is_present</source>
+        <target>Présent ?</target>
+      </trans-unit>
+      <trans-unit id="2xS3Xm4" resname="profil.game.post_message">
+        <source>profil.game.post_message</source>
+        <target>Poster le commentaire</target>
+      </trans-unit>
+      <trans-unit id="q_hkRPs" resname="admin.game.manage">
+        <source>admin.game.manage</source>
+        <target>Gestion des jeux</target>
+      </trans-unit>
+      <trans-unit id="KA1Eqx6" resname="welcome">
+        <source>welcome</source>
+        <target>Bienvenue</target>
+      </trans-unit>
+      <trans-unit id="BRsUZXR" resname="my_account">
+        <source>my_account</source>
+        <target>Mon profil</target>
+      </trans-unit>
+      <trans-unit id="h3gPpd5" resname="register">
+        <source>register</source>
+        <target>S'enregistrer</target>
+      </trans-unit>
+      <trans-unit id="FyU.a.M" resname="common.contact">
+        <source>common.contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="yTAW_B_" resname="page.contact.form_title">
+        <source>page.contact.form_title</source>
+        <target>Nous contacter</target>
+      </trans-unit>
+      <trans-unit id="MZq4Vai" resname="page.contact.form_submit">
+        <source>page.contact.form_submit</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="QaV1RFI" resname="homepage.title_baseline">
+        <source>homepage.title_baseline</source>
+        <target>L' Aventure</target>
+      </trans-unit>
+      <trans-unit id="lN.arBh" resname="homepage.subtitle_baseline">
+        <source>homepage.subtitle_baseline</source>
+        <target>commence ici</target>
+      </trans-unit>
+      <trans-unit id="Fx61AN0" resname="homepage.title_presentation">
+        <source>homepage.title_presentation</source>
+        <target>La Légion du phénix</target>
+      </trans-unit>
+      <trans-unit id="jfo5g1Y" resname="homepage.description_presentation">
+        <source>homepage.description_presentation</source>
+        <target>L'association "La Légion Du Phénix", est une association loi 1901 à but non lucratif, et basée sur Anglet (pour nous contacter c'est ici). Notre activité principale est le jeu de rôle, dans une ambiance conviviale, dynamique, et soudée.</target>
+      </trans-unit>
+      <trans-unit id="jjoroGe" resname="homepage.title_explain">
+        <source>homepage.title_explain</source>
+        <target>Qu'est-ce que le jeu de rôle ?</target>
+      </trans-unit>
+      <trans-unit id="6dyojMS" resname="homepage.description_explain">
+        <source>homepage.description_explain</source>
+        <target>Pour la fédération française de jeu de rôle, est une activité de loisir et de divertissement qui consiste à raconter une histoire à plusieurs. Installés autour d'une table, les joueurs interprètent le rôle d'un personnage au sein d'un univers fictif, décrivant chacun les aventures de son personnage interagissant avec le monde qui l'entourent. Pour plus d'informations sur la définition officielle, je vous invite à faire un tour sur le site de la fédération française de jeu de rôle.
+                        Pour notre association, il s'agit d'un moment où l'on peut se rencontrer et passer des moments entre amis, s'amuser, rigoler, et prendre du plaisir à incarner nos personnages de films, séries, manga, littérature favoris. Cela nous permet aussi d'explorer de manière fictive, des univers aussi riches et variés. En définitif, il s'agit d'un loisir où chacun peut s'amuser et se détendre en partageant aussi avec d'autres ce plaisir.</target>
+      </trans-unit>
+      <trans-unit id="UUObxky" resname="registration.invit_to_create_account">
+        <source>registration.invit_to_create_account</source>
+        <target>Envie d'en savoir plus, inscrivez-vous! </target>
+      </trans-unit>
+      <trans-unit id="1U6lqE9" resname="common.register">
+        <source>common.register</source>
+        <target>S'enregistrer</target>
+      </trans-unit>
+      <trans-unit id="s6_2mh." resname="registration.already_account">
+        <source>registration.already_account</source>
+        <target>Vous avez déjà un compte ?</target>
+      </trans-unit>
+      <trans-unit id="j5s_dNX" resname="registration.title_baseline">
+        <source>registration.title_baseline</source>
+        <target>Ton imagination est ta seule limite</target>
+      </trans-unit>
+      <trans-unit id="p2V2YhM" resname="registration.text_baseline">
+        <source>registration.text_baseline</source>
+        <target>lance le dés.... échec critique!</target>
+      </trans-unit>
+      <trans-unit id="G_mTB6T" resname="page.activity">
+        <source>page.activity</source>
+        <target>Nos jeux</target>
+      </trans-unit>
+      <trans-unit id="cPY2QZ1" resname="activity.filter_all">
+        <source>activity.filter_all</source>
+        <target>Tous les jeux</target>
+      </trans-unit>
+      <trans-unit id="9LijMQ8" resname="activity.filter_new">
+        <source>activity.filter_new</source>
+        <target>Nouveaux jeux</target>
+      </trans-unit>
+      <trans-unit id="JmUMtqf" resname="activity.filter_ongoing">
+        <source>activity.filter_ongoing</source>
+        <target>Jeux en cours</target>
+      </trans-unit>
+      <trans-unit id="DMOlC1U" resname="activity.filter_finish">
+        <source>activity.filter_finish</source>
+        <target>Jeux terminés</target>
+      </trans-unit>
+      <trans-unit id="mLXTjSf" resname="activity.finish">
+        <source>activity.finish</source>
+        <target>Terminé</target>
+      </trans-unit>
+      <trans-unit id="TgRSxsN" resname="activity.ongoing">
+        <source>activity.ongoing</source>
+        <target>En cours</target>
+      </trans-unit>
+      <trans-unit id="GkYwm2r" resname="activity.new">
+        <source>activity.new</source>
+        <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="UsFRbNf" resname="activity.slots">
+        <source>activity.slots</source>
+        <target>Créneau</target>
+      </trans-unit>
+      <trans-unit id="1KNwUAa" resname="activity.master">
+        <source>activity.master</source>
+        <target>Maitre du jeu</target>
+      </trans-unit>
+      <trans-unit id="rzws1e0" resname="activity.assignedPlace">
+        <source>activity.assignedPlace</source>
+        <target>Places attribuées</target>
+      </trans-unit>
+      <trans-unit id="yfGSRFD" resname="activity.more_information">
+        <source>activity.more_information</source>
+        <target>En savoir plus</target>
+      </trans-unit>
+      <trans-unit id="BlGGO.X" resname="activity">
+        <source>activity</source>
+        <target>Nos jeux</target>
+      </trans-unit>
+      <trans-unit id="CT59X9u" resname="contact">
+        <source>contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="FGZfTgr" resname="homepage.button_begin">
+        <source>homepage.button_begin</source>
+        <target>Essayez-le</target>
+      </trans-unit>
+      <trans-unit id="K390HSW" resname="admin.game.manage.picture">
+        <source>admin.game.manage.picture</source>
+        <target>Image du jeu</target>
       </trans-unit>
     </body>
   </file>
