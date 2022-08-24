@@ -17,7 +17,7 @@ class MailContactHandler extends AbstractMessageHandler
         try {
             $email=(new TemplatedEmail())
                 ->from($mail->getEmail())
-                ->to('lalegionduphenix@hotmail.fr')
+                ->to('contact@lalegionduphenix.com')
                 ->subject($mail->getSubject())
                 ->htmlTemplate('admin/mail/mail_contact.html.twig')
                 ->context(
