@@ -47,14 +47,6 @@ class ContactController extends AbstractController
         Request $request
     ): JsonResponse {
         if ($request->isXmlHttpRequest()) {
-            dump($request->request->get('name'));
-            dump($request->request->get('firstname'));
-            dump($request->request->get('phone'));
-            dump($request->request->get('email'));
-            dump($request->request->get('subject'));
-            dump($request->request->get('message'));
-
-
             if ($request->request->get('name')
                 && $request->request->get('firstname')
                 && $request->request->get('phone')
