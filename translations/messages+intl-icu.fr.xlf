@@ -651,7 +651,11 @@
       </trans-unit>
       <trans-unit id="jfo5g1Y" resname="homepage.description_presentation">
         <source>homepage.description_presentation</source>
-        <target>L'association "La Légion Du Phénix", est une association loi 1901 à but non lucratif, et basée sur Anglet (pour nous contacter c'est ici). Notre activité principale est le jeu de rôle, dans une ambiance conviviale, dynamique, et soudée.</target>
+        <target>L'association "La Légion Du Phénix", est une association loi 1901 à but non lucratif, et basée sur Anglet.</target>
+      </trans-unit>
+      <trans-unit id="UbvrFxR" resname="homepage.description_presentation2">
+        <source>homepage.description_presentation2</source>
+        <target>Notre activité principale est le jeu de rôle, dans une ambiance conviviale, dynamique, et soudée.</target>
       </trans-unit>
       <trans-unit id="jjoroGe" resname="homepage.title_explain">
         <source>homepage.title_explain</source>
@@ -659,8 +663,11 @@
       </trans-unit>
       <trans-unit id="6dyojMS" resname="homepage.description_explain">
         <source>homepage.description_explain</source>
-        <target>Pour la fédération française de jeu de rôle, est une activité de loisir et de divertissement qui consiste à raconter une histoire à plusieurs. Installés autour d'une table, les joueurs interprètent le rôle d'un personnage au sein d'un univers fictif, décrivant chacun les aventures de son personnage interagissant avec le monde qui l'entourent. Pour plus d'informations sur la définition officielle, je vous invite à faire un tour sur le site de la fédération française de jeu de rôle.
-                        Pour notre association, il s'agit d'un moment où l'on peut se rencontrer et passer des moments entre amis, s'amuser, rigoler, et prendre du plaisir à incarner nos personnages de films, séries, manga, littérature favoris. Cela nous permet aussi d'explorer de manière fictive, des univers aussi riches et variés. En définitif, il s'agit d'un loisir où chacun peut s'amuser et se détendre en partageant aussi avec d'autres ce plaisir.</target>
+        <target>Pour la fédération française de jeu de rôle, c'est une activité de loisir et de divertissement qui consiste à raconter une histoire à plusieurs. Installés autour d'une table, les joueurs interprètent le rôle d'un personnage au sein d'un univers fictif, décrivant chacun les aventures de son personnage interagissant avec le monde qui l'entourent. Pour plus d'informations sur la définition officielle, je vous invite à faire un tour sur le site de la fédération française de jeu de rôle.</target>
+      </trans-unit>
+      <trans-unit id="CshQj0P" resname="homepage.description_explain2">
+        <source>homepage.description_explain2</source>
+        <target>Pour notre association, il s'agit d'un moment où l'on peut se rencontrer et passer des moments entre amis, s'amuser, rigoler, et prendre du plaisir à incarner nos personnages de films, séries, manga, littérature favoris. Cela nous permet aussi d'explorer de manière fictive, des univers aussi riches et variés. En définitif, il s'agit d'un loisir où chacun peut s'amuser et se détendre en partageant aussi avec d'autres ce plaisir.</target>
       </trans-unit>
       <trans-unit id="UUObxky" resname="registration.invit_to_create_account">
         <source>registration.invit_to_create_account</source>

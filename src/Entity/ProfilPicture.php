@@ -13,7 +13,7 @@ class ProfilPicture
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $profilPicture;
 
     #[ORM\OneToOne(mappedBy: 'profilPicture', targetEntity: User::class, cascade: ['persist', 'remove'])]

@@ -745,6 +745,14 @@
         <source>admin.game.manage.picture</source>
         <target>__admin.game.manage.picture</target>
       </trans-unit>
+      <trans-unit id="UbvrFxR" resname="homepage.description_presentation2">
+        <source>homepage.description_presentation2</source>
+        <target>__homepage.description_presentation2</target>
+      </trans-unit>
+      <trans-unit id="CshQj0P" resname="homepage.description_explain2">
+        <source>homepage.description_explain2</source>
+        <target>__homepage.description_explain2</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

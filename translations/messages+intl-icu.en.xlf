@@ -651,7 +651,11 @@
       </trans-unit>
       <trans-unit id="jfo5g1Y" resname="homepage.description_presentation">
         <source>homepage.description_presentation</source>
-        <target>The association "La Légion Du Phénix", is a non-profit association law 1901, and based on Anglet (to contact us it is here). Our main activity is role-playing, in a friendly, dynamic and close-knit atmosphere.</target>
+        <target>The association "La Légion Du Phénix", is a non-profit association law 1901, and based on Anglet.</target>
+      </trans-unit>
+      <trans-unit id="UbvrFxR" resname="homepage.description_presentation2">
+        <source>homepage.description_presentation2</source>
+        <target>Our main activity is role-playing, in a friendly, dynamic and close-knit atmosphere.</target>
       </trans-unit>
       <trans-unit id="jjoroGe" resname="homepage.title_explain">
         <source>homepage.title_explain</source>
@@ -659,7 +663,11 @@
       </trans-unit>
       <trans-unit id="6dyojMS" resname="homepage.description_explain">
         <source>homepage.description_explain</source>
-        <target>For the French role-playing federation, is a leisure and entertainment activity that consists of telling a story to several people. Installed around a table, players interpret the role of a character within a fictional universe, each describing the adventures of his character interacting with the world around him. For more information on the official definition, I invite you to take a look at the site of the French role-playing federation.</target>
+        <target>For the French role-playing federation, is a leisure and entertainment activity that consists of telling a story to several people. Installed around a table, players interpret the role of a character within a fictional universe, each describing the adventures of his character interacting with the world around him.</target>
+      </trans-unit>
+      <trans-unit id="CshQj0P" resname="homepage.description_explain2">
+        <source>homepage.description_explain2</source>
+        <target>For more information on the official definition, I invite you to take a look at the site of the French role-playing federation.</target>
       </trans-unit>
       <trans-unit id="UUObxky" resname="registration.invit_to_create_account">
         <source>registration.invit_to_create_account</source>
