@@ -5,6 +5,8 @@ namespace App\Command;
 use App\Message\MailRefreshStatusGame;
 use App\Repository\GameRepository;
 use App\Repository\StatusUserInGameRepository;
+use App\Service\StatusService;
+use DateTime;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -40,6 +42,8 @@ class ResetPlayersGameStatusCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+        $date = new DateTime();
+
         $listStatus = $this->status_repo->findAll();
         $games = $this->game_repo->findAll();
         $this->router->getContext()
@@ -52,45 +56,59 @@ class ResetPlayersGameStatusCommand extends Command
             $io->error('no status for games found');
             return Command::FAILURE;
         }
-
-        foreach ($listStatus as $status) {
-            if ($status->isIsPresent()) {
-                $status->setIsPresent(false);
-                $this->status_repo->add($status,true);
-            }
-        }
-
         if (empty($games)) {
             $io->error('no games found');
             return Command::FAILURE;
         }
 
-        foreach ($games as $game) {
-            $this->bus->dispatch(
-                new MailRefreshStatusGame(
-                    $game->getGameMaster()->getEmail(),
-                    $game->getGameMaster()->getName(),
-                    $game->getGameMaster()->getFirstname(),
-                    $this->router->generate('app_profil'),
-                    $game->getTitle()
-                )
-            );
-
-            if(!empty($game->getPlayers())){
-                foreach ($game->getPlayers() as $player){
+        foreach ($listStatus as $status) {
+            $io->writeln('Status n°: '.$status->getId());
+            foreach ($status->getGames() as $game){
+                $io->writeln('Game n°: '.$game->getId());
+                $refresh = false;
+                if ($date->format('W')%2 === 1 && $game->getWeekSlots()===StatusService::SLOT_WEEK_PAIR && $status->isIsPresent()) {
+                    $status->setIsPresent(false);
+                    $this->status_repo->add($status,true);
+                    $refresh =true;
+                    $io->writeln('Status n°: '.$status->getId().' refresh');
+                }
+                if ($date->format('W')%2 === 0 && $game->getWeekSlots()===StatusService::SLOT_WEEK_ODD && $status->isIsPresent()) {
+                    $status->setIsPresent(false);
+                    $this->status_repo->add($status,true);
+                    $refresh=true;
+                    $io->writeln('Status n°: '.$status->getId().' refresh');
+                }
+                if(!$refresh){
+                    $io->writeln('Status n°: '.$status->getId().' not refresh');
+                }
+                if($refresh) {
                     $this->bus->dispatch(
                         new MailRefreshStatusGame(
-                            $player->getEmail(),
-                            $player->getName(),
-                            $player->getFirstname(),
+                            $game->getGameMaster()->getEmail(),
+                            $game->getGameMaster()->getName(),
+                            $game->getGameMaster()->getFirstname(),
                             $this->router->generate('app_profil'),
                             $game->getTitle()
                         )
                     );
+
+                    if (!empty($game->getPlayers())) {
+                        foreach ($game->getPlayers() as $player) {
+                            $this->bus->dispatch(
+                                new MailRefreshStatusGame(
+                                    $player->getEmail(),
+                                    $player->getName(),
+                                    $player->getFirstname(),
+                                    $this->router->generate('app_profil'),
+                                    $game->getTitle()
+                                )
+                            );
+                        }
+                    } else {
+                        $io->error('no players for games found');
+                        return Command::FAILURE;
+                    }
                 }
-            }else{
-                $io->error('no players for games found');
-                return Command::FAILURE;
             }
         }
 
