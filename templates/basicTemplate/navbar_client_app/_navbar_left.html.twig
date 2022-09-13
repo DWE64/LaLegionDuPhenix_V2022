@@ -17,26 +17,26 @@
         <ul class="side-nav">
             <li class="side-nav-item">
                 <a href="{{ path('app_home') }}" class="side-nav-link">
-                    <i class="uil-layer-group"></i>
+                    <i class="uil-home"></i>
                     <span> {{ 'home'|trans }} </span>
                 </a>
             </li>
             <li class="side-nav-item">
                 <a href="{{ path('app_activity') }}" class="side-nav-link">
-                    <i class="uil-layer-group"></i>
+                    <i class="uil-dice-six"></i>
                     <span> {{ 'activity'|trans }} </span>
                 </a>
             </li>
             <li class="side-nav-item">
                 <a href="{{ path('app_contact') }}" class="side-nav-link">
-                    <i class="uil-layer-group"></i>
+                    <i class="uil-envelope-alt"></i>
                     <span> {{ 'contact'|trans }} </span>
                 </a>
             </li>
             {% if is_granted('ROLE_STAFF') %}
                 <li class="side-nav-item">
                     <a href="{{ path('app_home_admin') }}" class="side-nav-link">
-                        <i class="uil-layer-group"></i>
+                        <i class="uil-cog"></i>
                         <span> {{ 'admin.pannel'|trans }}</span>
                     </a>
                 </li>
@@ -44,26 +44,26 @@
             {% if is_granted('ROLE_USER') %}
                 <li class="side-nav-item">
                     <a href="{{ path('app_profil')}}" class="side-nav-link">
-                        <i class="uil-layer-group"></i>
+                        <i class="uil-user-circle"></i>
                         <span> {{ 'my_account'|trans }} </span>
                     </a>
                 </li>
                 <li class="side-nav-item">
                     <a href="{{ path('app_logout') }}" class="side-nav-link">
-                        <i class="uil-layer-group"></i>
+                        <i class="uil-lock"></i>
                         <span> {{ 'logout'|trans }} </span>
                     </a>
                 </li>
             {% else %}
                 <li class="side-nav-item">
                     <a href="{{ path('app_login') }}" class="side-nav-link">
-                        <i class="uil-layer-group"></i>
+                        <i class="uil-unlock"></i>
                         <span> {{ 'login'|trans }} </span>
                     </a>
                 </li>
                 <li class="side-nav-item">
                     <a href="{{ path('app_register') }}" class="side-nav-link">
-                        <i class="uil-layer-group"></i>
+                        <i class="mdi-account-plus-outline"></i>
                         <span> {{ 'register'|trans }} </span>
                     </a>
                 </li>

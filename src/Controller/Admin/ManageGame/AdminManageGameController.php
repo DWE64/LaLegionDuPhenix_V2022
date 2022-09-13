@@ -505,31 +505,33 @@ class AdminManageGameController extends AbstractController
 
                 if ($request->request->get('player')) {
                     $user = $this->user_repo->find($request->request->get('player'));
-                    $game->addPlayer($user);
-                    $placeAssigned++;
-                    $game->setAssignedPlace($placeAssigned);
-                    $message += [
-                        'player' => [
-                            'id' => $user->getId(),
-                            'firstname' => $user->getFirstname(),
-                            'name' => $user->getName()
-                        ],
-                        'assignedPlace' => $game->getAssignedPlace()
-                    ];
-                    $statusUserInGame = new StatusUserInGame();
-                    $statusUserInGame->addUser($user);
-                    $statusUserInGame->setIsPresent(false);
-                    $game->addStatusUserInGame($statusUserInGame);
-                    $urlProfil = $request->getSchemeAndHttpHost() . $this->generateUrl('app_profil');
-                    $this->bus->dispatch(
-                        new MailAddUserToGame(
-                            $user->getEmail(),
-                            $user->getName(),
-                            $user->getFirstname(),
-                            $urlProfil,
-                            $game->getTitle()
-                        )
-                    );
+                    if(!$game->getPlayers()->contains($user)) {
+                        $game->addPlayer($user);
+                        $placeAssigned++;
+                        $game->setAssignedPlace($placeAssigned);
+                        $message += [
+                            'player' => [
+                                'id' => $user->getId(),
+                                'firstname' => $user->getFirstname(),
+                                'name' => $user->getName()
+                            ],
+                            'assignedPlace' => $game->getAssignedPlace()
+                        ];
+                        $statusUserInGame = new StatusUserInGame();
+                        $statusUserInGame->addUser($user);
+                        $statusUserInGame->setIsPresent(false);
+                        $game->addStatusUserInGame($statusUserInGame);
+                        $urlProfil = $request->getSchemeAndHttpHost() . $this->generateUrl('app_profil');
+                        $this->bus->dispatch(
+                            new MailAddUserToGame(
+                                $user->getEmail(),
+                                $user->getName(),
+                                $user->getFirstname(),
+                                $urlProfil,
+                                $game->getTitle()
+                            )
+                        );
+                    }
                 }
 
                 $game->setUpdatedAt($date);
