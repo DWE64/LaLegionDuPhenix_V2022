@@ -15,6 +15,12 @@ const jQuery=require('jquery');
 			'.edit_role_form',
 			this.handleNewRoleSubmit.bind(this)
 		);
+
+        /*this.$wrapper.on(
+        	'click',
+			'.switch_is_member_association',
+			this.handleSwitchMemberSubmit.bind(this)
+		);*/
     };
 
     $.extend(window.RepLogApp.prototype, {
@@ -67,10 +73,7 @@ const jQuery=require('jquery');
 					$form.closest('.edit_user_form').html(jqXHR.responseText);
 				}
 			});
-        }
-    });
-	$.extend(window.RepLogApp.prototype, {
-
+        },
 
 		handleNewRoleSubmit: function(e) {
 			e.preventDefault();
@@ -97,7 +100,28 @@ const jQuery=require('jquery');
 					$form.closest('.edit_user_form').html(jqXHR.responseText);
 				}
 			});
-		}
+		},
+
+		/*handleSwitchMemberSubmit: function(e) {
+			e.preventDefault();
+
+			let $button = $(e.currentTarget);
+
+
+			$.ajax({
+				url: $button.data('url'),
+				method: 'POST',
+				success: function(data){
+					$('.user-associationRegistrationDate-'+data.id).text(data.associationRegistrationDate);
+					$('.user-updatedAt-'+data.id).text(data.updatedAt);
+					$('.user-memberStatus-'+data.id).text(data.memberStatus);
+					alert('Changement effectue : '+data.status);
+				},
+				error: function(jqXHR){
+					alert('Changement effectué : '+jqXHR);
+				}
+			});
+		}*/
 	});
    
 

@@ -10,6 +10,7 @@ $(document).ready(function() {
 
     // Default Datatable
     $('#basic-datatable').DataTable({
+        'pageLength': 100,
         keys: true,
         "language": {
             "paginate": {
@@ -23,7 +24,7 @@ $(document).ready(function() {
     });
 
     //Buttons examples
-    var table = $('#datatable-buttons').DataTable({
+    let table = $('#datatable-buttons').DataTable({
         lengthChange: false,
         buttons: ['copy', 'print'],
         "language": {
