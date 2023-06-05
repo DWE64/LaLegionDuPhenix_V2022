@@ -31,6 +31,7 @@
                         <th>{{ 'admin.user.manage.updated_at'|trans }}</th>
                         <th>{{ 'admin.user.manage.name'|trans }}</th>
                         <th>{{ 'admin.user.manage.firstname'|trans }}</th>
+                        <th>{{ 'admin.user.manage.username'|trans }}</th>
                         <th>{{ 'admin.user.manage.birthday'|trans }}</th>
                         <th>{{ 'admin.user.manage.address'|trans }}</th>
                         <th>{{ 'admin.user.manage.seniority'|trans }}</th>
@@ -71,6 +72,7 @@
                             <td class="user-updatedAt-{{ user.id }}">{{ (user.updatedAt is not null)? user.updatedAt|date("d/m/Y") : '-' }}</td>
                             <td class="user-name-{{ user.id }}">{{ user.name }}</td>
                             <td class="user-firstname-{{ user.id }}">{{ user.firstname }}</td>
+                            <td class="user-username-{{ user.id }}">{{ user.username }}</td>
                             <td class="user-birthday-{{ user.id }}">{{ (user.birthday is not null)? user.birthday|date("d/m/Y") : '-' }}</td>
                             <td class="user-address-{{ user.id }}">{{ user.address }} - {{ user.postalCode }} {{ user.city }}</td>
                             <td class="user-member-seniority-{{ user.id }}">

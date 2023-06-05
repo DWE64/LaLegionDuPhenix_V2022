@@ -6,7 +6,7 @@
                value="{{ user.id }}"
                >
         <label class="form-check-label"
-               for="check-game-{{ game.id }}-player-{{ user.id }}">{{ user.firstname }} {{ user.name }}</label>
+               for="check-game-{{ game.id }}-player-{{ user.id }}">{{ user.firstname }} {{ user.name }} ({{ game.user.username }})</label>
     </div>
 {% endfor %}
 <div class="mb-3 text-center">

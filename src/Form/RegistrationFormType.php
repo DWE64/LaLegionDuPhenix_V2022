@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+
 class RegistrationFormType extends AbstractType
 {
     private TranslatorInterface $translator;
@@ -29,6 +30,16 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        ->add('username', TextType::class,[
+            'required'=>true,
+            'attr'=>[
+                'class'=>'form-control'
+            ],
+            'label_attr'=>[
+                'class'=>'form-label'
+            ],
+            'label'=>$this->translator->trans('registration.username'),
+        ])
             ->add('name', TextType::class,[
                 'required'=>true,
                 'attr'=>[
