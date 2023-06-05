@@ -26,6 +26,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $username;
+
     #[ORM\Column(type: 'string')]
     private $password;
 
@@ -77,6 +80,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(inversedBy: 'user', targetEntity: ProfilPicture::class, cascade: ['persist', 'remove'])]
     private $profilPicture;
 
+    
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -117,6 +122,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
+
+     public function getUsername(): ?string
+     {
+         return $this->username;
+     }
+ 
+     public function setUsername(?string $username): self
+     {
+         $this->username = $username;
+ 
+         return $this;
+     }
+
+    
     public function getRoles(): array
     {
         $roles = $this->roles;

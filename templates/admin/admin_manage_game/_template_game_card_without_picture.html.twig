@@ -55,7 +55,7 @@
                         class="game-hourSlot-{{ game.id }}">{{ game.halfDaySlots }}</span></p>
 
             <p class="text-muted font-12 mb-3">{{ 'common.game.master'|trans }} <span
-                        class="game-gameMaster-{{ game.id }}">{{ game.gameMaster.firstname }} {{ game.gameMaster.name }}</span>
+                        class="game-gameMaster-{{ game.id }}">{{ game.gameMaster.firstname }} {{ game.gameMaster.name }} ({{ game.gameMaster.username }})</span>
             </p>
 
             <p class="text-muted font-13 mb-3 game-description-{{ game.id }}">{{ game.description }}
@@ -79,7 +79,7 @@
                 {% if game.players is defined and game.players is not empty %}
                     {% for user in game.players %}
                         <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip"
-                           data-bs-placement="top" title="{{ user.name }} {{ user.firstname }}" class="d-inline-block">
+                           data-bs-placement="top" title="{{ user.name }} {{ user.firstname }}  " class="d-inline-block">
                             {% if user.profilPicture is not null and user.profilPicture.profilPicture is not null %}
                                 <img src="{{ asset('pictures/users/' ~ user.profilPicture.profilPicture) }}"
                                      class="rounded-circle avatar-xs" alt="friend">

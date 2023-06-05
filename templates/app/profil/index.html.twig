@@ -40,7 +40,8 @@
                                     </div>
                                     <div class="col">
                                         <div>
-                                            <h4 class="mt-1 mb-1 text-white">{{ app.user.firstname }} {{ app.user.name }}</h4>
+                                            <h4 class="mt-1 mb-1 text-white">{{ app.user.firstname }} {{ app.user.name }} ({{ app.user.username }})</h4>
+                                            
                                             <p class="font-13 text-white-50"> {{ app.user.email }}</p>
                                             <p class="font-13 text-white-50"> {{ 'common.is_member'|trans }} {{ (app.user.isAssociationMember)? 'common.member_true'|trans : 'common.member_false'|trans }}</p>
 
@@ -96,7 +97,10 @@
 
                         <div class="text-start">
                             <p class="text-muted"><strong>{{ 'common.fullname'|trans }} :</strong> <span
-                                        class="ms-2 user-name-firstname-{{ app.user.id }}">{{ app.user.firstname }} {{ app.user.name }}</span>
+                                        class="ms-2 user-name-firstname-{{ app.user.id }}">{{ app.user.firstname }} {{app.user.name}} </span>
+                            </p>
+                            <p class="text-muted"><strong>{{ 'common.fullname'|trans }} :</strong> <span
+                                        class="ms-2 user-username-{{ app.user.id }}"> {{ app.user.username }}</span>
                             </p>
 
                             <p class="text-muted"><strong>{{ 'common.birthday'|trans }} :</strong> <span
