@@ -40,7 +40,7 @@
                     </thead>
                     <tbody>
                     {% for user in users %}
-                        <tr>
+                        <tr class="user-row-{{ user.id }}">
                             <td>{{ user.email }}</td>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
                                 <td>
@@ -55,13 +55,13 @@
                                 </td>
                             {% endif %}
                             <td class="user-memberStatus-{{ user.id }}">{{ user.memberStatus }}</td>
-                            <td class="user-associationRegistrationDate-{{ user.id }}">{{ (user.associationRegistrationDate is not null)? user.associationRegistrationDate|date("d/m/Y") : '-' }}</td>
+                            <td class="user-associationRegistrationDate-{{ user.id }}">{{ (user.associationRegistrationDate is not null) ? user.associationRegistrationDate|date("d/m/Y") : '-' }}</td>
                             <td>
                                 <div>
                                     <input type="checkbox" id="switch{{ user.id }}"
-                                           name="switch-button-user-{{ user.id }}" {{ (user.isAssociationMember)? 'checked':'' }}
+                                           name="switch-button-user-{{ user.id }}" {{ (user.isAssociationMember) ? 'checked' : '' }}
                                            data-switch="success"
-                                           data-url="{{ path('app_admin_manage_user_change_status_member_association',{id: user.id}) }}"
+                                           data-url="{{ path('app_admin_manage_user_change_status_member_association', {id: user.id}) }}"
                                            class="switch_is_member_association"
                                     />
                                     <label for="switch{{ user.id }}" data-on-label="Yes" data-off-label="No"
@@ -69,19 +69,24 @@
                                 </div>
                             </td>
                             <td>{{ user.createdAt|date("d/m/Y") }}</td>
-                            <td class="user-updatedAt-{{ user.id }}">{{ (user.updatedAt is not null)? user.updatedAt|date("d/m/Y") : '-' }}</td>
+                            <td class="user-updatedAt-{{ user.id }}">{{ (user.updatedAt is not null) ? user.updatedAt|date("d/m/Y") : '-' }}</td>
                             <td class="user-name-{{ user.id }}">{{ user.name }}</td>
                             <td class="user-firstname-{{ user.id }}">{{ user.firstname }}</td>
                             <td class="user-username-{{ user.id }}">{{ user.username }}</td>
-                            <td class="user-birthday-{{ user.id }}">{{ (user.birthday is not null)? user.birthday|date("d/m/Y") : '-' }}</td>
+                            <td class="user-birthday-{{ user.id }}">{{ (user.birthday is not null) ? user.birthday|date("d/m/Y") : '-' }}</td>
                             <td class="user-address-{{ user.id }}">{{ user.address }} - {{ user.postalCode }} {{ user.city }}</td>
                             <td class="user-member-seniority-{{ user.id }}">
-                                {{ (user.memberSeniority is not null)? user.memberSeniority : '-' }}
+                                {{ (user.memberSeniority is not null) ? user.memberSeniority : '-' }}
                             </td>
                             <td>
                                 {% block buttonModalManageUser %}
                                     {{ parent() }}
                                 {% endblock %}
+                                <form class="delete_user_form" method="post" action="{{ path('app_admin_delete_user', {id: user.id}) }}" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="mdi mdi-delete"></i>
+                                    </button>
+                                </form>
                             </td>
                             {% block modalManageUser %}
                                 {{ parent() }}
@@ -94,7 +99,6 @@
                     </tbody>
                 </table>
             </div> <!-- end preview-->
-
         </div> <!-- end tab-content-->
     </div>
 {% endblock %}

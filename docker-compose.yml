@@ -43,10 +43,15 @@ services:
     container_name: php_ldp
     restart: always
     ports:
-      - '127.0.0.1:5453:80'
+        - '127.0.0.1:5453:80'
     volumes:
-      - ./docker/php/vhosts:/etc/apache2/sites-enabled
-      - ./:/var/www/lalegionduphenix_V2022
+      - type: bind
+        source: ./docker/php/vhosts
+        target: /etc/apache2/sites-enabled
+
+      - type: bind
+        source: ./
+        target: /var/www/lalegionduphenix_V2022
 
   #  node-service:
   #    build:

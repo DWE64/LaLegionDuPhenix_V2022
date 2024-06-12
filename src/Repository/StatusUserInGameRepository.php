@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Repository;
 
 use App\Entity\StatusUserInGame;
@@ -7,8 +6,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<StatusUserInGame>
- *
  * @method StatusUserInGame|null find($id, $lockMode = null, $lockVersion = null)
  * @method StatusUserInGame|null findOneBy(array $criteria, array $orderBy = null)
  * @method StatusUserInGame[]    findAll()
@@ -21,21 +18,11 @@ class StatusUserInGameRepository extends ServiceEntityRepository
         parent::__construct($registry, StatusUserInGame::class);
     }
 
-    public function add(StatusUserInGame $entity, bool $flush = false): void
+    public function remove(StatusUserInGame $statusUserInGame, bool $flush = false): void
     {
-        $this->getEntityManager()->persist($entity);
-
+        $this->_em->remove($statusUserInGame);
         if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-    public function remove(StatusUserInGame $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
+            $this->_em->flush();
         }
     }
 

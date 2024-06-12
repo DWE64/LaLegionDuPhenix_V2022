@@ -8,6 +8,7 @@ use App\Message\MailUpdateUserByAdmin;
 use App\Message\MailValidationInscription;
 use App\Repository\UserRepository;
 use App\Service\StatusService;
+use App\Service\UserDeletionService;
 use DateTime;
 use DateTimeImmutable;
 use JetBrains\PhpStorm\Deprecated;
@@ -18,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Config\Framework\SerializerConfig;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[IsGranted('ROLE_STAFF')]
@@ -27,15 +27,21 @@ class AdminManageUserController extends AbstractController
     private TranslatorInterface $translator;
     private UserRepository $userRepository;
     private MessageBusInterface $bus;
+    private UserDeletionService $userDeletionService;
+
 
     public function __construct(
         TranslatorInterface $translator,
-        UserRepository $userRepository,
-        MessageBusInterface $bus
+        MessageBusInterface $bus,
+        UserDeletionService $userDeletionService,
+        UserRepository $userRepository
     ) {
         $this->translator = $translator;
+        $this->userDeletionService = $userDeletionService;
         $this->userRepository = $userRepository;
         $this->bus = $bus;
+        $this->userDeletionService = $userDeletionService;
+
     }
 
     #[Route('/admin/manage/user', name: 'app_admin_manage_user')]
@@ -301,5 +307,18 @@ class AdminManageUserController extends AbstractController
             $message = Response::HTTP_NOT_MODIFIED;
             return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
         }
+    }
+    #[Route('/admin/manager/user/{id}/delete', name: 'app_admin_delete_user', methods: ['POST'])]
+    #[IsGranted('ROLE_SUPER_ADMIN')]
+    public function deleteUser(User $user, Request $request): Response
+    {
+
+        $this->userDeletionService->deleteUser($user);
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse(['id' => $user->getId()], Response::HTTP_OK);
+        }
+
+        return $this->redirectToRoute('app_admin_manage_user');
     }
 }

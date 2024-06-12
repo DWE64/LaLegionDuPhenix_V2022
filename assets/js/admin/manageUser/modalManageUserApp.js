@@ -102,6 +102,30 @@ const jQuery=require('jquery');
 			});
 		},
 
+		handleDeleteUserSubmit: function (e) {
+			e.preventDefault();
+			var $form = $(e.currentTarget);
+
+			if (!confirm('Are you sure you want to delete this user?')) {
+				return;
+			}
+
+			$.ajax({
+				url: $form.attr('action'),
+				method: 'POST',
+				data: $form.serialize(),
+				success: function (data) {
+					// Remove the user row from the table
+					$('.user-row-' + data.id).remove();
+				},
+				error: function (jqXHR) {
+					alert('Delete failed: ' + jqXHR.responseText);
+				}
+			});
+		}
+
+
+
 		/*handleSwitchMemberSubmit: function(e) {
 			e.preventDefault();
 

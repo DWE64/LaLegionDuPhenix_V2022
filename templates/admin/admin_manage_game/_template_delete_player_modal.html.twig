@@ -3,15 +3,13 @@
         <input type="checkbox"
                class="form-check-input check-game-{{ game.id }}-player-{{ user.id }}"
                id="check-game-{{ game.id }}-player-{{ user.id }}" name="player"
-               value="{{ user.id }}"
-               >
+               value="{{ user.id }}">
         <label class="form-check-label"
-               for="check-game-{{ game.id }}-player-{{ user.id }}">{{ user.firstname }} {{ user.name }} ({{ game.user.username }})</label>
+               for="check-game-{{ game.id }}-player-{{ user.id }}">{{ user.firstname }} {{ user.name }} ({{ user.username }})</label>
     </div>
 {% endfor %}
 <div class="mb-3 text-center">
-    <button class="btn btn-primary"
-            type="submit">
+    <button class="btn btn-primary" type="submit">
         {{ 'admin.game.manage.button_delete_player'|trans }}
     </button>
 </div>

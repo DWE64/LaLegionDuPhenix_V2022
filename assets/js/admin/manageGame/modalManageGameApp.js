@@ -101,7 +101,6 @@ const jQuery = require('jquery');
             });
         },
 
-        //listener pour edit un game
         handleEditFormSubmit: function (e) {
             e.preventDefault();
             var $form = $(e.currentTarget);

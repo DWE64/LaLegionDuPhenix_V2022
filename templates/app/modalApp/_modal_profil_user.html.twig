@@ -5,11 +5,9 @@
     </button>
 {% endblock %}
 {% block modalProfilUser %}
-    <div id="user-profil-modal-{{ app.user.id }}" class="modal fade user-profil-modal-{{ app.user.id }}" tabindex="-1" role="dialog"
-         aria-hidden="true">
+    <div id="user-profil-modal-{{ app.user.id }}" class="modal fade user-profil-modal-{{ app.user.id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content js-profil-user">
-
                 <div class="modal-body">
                     <div class="text-center mt-2 mb-4">
                         <a href="{{ path('app_home') }}">
@@ -17,28 +15,23 @@
                         </a>
                     </div>
 
-                    <form id="edit_user_form" class="ps-3 pe-3 edit_user_form" role="form"
-                          method="POST"
-                          action="{{ path('app_profil_user_edit',{id: app.user.id}) }}"
-                          data-url="{{ path('app_profil_user_edit',{id: app.user.id}) }}"
+                    <form id="edit_user_form" class="ps-3 pe-3 edit_user_form" role="form" method="POST"
+                          action="{{ path('app_profil_user_edit', {id: app.user.id}) }}"
+                          data-url="{{ path('app_profil_user_edit', {id: app.user.id}) }}"
                           data-id="{{ app.user.id }}"
                     >
-
                         <div class="mb-3">
                             <label for="name" class="form-label">{{ 'user.profil.name'|trans }}</label>
                             <input type="text" id="name" name="name" class="form-control">
                         </div>
-
                         <div class="mb-3">
                             <label for="firstname" class="form-label">{{ 'user.profil.firstname'|trans }}</label>
                             <input type="text" id="firstname" name="firstname" class="form-control">
                         </div>
-
                         <div class="mb-3">
                             <label for="username" class="form-label">{{ 'user.profil.username'|trans }}</label>
                             <input type="text" id="username" name="username" class="form-control">
                         </div>
-
                         <div class="mb-3">
                             <label for="birthday" class="form-label">{{ 'user.profil.birthday'|trans }}</label>
                             <input class="form-control" id="birthday" type="date" name="birthday">
@@ -62,14 +55,11 @@
                             <input type="file" id="picture" name="picture" class="form-control">
                         </div>
                         <div class="mb-3 text-center">
-                            <button class="btn btn-primary"
-                                    type="submit">{{ 'user.profil.button_update'|trans }}</button>
+                            <button class="btn btn-primary" type="submit">{{ 'user.profil.button_update'|trans }}</button>
                         </div>
                     </form>
-
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
+            </div>
+        </div>
+    </div>
 {% endblock %}

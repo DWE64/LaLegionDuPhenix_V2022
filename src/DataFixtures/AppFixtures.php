@@ -29,10 +29,33 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $rolesAdmin[] = "ROLE_USER";
+        $rolesAdmin[] = "ROLE_SUPER_ADMIN";
+        $user = new User();
+        $user->setEmail('q.perriere@gmail.com');
+        $user->setRoles($rolesAdmin);
+        $user->setName($this->faker->name);
+        $user->setFirstname($this->faker->firstName);
+        $user->setUsername($this->faker->userName);
+        $user->setAddress($this->faker->address);
+        $user->setBirthday($this->faker->dateTime);
+        $user->setCity($this->faker->city);
+        $user->setPostalCode($this->faker->postcode);
+        $passWdHash = $this->hash->hashPassword($user, '123456');
+        $user->setPassword($passWdHash);
+        $this->userRep->add($user, true);
+
         $roles[] = "ROLE_USER";
         for ($i =0; $i<30; $i++) {
             $user = new User();
             $user->setEmail($this->faker->email);
+            $user->setName($this->faker->name);
+            $user->setFirstname($this->faker->firstName);
+            $user->setUsername($this->faker->userName);
+            $user->setAddress($this->faker->address);
+            $user->setBirthday($this->faker->dateTime);
+            $user->setCity($this->faker->city);
+            $user->setPostalCode($this->faker->postcode);
             $user->setRoles($roles);
             $passWdHash = $this->hash->hashPassword($user, 'password');
             $user->setPassword($passWdHash);

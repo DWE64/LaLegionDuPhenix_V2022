@@ -26,5 +26,9 @@ services:
         arguments:
             $gamePictureDirectory: '%game_picture%'
             $userPictureDirectory: '%user_picture_profil%'
+    App\Service\UserDeletionService:
+        arguments:
+            $gamePictureDirectory: '%game_picture%'
+            $userPictureDirectory: '%user_picture_profil%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

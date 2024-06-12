@@ -56,18 +56,8 @@ class ProfilController extends AbstractController
         );
     }
 
-    #[Route('/profil/edit/{id}',
-        name: 'app_profil_user_edit',
-        methods: [
-            'GET',
-            'POST',
-            'UPDATE'
-        ]
-    )]
-    public function editUser(
-        Request $request,
-        User $user
-    ): JsonResponse {
+    #[Route('/profil/edit/{id}', name: 'app_profil_user_edit', methods: ['GET', 'POST', 'UPDATE'])]
+    public function editUser(Request $request, User $user): JsonResponse {
         if ($request->isXmlHttpRequest()) {
             $date = new DateTimeImmutable('now');
             $message = [
@@ -84,6 +74,12 @@ class ProfilController extends AbstractController
                 $user->setFirstname($request->request->get('firstname'));
                 $message += [
                     'firstname' => $user->getFirstname()
+                ];
+            }
+            if ($request->request->get('username')) {
+                $user->setUsername($request->request->get('username')); // Correction ici
+                $message += [
+                    'username' => $user->getUsername()
                 ];
             }
             if ($request->request->get('birthday')) {

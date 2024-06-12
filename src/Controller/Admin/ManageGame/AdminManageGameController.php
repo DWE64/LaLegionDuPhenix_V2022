@@ -551,13 +551,9 @@ class AdminManageGameController extends AbstractController
         }
     }
 
-    #[Route('/admin/manage/game/{gameId}/get_players', name: 'app_admin_manage_game_get_player', methods: [
-        'GET'
-    ])]
-    public function getPlayerGame(
-        Request $request,
-        Game $gameId
-    ): JsonResponse {
+    #[Route('/admin/manage/game/{gameId}/get_players', name: 'app_admin_manage_game_get_player', methods: ['GET'])]
+    public function getPlayerGame(Request $request, Game $gameId): JsonResponse
+    {
         if ($request->isXmlHttpRequest()) {
             $game = $this->repo_game->find($gameId);
             $message = [
@@ -570,20 +566,16 @@ class AdminManageGameController extends AbstractController
                 )
             ];
 
-            return new JsonResponse($message, Response::HTTP_OK, []);
+            return new JsonResponse($message, JsonResponse::HTTP_OK);
         } else {
-            $message = Response::HTTP_NOT_MODIFIED;
-            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+            $message = JsonResponse::HTTP_NOT_MODIFIED;
+            return new JsonResponse($message, JsonResponse::HTTP_NOT_MODIFIED);
         }
     }
 
-    #[Route('/admin/manage/game/{gameId}/delete_player', name: 'app_admin_manage_game_delete_player', methods: [
-        'DELETE'
-    ])]
-    public function deletePlayerGame(
-        Request $request,
-        Game $gameId
-    ): JsonResponse {
+    #[Route('/admin/manage/game/{gameId}/delete_player', name: 'app_admin_manage_game_delete_player', methods: ['DELETE'])]
+    public function deletePlayerGame(Request $request, Game $gameId): JsonResponse
+    {
         if ($request->isXmlHttpRequest()) {
             $game = $this->repo_game->find($gameId);
             $date = new DateTimeImmutable('now');
@@ -608,39 +600,45 @@ class AdminManageGameController extends AbstractController
                         'assignedPlace' => $game->getAssignedPlace()
                     ];
                     foreach ($game->getStatusUserInGames() as $status) {
-                        foreach ($status->getUser() as $userStatus) {
-                            if ($user === $userStatus) {
-                                $urlContact = $request->getSchemeAndHttpHost() . $this->generateUrl('app_contact');
-                                $this->bus->dispatch(
-                                    new MailDeleteUserToGame(
-                                        $user->getEmail(),
-                                        $user->getName(),
-                                        $user->getFirstname(),
-                                        $urlContact,
-                                        $game->getTitle()
-                                    )
-                                );
-                                $status->removeUser($user);
+                        if ($status->getUser()->contains($user)) {
+                            $urlContact = $request->getSchemeAndHttpHost() . $this->generateUrl('app_contact');
+                            $this->bus->dispatch(
+                                new MailDeleteUserToGame(
+                                    $user->getEmail(),
+                                    $user->getName(),
+                                    $user->getFirstname(),
+                                    $urlContact,
+                                    $game->getTitle()
+                                )
+                            );
+                            $status->removeUser($user);
+                            if ($status->getUser()->isEmpty()) {
                                 $game->removeStatusUserInGame($status);
-                                $this->repo_status_user->remove($status);
+                                $this->repo_status_user->remove($status, true);
                             }
                         }
                     }
                     $game->setUpdatedAt($date);
                     $this->repo_game->add($game, true);
 
-                    return new JsonResponse($message, Response::HTTP_OK, []);
+                    return new JsonResponse($message, JsonResponse::HTTP_OK);
+                } else {
+                    $message += [
+                        'status' => JsonResponse::HTTP_NOT_MODIFIED,
+                        'error' => 'No player specified'
+                    ];
+                    return new JsonResponse($message, JsonResponse::HTTP_NOT_MODIFIED);
                 }
             } else {
                 $message += [
-                    'status' => Response::HTTP_NOT_MODIFIED,
-                    'error' => 'never place assigned'
+                    'status' => JsonResponse::HTTP_NOT_MODIFIED,
+                    'error' => 'No places assigned'
                 ];
-                return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+                return new JsonResponse($message, JsonResponse::HTTP_NOT_MODIFIED);
             }
         } else {
-            $message = Response::HTTP_NOT_MODIFIED;
-            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+            $message = JsonResponse::HTTP_NOT_MODIFIED;
+            return new JsonResponse($message, JsonResponse::HTTP_NOT_MODIFIED);
         }
     }
 

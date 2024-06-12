@@ -753,6 +753,22 @@
         <source>admin.game.manage.picture</source>
         <target>Image du jeu</target>
       </trans-unit>
+      <trans-unit id="8TN6VNh" resname="registration.username">
+        <source>registration.username</source>
+        <target>Pseudo Discord</target>
+      </trans-unit>
+      <trans-unit id="DoqJWYz" resname="admin.user.manage.username">
+        <source>admin.user.manage.username</source>
+        <target>Pseudo Discord</target>
+      </trans-unit>
+      <trans-unit id="jvIhkrp" resname="user.profil.username">
+        <source>user.profil.username</source>
+        <target>__user.profil.username</target>
+      </trans-unit>
+      <trans-unit id=".zXmG6z" resname="common.username">
+        <source>common.username</source>
+        <target>Pseudo Discord</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
