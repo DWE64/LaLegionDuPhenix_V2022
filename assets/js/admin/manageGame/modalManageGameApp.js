@@ -53,8 +53,8 @@ const jQuery = require('jquery');
         )
 
         this.$wrapper.on(
-            'click',
-            '.player-switch-check',
+            'change',
+            '.toggle-switch input',
             this.handleChangePlayersStatus.bind(this)
         )
     };
@@ -205,20 +205,20 @@ const jQuery = require('jquery');
         },
 
         //listener pour récupere les players
-         handleGetPlayersGame: function (e) {
+        handleGetPlayersGame: function (e) {
             e.preventDefault();
             let $button = $(e.currentTarget);
 
             $.ajax({
-                 url: $button.data('url'),
-                 method: 'GET',
-                 success: function (data) {
+                url: $button.data('url'),
+                method: 'GET',
+                success: function (data) {
 
-                     $('#delete_player_game_form_'+data.id).append(data.view);
-                 },
-                 error: function (jqXHR) {
-                     alert('get player failed : ' + jqXHR);
-                 }
+                    $('#delete_player_game_form_'+data.id).append(data.view);
+                },
+                error: function (jqXHR) {
+                    alert('get player failed : ' + jqXHR);
+                }
             });
         },
 
@@ -314,48 +314,49 @@ const jQuery = require('jquery');
 
         //listener pour changer les status des players
         handleChangePlayersStatus: function (e) {
-            let $button = $(e.currentTarget);
+            let $input = $(e.currentTarget);
 
             $.ajax({
-                url: $button.data('url'),
+                url: $input.data('url'),
                 method: 'POST',
+                data: { status: $input.data('custom-switch') },
                 success: function (data) {
-                    alert('player change status in game: '+ data.firstname+" "+data.name);
+                    alert('player change status in game: ' + data.firstname + " " + data.name);
                 },
                 error: function (jqXHR) {
                     alert('get player failed : ' + jqXHR);
                 }
             });
         },
-
-        /*handleNewRoleSubmit: function(e) {
-            e.preventDefault();
-            var $form= $(e.currentTarget);
-
-            $.ajax({
-                url: $form.attr('action'),
-                method: 'POST',
-                data: $form.serialize(),
-                success: function(data){
-                    //$tbody.append(data);
-                    $('.user-updatedAt-'+data.id).text(data.updatedAt);
-
-                    if(data.roles !== undefined){
-                        $('.user-roles-'+data.id).text(data.roles);
-                    }
-
-                    $(".edit-role-modal").fadeOut('fast');
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
-                },
-                error: function(jqXHR){
-                    alert('edit failed : '+jqXHR);
-                    $form.closest('.edit_user_form').html(jqXHR.responseText);
-                }
-            });
-        },*/
-
     });
+
+
+/*handleNewRoleSubmit: function(e) {
+    e.preventDefault();
+    var $form= $(e.currentTarget);
+
+    $.ajax({
+        url: $form.attr('action'),
+        method: 'POST',
+        data: $form.serialize(),
+        success: function(data){
+            //$tbody.append(data);
+            $('.user-updatedAt-'+data.id).text(data.updatedAt);
+
+            if(data.roles !== undefined){
+                $('.user-roles-'+data.id).text(data.roles);
+            }
+
+            $(".edit-role-modal").fadeOut('fast');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        },
+        error: function(jqXHR){
+            alert('edit failed : '+jqXHR);
+            $form.closest('.edit_user_form').html(jqXHR.responseText);
+        }
+    });
+},*/
 
 
 })(window, jQuery);

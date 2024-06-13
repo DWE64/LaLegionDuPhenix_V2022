@@ -21,6 +21,8 @@
                     <thead>
                     <tr>
                         <th>{{ 'admin.user.manage.email'|trans }}</th>
+                        <th>{{ 'admin.user.manage.name'|trans }}</th>
+                        <th>{{ 'admin.user.manage.firstname'|trans }}</th>
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
                             <th>{{ 'admin.user.manage.role'|trans }}</th>
                         {% endif %}
@@ -29,8 +31,6 @@
                         <th>{{ 'admin.user.manage.is_member'|trans }}</th>
                         <th>{{ 'admin.user.manage.created_at'|trans }}</th>
                         <th>{{ 'admin.user.manage.updated_at'|trans }}</th>
-                        <th>{{ 'admin.user.manage.name'|trans }}</th>
-                        <th>{{ 'admin.user.manage.firstname'|trans }}</th>
                         <th>{{ 'admin.user.manage.username'|trans }}</th>
                         <th>{{ 'admin.user.manage.birthday'|trans }}</th>
                         <th>{{ 'admin.user.manage.address'|trans }}</th>
@@ -42,6 +42,8 @@
                     {% for user in users %}
                         <tr class="user-row-{{ user.id }}">
                             <td>{{ user.email }}</td>
+                            <td class="user-name-{{ user.id }}">{{ user.name }}</td>
+                            <td class="user-firstname-{{ user.id }}">{{ user.firstname }}</td>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
                                 <td>
                                     <p class="user-roles-{{ user.id }}">
@@ -70,8 +72,6 @@
                             </td>
                             <td>{{ user.createdAt|date("d/m/Y") }}</td>
                             <td class="user-updatedAt-{{ user.id }}">{{ (user.updatedAt is not null) ? user.updatedAt|date("d/m/Y") : '-' }}</td>
-                            <td class="user-name-{{ user.id }}">{{ user.name }}</td>
-                            <td class="user-firstname-{{ user.id }}">{{ user.firstname }}</td>
                             <td class="user-username-{{ user.id }}">{{ user.username }}</td>
                             <td class="user-birthday-{{ user.id }}">{{ (user.birthday is not null) ? user.birthday|date("d/m/Y") : '-' }}</td>
                             <td class="user-address-{{ user.id }}">{{ user.address }} - {{ user.postalCode }} {{ user.city }}</td>
