@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Step Toggle Switch</title>
+    <style>
+        /* Container for the toggle switch */
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 180px;
+            height: 40px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        /* Hide the radio buttons */
+        .toggle-switch input {
+            display: none;
+        }
+
+        /* Labels for the toggle states */
+        .toggle-switch label {
+            flex: 1;
+            text-align: center;
+            z-index: 1;
+            cursor: pointer;
+            user-select: none;
+            color: #555;
+        }
+
+        /* Slider that moves to indicate the current state */
+        .toggle-slider {
+            position: absolute;
+            width: 60px;
+            height: 100%;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        /* Colors for the slider based on the selected state */
+        #off:checked ~ .toggle-slider {
+            left: 0;
+            background: #ff4d4d; /* Red for Absent */
+        }
+
+        #neutral:checked ~ .toggle-slider {
+            left: 60px;
+            background: #b3b3b3; /* Gray for Neutral */
+        }
+
+        #on:checked ~ .toggle-slider {
+            left: 120px;
+            background: #4caf50; /* Green for Present */
+        }
+    </style>
+</head>
+<body>
+<div class="toggle-switch">
+    <input type="radio" id="off" name="toggle" checked>
+    <label for="off">Absent</label>
+
+    <input type="radio" id="neutral" name="toggle">
+    <label for="neutral">Neutre</label>
+
+    <input type="radio" id="on" name="toggle">
+    <label for="on">Présent</label>
+
+    <div class="toggle-slider"></div>
+</div>
+</body>
+</html>
