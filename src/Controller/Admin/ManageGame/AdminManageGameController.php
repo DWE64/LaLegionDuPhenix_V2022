@@ -347,7 +347,7 @@ class AdminManageGameController extends AbstractController
 
                 $statusUserInGame = new StatusUserInGame();
                 $statusUserInGame->addUser($user);
-                $statusUserInGame->setIsPresent(true);
+                $statusUserInGame->setIsPresent(null);
                 $game->addStatusUserInGame($statusUserInGame);
                 $game->setGameMaster($user);
                 $message += [
@@ -523,7 +523,7 @@ class AdminManageGameController extends AbstractController
                         ];
                         $statusUserInGame = new StatusUserInGame();
                         $statusUserInGame->addUser($user);
-                        $statusUserInGame->setIsPresent(false);
+                        $statusUserInGame->setIsPresent(null);
                         $game->addStatusUserInGame($statusUserInGame);
                         $urlProfil = $request->getSchemeAndHttpHost() . $this->generateUrl('app_profil');
                         $this->bus->dispatch(
@@ -746,7 +746,8 @@ class AdminManageGameController extends AbstractController
 
             $newStatus = $request->request->get('status');
             $userId = $request->request->get('userid');
-            $status->setIsPresent($newStatus);
+
+            $status->setIsPresent(json_decode($newStatus));
 
             $this->em->persist($status);
             $this->em->flush();

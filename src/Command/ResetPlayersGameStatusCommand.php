@@ -67,13 +67,13 @@ class ResetPlayersGameStatusCommand extends Command
                 $io->writeln('Game n°: '.$game->getId());
                 $refresh = false;
                 if ($date->format('W')%2 === 1 && $game->getWeekSlots()===StatusService::SLOT_WEEK_PAIR && $status->isIsPresent()) {
-                    $status->setIsPresent(false);
+                    $status->setIsPresent(null);
                     $this->status_repo->add($status,true);
                     $refresh =true;
                     $io->writeln('Status n°: '.$status->getId().' refresh');
                 }
                 if ($date->format('W')%2 === 0 && $game->getWeekSlots()===StatusService::SLOT_WEEK_ODD && $status->isIsPresent()) {
-                    $status->setIsPresent(false);
+                    $status->setIsPresent(null);
                     $this->status_repo->add($status,true);
                     $refresh=true;
                     $io->writeln('Status n°: '.$status->getId().' refresh');

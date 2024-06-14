@@ -45,6 +45,20 @@ class AppFixtures extends Fixture
         $user->setPassword($passWdHash);
         $this->userRep->add($user, true);
 
+        $user = new User();
+        $user->setEmail('contact@dwe64.com');
+        $user->setRoles($rolesAdmin);
+        $user->setName($this->faker->name);
+        $user->setFirstname($this->faker->firstName);
+        $user->setUsername($this->faker->userName);
+        $user->setAddress($this->faker->address);
+        $user->setBirthday($this->faker->dateTime);
+        $user->setCity($this->faker->city);
+        $user->setPostalCode($this->faker->postcode);
+        $passWdHash = $this->hash->hashPassword($user, 'DevWebEnt64');
+        $user->setPassword($passWdHash);
+        $this->userRep->add($user, true);
+
         $roles[] = "ROLE_USER";
         for ($i =0; $i<30; $i++) {
             $user = new User();
