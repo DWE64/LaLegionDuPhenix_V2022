@@ -21,7 +21,7 @@ class StatusUserInGame
     #[ORM\ManyToMany(targetEntity: Game::class, inversedBy: 'statusUserInGames')]
     private $games;
 
-    #[ORM\Column(type: 'string', nullable: true, options: ["default" => false] )]
+    #[ORM\Column(type: 'boolean', nullable: true, options: ["default" => null] )]
     private $isPresent;
 
     public function __construct()
@@ -88,7 +88,7 @@ class StatusUserInGame
         return $this->isPresent;
     }
 
-    public function setIsPresent(bool $isPresent): self
+    public function setIsPresent(?bool $isPresent): self
     {
         $this->isPresent = $isPresent;
 

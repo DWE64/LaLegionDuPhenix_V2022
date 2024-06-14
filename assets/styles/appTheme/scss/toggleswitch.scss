@@ -17,7 +17,7 @@
     z-index: 1;
     cursor: pointer;
     user-select: none;
-    color: #555;
+    color: #000000;
   }
 }
 
@@ -33,15 +33,15 @@
 /* Colors for the slider based on the selected state */
 input[id^="off-"]:checked ~ .toggle-slider {
   left: 0;
-  background: #ff0000; /* Red for Absent */
+  background: #b23f36; /* Red for Absent */
 }
 
 input[id^="neutral-"]:checked ~ .toggle-slider {
   left: 60px;
-  background: grey; /* Gray for Neutral */
+  background: #a6a6a6; /* Gray for Neutral */
 }
 
 input[id^="on-"]:checked ~ .toggle-slider {
   left: 120px;
-  background: #00ff0b; /* Green for Present */
+  background: rgb(248, 234, 195); /* Green for Present */
 }

@@ -164,9 +164,7 @@
                         <table class="table table-centered table-responsive mx-0 px-0 mb-0">
                             <thead>
                             <tr>
-                                <th>{{ 'admin.user.manage.name'|trans }}</th>
-                                <th>{{ 'admin.user.manage.firstname'|trans }}</th>
-                                <th>{{ 'admin.user.manage.username'|trans }}</th>
+                                <th>{{ 'admin.user.manage.name'|trans }} {{ 'admin.user.manage.firstname'|trans }} ({{ 'admin.user.manage.username'|trans }})</th>
                                 <th>{{ 'admin.user.manage.isPresent'|trans }}</th>
                             </tr>
                             </thead>
@@ -175,25 +173,23 @@
                                 {% for status in game.statusUserInGames %}
                                     {% for user in status.user %}
                                         <tr>
-                                            <td>{{ user.name }}</td>
-                                            <td>{{ user.firstname }}</td>
-                                            <td>{{ user.username }}</td>
+                                            <td>{{ user.name }} {{ user.firstname }} ({{ user.username }})</td>
                                             <td>
                                                 <div class="toggle-switch" id="toggle-user-{{ user.id }}">
-                                                    <input type="radio" id="off-{{ user.id }}" name="toggle-{{ user.id }}" data-custom-switch="absent"
+                                                    <input type="radio" id="off-{{ user.id }}" name="toggle-{{ user.id }}" data-custom-switch=false
                                                            data-url="{{ path('app_admin_manage_user_change_status_game',{idStatus: status.id}) }}"
-                                                           data-userid="{{ user.id }}" {% if status.ispresent == false %}checked{% endif %}>
-                                                    <label for="off-{{ user.id }}">Absent</label>
+                                                           data-userid="{{ user.id }}" {% if not status.ispresent %}checked{% endif %}>
+                                                    <label for="off-{{ user.id }}">NON</label>
 
-                                                    <input type="radio" id="neutral-{{ user.id }}" name="toggle-{{ user.id }}" data-custom-switch="neutral"
+                                                    <input type="radio" id="neutral-{{ user.id }}" name="toggle-{{ user.id }}" data-custom-switch=null
                                                            data-url="{{ path('app_admin_manage_user_change_status_game',{idStatus: status.id}) }}"
-                                                           data-userid="{{ user.id }}" {% if status.ispresent == null %}checked{% endif %}>
-                                                    <label for="neutral-{{ user.id }}">Neutre</label>
+                                                           data-userid="{{ user.id }}" {% if status.ispresent is null %}checked{% endif %}>
+                                                    <label for="neutral-{{ user.id }}">-</label>
 
-                                                    <input type="radio" id="on-{{ user.id }}" name="toggle-{{ user.id }}" data-custom-switch="present"
+                                                    <input type="radio" id="on-{{ user.id }}" name="toggle-{{ user.id }}" data-custom-switch=true
                                                            data-url="{{ path('app_admin_manage_user_change_status_game',{idStatus: status.id}) }}"
-                                                           data-userid="{{ user.id }}" {% if status.ispresent == true %}checked{% endif %}>
-                                                    <label for="on-{{ user.id }}">Présent</label>
+                                                           data-userid="{{ user.id }}" {% if status.ispresent %}checked{% endif %}>
+                                                    <label for="on-{{ user.id }}">OUI</label>
 
                                                     <div class="toggle-slider"></div>
                                                 </div>
