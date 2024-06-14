@@ -319,15 +319,19 @@ const jQuery = require('jquery');
             $.ajax({
                 url: $input.data('url'),
                 method: 'POST',
-                data: { status: $input.data('custom-switch') },
-                success: function (data) {
-                    alert('player change status in game: ' + data.firstname + " " + data.name);
+                data: {
+                    status: $input.data('custom-switch'),
+                    userid: $input.data('userid')
                 },
-                error: function (jqXHR) {
-                    alert('get player failed : ' + jqXHR);
+                success: function(data) {
+                    console.log('Status changed for user: ', data.userid, ' to status: ', data.status);
+                },
+                error: function(jqXHR) {
+                    console.error('Error changing player status: ', jqXHR);
                 }
             });
-        },
+        }
+
     });
 
 

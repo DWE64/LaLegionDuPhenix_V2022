@@ -19,6 +19,7 @@ use App\Repository\UserRepository;
 use App\Service\FileUploader;
 use App\Service\StatusService;
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use JetBrains\PhpStorm\Deprecated;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,6 +39,7 @@ class AdminManageGameController extends AbstractController
     private FileUploader $fileUploader;
     private StatusUserInGameRepository $repo_status_user;
     private MessageBusInterface $bus;
+    private EntityManagerInterface $em;
 
     public function __construct(
         TranslatorInterface $translator,
@@ -45,7 +47,8 @@ class AdminManageGameController extends AbstractController
         UserRepository $user_repo,
         FileUploader $fileUploader,
         StatusUserInGameRepository $repo_status_user,
-        MessageBusInterface $bus
+        MessageBusInterface $bus,
+        EntityManagerInterface $em
     ) {
         $this->translator = $translator;
         $this->repo_game = $repo_game;
@@ -53,6 +56,7 @@ class AdminManageGameController extends AbstractController
         $this->fileUploader = $fileUploader;
         $this->repo_status_user = $repo_status_user;
         $this->bus = $bus;
+        $this->em = $em;
     }
 
     #[Route('/admin/manage/game', name: 'app_admin_manage_game')]
@@ -735,27 +739,27 @@ class AdminManageGameController extends AbstractController
     }
 
     #[Route('/admin/manage/game/change_status_player/{idStatus}', name: 'app_admin_manage_user_change_status_game')]
-    public function changePlayersStatusGame(
-        Request $request,
-        StatusUserInGame $idStatus
-    ): JsonResponse {
+    public function changePlayersStatusGame(Request $request, StatusUserInGame $idStatus): JsonResponse
+    {
         if ($request->isXmlHttpRequest()) {
             $status = $this->repo_status_user->find($idStatus);
 
-            if ($status->isIsPresent()) {
-                $status->setIsPresent(false);
-            } else {
-                $status->setIsPresent(true);
-            }
+            $newStatus = $request->request->get('status');
+            $userId = $request->request->get('userid');
+            $status->setIsPresent($newStatus);
 
-            $this->repo_status_user->add($status, true);
+            $this->em->persist($status);
+            $this->em->flush();
 
-            return new JsonResponse('', Response::HTTP_OK, []);
+            $response = [
+                'userid' => $userId,
+                'status' => $newStatus
+            ];
+
+            return new JsonResponse($response, Response::HTTP_OK);
         } else {
             $message = Response::HTTP_NOT_MODIFIED;
-            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED);
         }
     }
-
-
 }

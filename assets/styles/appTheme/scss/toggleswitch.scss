@@ -31,17 +31,17 @@
 }
 
 /* Colors for the slider based on the selected state */
-#off:checked ~ .toggle-slider {
+input[id^="off-"]:checked ~ .toggle-slider {
   left: 0;
   background: #ff0000; /* Red for Absent */
 }
 
-#neutral:checked ~ .toggle-slider {
+input[id^="neutral-"]:checked ~ .toggle-slider {
   left: 60px;
-  background: #ffffff; /* Gray for Neutral */
+  background: grey; /* Gray for Neutral */
 }
 
-#on:checked ~ .toggle-slider {
+input[id^="on-"]:checked ~ .toggle-slider {
   left: 120px;
   background: #00ff0b; /* Green for Present */
 }

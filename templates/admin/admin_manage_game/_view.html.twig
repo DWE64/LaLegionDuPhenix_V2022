@@ -180,20 +180,20 @@
                                             <td>{{ user.username }}</td>
                                             <td>
                                                 <div class="toggle-switch" id="toggle-user-{{ user.id }}">
-                                                    <input type="radio" id="off" name="toggle" data-custom-switch="absent"
+                                                    <input type="radio" id="off-{{ user.id }}" name="toggle-{{ user.id }}" data-custom-switch="absent"
                                                            data-url="{{ path('app_admin_manage_user_change_status_game',{idStatus: status.id}) }}"
-                                                           data-userid="{{ user.id }}" {% if status.isPresent == 'absent' %}checked{% endif %}>
-                                                    <label for="off">Absent</label>
+                                                           data-userid="{{ user.id }}" {% if status.ispresent == false %}checked{% endif %}>
+                                                    <label for="off-{{ user.id }}">Absent</label>
 
-                                                    <input type="radio" id="neutral" name="toggle" data-custom-switch="neutral"
+                                                    <input type="radio" id="neutral-{{ user.id }}" name="toggle-{{ user.id }}" data-custom-switch="neutral"
                                                            data-url="{{ path('app_admin_manage_user_change_status_game',{idStatus: status.id}) }}"
-                                                           data-userid="{{ user.id }}" {% if status.isPresent is null or status.isPresent == 'neutral' %}checked{% endif %}>
-                                                    <label for="neutral">Neutre</label>
+                                                           data-userid="{{ user.id }}" {% if status.ispresent == null %}checked{% endif %}>
+                                                    <label for="neutral-{{ user.id }}">Neutre</label>
 
-                                                    <input type="radio" id="on" name="toggle" data-custom-switch="present"
+                                                    <input type="radio" id="on-{{ user.id }}" name="toggle-{{ user.id }}" data-custom-switch="present"
                                                            data-url="{{ path('app_admin_manage_user_change_status_game',{idStatus: status.id}) }}"
-                                                           data-userid="{{ user.id }}" {% if status.isPresent == 'present' %}checked{% endif %}>
-                                                    <label for="on">Présent</label>
+                                                           data-userid="{{ user.id }}" {% if status.ispresent == true %}checked{% endif %}>
+                                                    <label for="on-{{ user.id }}">Présent</label>
 
                                                     <div class="toggle-slider"></div>
                                                 </div>
