@@ -21,9 +21,7 @@ class StatusUserInGame
     #[ORM\ManyToMany(targetEntity: Game::class, inversedBy: 'statusUserInGames')]
     private $games;
 
-    #[ORM\Column(type: 'boolean', options: [
-        "default" => false
-    ])]
+    #[ORM\Column(type: 'string', nullable: true, options: ["default" => false] )]
     private $isPresent;
 
     public function __construct()
@@ -31,7 +29,6 @@ class StatusUserInGame
         $this->user = new ArrayCollection();
         $this->games = new ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +41,7 @@ class StatusUserInGame
     {
         return $this->user;
     }
+
 
     public function addUser(User $user): self
     {
