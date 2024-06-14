@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block section %}
+    <h1>{{ title }}</h1>
+
+    {{ include('admin/admin_manage_post_template/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_manage_post_template_index') }}">{{ 'admin.manage.post.template.backToList'|trans }}</a>
+
+    {{ include('admin/admin_manage_post_template/_delete_form.html.twig') }}
+{% endblock %}

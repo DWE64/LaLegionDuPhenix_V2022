@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block section %}
+    <h1>{{ title }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'admin.manage.post.template.title'|trans }}</th>
+                <th>{{ 'admin.manage.post.template.subtitle'|trans }}</th>
+                <th>{{ 'admin.manage.post.template.content'|trans }}</th>
+                <th>{{ 'admin.manage.post.template.createdAt'|trans }}</th>
+                <th>{{ 'admin.manage.post.template.updatedAt'|trans }}</th>
+                <th>{{ 'admin.manage.post.template.action'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post_template in post_templates %}
+            <tr>
+                <td>{{ post_template.title }}</td>
+                <td>{{ post_template.subtitle }}</td>
+                <td>{{ post_template.content }}</td>
+                <td>{{ post_template.createdAt ? post_template.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ post_template.updatedAt ? post_template.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_manage_post_template_show', {'id': post_template.id}) }}">{{ 'admin.manage.post.template.show'|trans }}</a>
+                    <a href="{{ path('app_admin_manage_post_template_edit', {'id': post_template.id}) }}">{{ 'admin.manage.post.template.edit'|trans }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_manage_post_template_new') }}">Create new</a>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

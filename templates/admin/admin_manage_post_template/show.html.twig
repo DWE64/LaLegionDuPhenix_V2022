@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block section %}
+    <h1>{{ title }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{ 'admin.manage.post.template.title'|trans }}</th>
+                <td>{{ post_template.title }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'admin.manage.post.template.subtitle'|trans }}</th>
+                <td>{{ post_template.subtitle }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'admin.manage.post.template.content'|trans }}</th>
+                <td>{{ post_template.content }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'admin.manage.post.template.createdAt'|trans }}</th>
+                <td>{{ post_template.createdAt ? post_template.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'admin.manage.post.template.updatedAt'|trans }}</th>
+                <td>{{ post_template.updatedAt ? post_template.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_manage_post_template_index') }}">{{ 'admin.manage.post.template.backToList'|trans }}</a>
+
+    <a href="{{ path('app_admin_manage_post_template_edit', {'id': post_template.id}) }}">{{ 'admin.manage.post.template.edit'|trans }}</a>
+
+    {{ include('admin_manage_post_template/_delete_form.html.twig') }}
+{% endblock %}
