@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   position: relative;
-  width: 180px;
-  height: 40px;
+  width: 120px;
+  height: 30px;
   background: #ddd;
-  border-radius: 20px;
+  border-radius: 15px;
   overflow: hidden;
 
   input {
@@ -18,30 +18,31 @@
     cursor: pointer;
     user-select: none;
     color: #000000;
+    font-size: 12px;
   }
 }
 
 /* Slider that moves to indicate the current state */
 .toggle-slider {
   position: absolute;
-  width: 60px;
+  width: 40px;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 15px;
   transition: 0.3s;
 }
 
 /* Colors for the slider based on the selected state */
 input[id^="off-"]:checked ~ .toggle-slider {
   left: 0;
-  background: #b23f36; /* Red for Absent */
+  background: #b23f36; // Rouge pour Absent
 }
 
 input[id^="neutral-"]:checked ~ .toggle-slider {
-  left: 60px;
-  background: #a6a6a6; /* Gray for Neutral */
+  left: 40px;
+  background: #a6a6a6;
 }
 
 input[id^="on-"]:checked ~ .toggle-slider {
-  left: 120px;
-  background: rgb(248, 234, 195); /* Green for Present */
+  left: 80px;
+  background: rgb(248, 234, 195);
 }
