@@ -166,31 +166,34 @@ class ProfilController extends AbstractController
     }
 
     #[Route('/profil/edit/game/player_or_master/change_status/{idStatus}', name: 'app_profil_user_change_status_player_or_master_game')]
-    public function changePlayersOrMasterStatusGame(
-        Request $request,
-        StatusUserInGame $idStatus
-    ): JsonResponse {
+    public function changePlayersOrMasterStatusGame(Request $request, StatusUserInGame $idStatus): JsonResponse
+    {
         if ($request->isXmlHttpRequest()) {
             $status = $this->repo_status_user->find($idStatus);
 
-            if($status->isIsPresent()){
-                $status->setIsPresent(false);
-            }else{
+            $newStatus = json_decode($request->request->get('status'), true);
+
+            if ($newStatus === null) {
+                $status->setIsPresent(null);
+            } elseif ($newStatus) {
                 $status->setIsPresent(true);
+            } else {
+                $status->setIsPresent(false);
             }
 
             $this->repo_status_user->add($status, true);
-            $message=[
-                'message'=>$this->translator->trans('page.profil.message_success_status_change')
+            $message = [
+                'message' => $this->translator->trans('page.profil.message_success_status_change')
             ];
-            return new JsonResponse($message, Response::HTTP_OK, []);
+            return new JsonResponse($message, Response::HTTP_OK);
         } else {
             $message = [
-                'message'=> Response::HTTP_NOT_MODIFIED.' - '.$this->translator->trans('page.profil.message_error_status_change')
+                'message' => Response::HTTP_NOT_MODIFIED.' - '.$this->translator->trans('page.profil.message_error_status_change')
             ];
-            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED);
         }
     }
+
 
     #[Route('/profil/edit/game/{idGame}/master/post_message', name: 'app_profil_user_post_message_game_master')]
     public function postMessageGameMaster(
