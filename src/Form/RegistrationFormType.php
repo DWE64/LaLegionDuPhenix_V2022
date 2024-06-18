@@ -62,33 +62,19 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label'=>$this->translator->trans('registration.firstname'),
             ])
-            ->add('birthday', TextType::class,[
-                'mapped'=>false,
-                'required'=>true,
-                'attr'=>[
-                    'class'=>'form-control date',
-                    'data-toggle'=>'date-picker',
-                    'data-single-date-picker'=>"true",
-
+            ->add('birthday', BirthdayType::class, [
+                'required' => true,
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'html5' => true,
+                'attr' => [
+                    'class' => 'form-control',
                 ],
-                'label'=>$this->translator->trans('registration.birthday'),
-                'label_attr'=>[
-                    'class'=>'form-label'
+                'label' => $this->translator->trans('registration.birthday'),
+                'label_attr' => [
+                    'class' => 'form-label'
                 ],
             ])
-            /*->add('birthday', BirthdayType::class,[
-                'required'=>true,
-                'attr'=>[
-                    'class'=>'form-control date',
-                    'data-toggle'=>'date-picker',
-                    'data-single-date-picker'=>"true",
-
-                ],
-                'label'=>$this->translator->trans('registration.birthday'),
-                'label_attr'=>[
-                    'class'=>'form-label'
-                ],
-            ])*/
             ->add('address', TextType::class,[
                 'required'=>true,
                 'attr'=>[
