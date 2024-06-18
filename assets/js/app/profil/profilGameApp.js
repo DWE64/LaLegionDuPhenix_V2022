@@ -6,7 +6,7 @@ const jQuery = require('jquery');
 
         this.$wrapper.on(
             'change',
-            '.player-switch-check, .master-switch-check',
+            '.toggle-switch input',
             this.handleChangePlayersStatus.bind(this)
         );
 
@@ -22,21 +22,27 @@ const jQuery = require('jquery');
         handleChangePlayersStatus: function (e) {
             let $input = $(e.currentTarget);
 
+            console.log('Sending data:', {
+                status: $input.data('custom-switch'),
+                playerid: $input.data('playerid')
+            });
+
             $.ajax({
                 url: $input.data('url'),
                 method: 'POST',
                 data: {
                     status: $input.data('custom-switch'),
-                    userid: $input.data('userid')
+                    playerid: $input.data('playerid')
                 },
                 success: function(data) {
-                    console.log('Status changed for user: ', data.userid, ' to status: ', data.status);
+                    console.log('Status changed for user: ', data.playerid, ' to status: ', data.status);
                 },
                 error: function(jqXHR) {
                     console.error('Error changing player status: ', jqXHR);
                 }
             });
         },
+
 
         handleFormPostGameMasterCommentarySubmit: function (e) {
             e.preventDefault();
