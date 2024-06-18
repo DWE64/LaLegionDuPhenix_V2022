@@ -12,6 +12,7 @@ use App\Repository\UserRepository;
 use App\Service\FileUploader;
 use DateTime;
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,19 +29,22 @@ class ProfilController extends AbstractController
     private FileUploader $fileUploader;
     private StatusUserInGameRepository $repo_status_user;
     private GameRepository $gameRepo;
+    private EntityManagerInterface $em;
 
     public function __construct(
         TranslatorInterface $translator,
         UserRepository $userRepository,
         FileUploader $fileUploader,
         StatusUserInGameRepository $repo_status_user,
-        GameRepository $gameRepo
+        GameRepository $gameRepo,
+        EntityManagerInterface $em
     ) {
         $this->translator = $translator;
         $this->userRepository = $userRepository;
         $this->fileUploader = $fileUploader;
         $this->repo_status_user = $repo_status_user;
         $this->gameRepo = $gameRepo;
+        $this->em = $em;
     }
 
     #[Route('/profil', name: 'app_profil')]
@@ -171,25 +175,32 @@ class ProfilController extends AbstractController
         if ($request->isXmlHttpRequest()) {
             $status = $this->repo_status_user->find($idStatus);
 
-            $newStatus = json_decode($request->request->get('status'), true);
-
-            if ($newStatus === null) {
-                $status->setIsPresent(null);
-            } elseif ($newStatus) {
-                $status->setIsPresent(true);
-            } else {
-                $status->setIsPresent(false);
+            if (!$status) {
+                return new JsonResponse(['error' => 'Status not found'], Response::HTTP_NOT_FOUND);
             }
 
-            $this->repo_status_user->add($status, true);
-            $message = [
-                'message' => $this->translator->trans('page.profil.message_success_status_change')
+            $newStatus = $request->request->get('status');
+            $playerId = $request->request->get('playerid');
+
+            // Debugging
+            dump($newStatus, $playerId);
+
+            $status->setIsPresent(json_decode($newStatus));
+
+            $this->em->persist($status);
+            $this->em->flush();
+
+            // Check if the status is updated
+            $updatedStatus = $this->repo_status_user->find($idStatus);
+            dump($updatedStatus);
+
+            $response = [
+                'playerid' => $playerId,
+                'status' => $newStatus
             ];
-            return new JsonResponse($message, Response::HTTP_OK);
+            return new JsonResponse($response, Response::HTTP_OK);
         } else {
-            $message = [
-                'message' => Response::HTTP_NOT_MODIFIED.' - '.$this->translator->trans('page.profil.message_error_status_change')
-            ];
+            $message = Response::HTTP_NOT_MODIFIED;
             return new JsonResponse($message, Response::HTTP_NOT_MODIFIED);
         }
     }

@@ -34,8 +34,8 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setEmail('q.perriere@gmail.com');
         $user->setRoles($rolesAdmin);
-        $user->setName($this->faker->name);
-        $user->setFirstname($this->faker->firstName);
+        $user->setName('Perriere');
+        $user->setFirstname('Quentin');
         $user->setUsername($this->faker->userName);
         $user->setAddress($this->faker->address);
         $user->setBirthday($this->faker->dateTime);
