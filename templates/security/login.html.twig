@@ -51,7 +51,7 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                {# <a href="#" class="text-muted float-end"><small>{{ 'common.password_lost'|trans }}</small></a>#}
+                                                <a href="{{ path('app_forgot_password_request') }}" class="text-muted float-end"><small>{{ 'common.password_lost'|trans }}</small></a>
                                                 <label for="password" class="form-label">{{ 'common.password'|trans }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <input type="password" name="password" id="password" class="form-control" autocomplete="current-password" required>
