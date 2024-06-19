@@ -1,42 +1,45 @@
 <?php
+
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Repository\GameRepository;
-use App\Repository\StatusUserInGameRepository;
-use App\Repository\UserRepository;
 use App\Service\FileUploader;
 use App\Service\QrCodeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\File\File;
 class QrCodeController extends AbstractController
 {
     private QrCodeService $qrCodeService;
-    private UserRepository $userRepo;
+    private FileUploader $fileUploader;
 
-    public function __construct(
-        QrCodeService $qrCodeService,
-        UserRepository $userRepo
-    )
+    public function __construct(QrCodeService $qrCodeService, FileUploader $fileUploader)
     {
         $this->qrCodeService = $qrCodeService;
-        $this->userRepo = $userRepo;
+        $this->fileUploader = $fileUploader;
     }
 
-    /**
-     * @Route("/generate-qrcode/{userId}", name="generate_qrcode")
-     */
-    public function generateQrCode(int $userId): Response
+    #[Route('/generate-qrcode/{userId}', name: 'generate_qrcode')]
+    public function generateQrCode(): Response
     {
-        // Récupérer les informations utilisateur
-        $user = $this->userRepo->find($userId);
-        if (!($user instanceof User)) {
+        $user = $this->getUser();
+
+        if (!$user) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
         }
 
-        // Convertir les informations utilisateur en chaîne de caractères
+        $gamesData = [];
+
+        foreach ($user->getPlayersGames() as $game) {
+            $gamesData[] = [
+                'title' => $game->getTitle(),
+                'weekSlot' => $game->getWeekSlots(),
+                'halfDaySlot' => $game->getHalfDaySlots(),
+                'isPresent' => $this->checkUserPresence($user, $game),
+                'role' => $this->getUserRole($user, $game)
+            ];
+        }
+
         $data = [
             'Nom' => $user->getName(),
             'Prenom' => $user->getFirstname(),
@@ -45,16 +48,38 @@ class QrCodeController extends AbstractController
             'Date d\'Inscription à l\'Asso' => $user->getAssociationRegistrationDate()->format('Y-m-d'),
             'Date de Création du Compte' => $user->getCreatedAt()->format('Y-m-d'),
             'Date de Modification du Compte' => $user->getUpdatedAt() ? $user->getUpdatedAt()->format('Y-m-d') : 'Non modifié',
-            'Date de Naissance' => $user->getBirthday()->format('Y-m-d')
+            'Date de Naissance' => $user->getBirthday()->format('Y-m-d'),
+            'Games' => $gamesData
         ];
-        $dataString = json_encode($data);
 
-        // Générer le QR code
-        $qrCodePath = $this->qrCodeService->generateQrCode($dataString);
+        $qrCodeContent = json_encode($data);
+        $qrCodePath = $this->qrCodeService->generateQrCode($qrCodeContent);
 
-        // Afficher l'image du QR code
-        return $this->render('qrcode/display.html.twig', [
-            'qrCodePath' => $qrCodePath
+        $uploadedFileName = $this->fileUploader->uploadQrcode(new File($qrCodePath));
+
+
+        return $this->render('qr_code/index.html.twig', [
+            'qrCodePath' => '/pictures/qr_codes/' . $uploadedFileName,
         ]);
+    }
+
+    private function checkUserPresence($user, $game): string
+    {
+        foreach ($game->getStatusUserInGames() as $status) {
+            if ($status->getUser()->contains($user)) {
+                return $status->isIsPresent() ? 'Validé' : 'Invalidé';
+            }
+        }
+        return 'Non spécifié';
+    }
+
+    private function getUserRole($user, $game): string
+    {
+        if ($game->getGameMaster() === $user) {
+            return 'Master';
+        } elseif ($game->getPlayers()->contains($user)) {
+            return 'Player';
+        }
+        return 'Non spécifié';
     }
 }
