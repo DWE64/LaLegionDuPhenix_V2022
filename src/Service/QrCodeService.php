@@ -7,14 +7,19 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class QrCodeService
 {
-    public function generateQrCode(string $data): string
+    public function generateQrCode(string $data, int $userId): string
     {
+        $filePath = sys_get_temp_dir() . '/qrcode_' . $userId . '.png';
+
         $result = Builder::create()
             ->writer(new PngWriter())
             ->data($data)
             ->build();
 
-        $filePath = sys_get_temp_dir() . '/' . uniqid('qrcode_', true) . '.png';
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
         $result->saveToFile($filePath);
 
         return $filePath;

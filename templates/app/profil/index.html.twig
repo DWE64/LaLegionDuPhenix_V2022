@@ -2,7 +2,6 @@
 
 {% use 'app/modalApp/_modal_profil_user.html.twig' %}
 
-
 {% block title %}{{ title }}{% endblock %}
 
 {% block section %}
@@ -17,7 +16,6 @@
             </div>
         </div>
         <!-- end page title -->
-
 
         <div class="row">
             <div class="col-sm-12">
@@ -41,7 +39,7 @@
                                     <div class="col">
                                         <div>
                                             <h4 class="mt-1 mb-1 text-white">{{ app.user.firstname }} {{ app.user.name }} ({{ app.user.username }})</h4>
-                                            
+
                                             <p class="font-13 text-white-50"> {{ app.user.email }}</p>
                                             <p class="font-13 text-white-50"> {{ 'common.is_member'|trans }} {{ (app.user.isAssociationMember)? 'common.member_true'|trans : 'common.member_false'|trans }}</p>
 
@@ -74,6 +72,9 @@
 
                             <div class="col-sm-4">
                                 <div class="text-center mt-sm-0 mt-3 text-sm-end">
+                                    <a href="{{ path('generate_qrcode', {userId: app.user.id}) }}" class="btn btn-light">
+                                        <i class="mdi mdi-qrcode-scan"></i> Générer QR Code
+                                    </a>
                                     {% block buttonModalProfilUser %}
                                         {{ parent() }}
                                     {% endblock %}
@@ -86,7 +87,6 @@
             </div> <!-- end col-->
         </div>
         <!-- end row -->
-
 
         <div class="row">
             <div class="col-xl-4">

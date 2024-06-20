@@ -31,9 +31,9 @@ class FileUploader
         return $this->uploadFile($file, $this->getUserPictureDirectory());
     }
 
-    public function uploadQrcode(UploadedFile $file)
+    public function uploadQrcode(UploadedFile $file, int $userId)
     {
-        return $this->uploadFile($file, $this->getQrCodeDirectory());
+        return $this->uploadQrCodeFile($file, $this->getQrCodeDirectory(), $userId);
     }
 
     private function uploadFile(UploadedFile $file, $targetDirectory)
@@ -41,6 +41,23 @@ class FileUploader
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
         $fileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+        try {
+            $file->move($targetDirectory, $fileName);
+        } catch (FileException $e) {
+            return $e;
+        }
+
+        return $fileName;
+    }
+
+    private function uploadQrCodeFile(UploadedFile $file, $targetDirectory, int $userId)
+    {
+        $fileName = 'qrcode_' . $userId . '.png';
+
+        if (file_exists($targetDirectory . '/' . $fileName)) {
+            unlink($targetDirectory . '/' . $fileName);
+        }
 
         try {
             $file->move($targetDirectory, $fileName);

@@ -59,7 +59,7 @@ class AdminManageGameController extends AbstractController
     public function index(): Response
     {
         return $this->render(
-            'admin/admin_manage_game/index.html.twig',
+            'admin/admin_manage_game/view.html.twig',
             [
                 'title' => $this->translator->trans('page.admin.list_game'),
                 'games' => $this->repo_game->findAll(),

@@ -2,12 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Service\FileUploader;
 use App\Service\QrCodeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use App\Entity\Game;
+
 class QrCodeController extends AbstractController
 {
     private QrCodeService $qrCodeService;
@@ -19,67 +24,120 @@ class QrCodeController extends AbstractController
         $this->fileUploader = $fileUploader;
     }
 
-    #[Route('/generate-qrcode/{userId}', name: 'generate_qrcode')]
-    public function generateQrCode(): Response
+    #[Route('/generate-qrcode/{user}', name: 'generate_qrcode')]
+    public function generateQrCode(User $user): Response
     {
-        $user = $this->getUser();
 
-        if (!$user) {
-            throw $this->createNotFoundException('Utilisateur non trouvé');
-        }
+        $memberCategory = $this->determineMemberCategory($user->getBirthday());
 
         $gamesData = [];
 
         foreach ($user->getPlayersGames() as $game) {
-            $gamesData[] = [
-                'title' => $game->getTitle(),
-                'weekSlot' => $game->getWeekSlots(),
-                'halfDaySlot' => $game->getHalfDaySlots(),
-                'isPresent' => $this->checkUserPresence($user, $game),
-                'role' => $this->getUserRole($user, $game)
-            ];
+            $gamesData[] = $this->formatGameData($user, $game, 'Player');
         }
 
-        $data = [
-            'Nom' => $user->getName(),
-            'Prenom' => $user->getFirstname(),
-            'Pseudo' => $user->getUsername(),
-            'Statut du Membre' => $user->getMemberStatus(),
-            'Date d\'Inscription à l\'Asso' => $user->getAssociationRegistrationDate()->format('Y-m-d'),
-            'Date de Création du Compte' => $user->getCreatedAt()->format('Y-m-d'),
-            'Date de Modification du Compte' => $user->getUpdatedAt() ? $user->getUpdatedAt()->format('Y-m-d') : 'Non modifié',
-            'Date de Naissance' => $user->getBirthday()->format('Y-m-d'),
-            'Games' => $gamesData
-        ];
+        foreach ($user->getGames() as $game) {
+            $gamesData[] = $this->formatGameData($user, $game, 'Master');
+        }
 
-        $qrCodeContent = json_encode($data);
-        $qrCodePath = $this->qrCodeService->generateQrCode($qrCodeContent);
-
-        $uploadedFileName = $this->fileUploader->uploadQrcode(new File($qrCodePath));
+        $viewQrCodeUrl = $this->generateUrl('view_qrcode', ['user' => $user->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
 
-        return $this->render('qr_code/index.html.twig', [
+        $qrCodePath = $this->qrCodeService->generateQrCode($viewQrCodeUrl, $user->getId());
+
+        $file = new File($qrCodePath);
+        $uploadedFile = new UploadedFile(
+            $file->getPathname(),
+            $file->getFilename(),
+            $file->getMimeType(),
+            UPLOAD_ERR_OK,
+            true
+        );
+
+        $uploadedFileName = $this->fileUploader->uploadQrcode($uploadedFile, $user->getId());
+
+        return $this->render('qrcode/index.html.twig', [
             'qrCodePath' => '/pictures/qr_codes/' . $uploadedFileName,
         ]);
     }
 
-    private function checkUserPresence($user, $game): string
+    #[Route('/view-qrcode/{user}', name: 'view_qrcode')]
+    public function viewQrCode(User $user): Response
     {
-        foreach ($game->getStatusUserInGames() as $status) {
-            if ($status->getUser()->contains($user)) {
-                return $status->isIsPresent() ? 'Validé' : 'Invalidé';
-            }
+        $memberCategory = $this->determineMemberCategory($user->getBirthday());
+
+        $gamesData = [];
+
+        foreach ($user->getPlayersGames() as $game) {
+            $gamesData[] = $this->formatGameData($user, $game, 'Player');
         }
-        return 'Non spécifié';
+
+        foreach ($user->getGames() as $game) {
+            $gamesData[] = $this->formatGameData($user, $game, 'Master');
+        }
+
+        return $this->render('qrcode/view.html.twig', [
+            'name' => $user->getName(),
+            'firstname' => $user->getFirstname(),
+            'username' => $user->getUsername(),
+            'memberCategory' => $memberCategory,
+            'registrationDate' => $user->getAssociationRegistrationDate()->format('d-m-y'),
+            'updatedAt' => $user->getUpdatedAt() ? $user->getUpdatedAt()->format('d-m-y') : 'Non modifié',
+            'birthday' => $user->getBirthday()->format('d-m-y'),
+            'gamesData' => $gamesData,
+        ]);
     }
 
-    private function getUserRole($user, $game): string
+    private function formatGameData($user, $game, $role): array
     {
-        if ($game->getGameMaster() === $user) {
-            return 'Master';
-        } elseif ($game->getPlayers()->contains($user)) {
-            return 'Player';
+
+        $presence = 'Présence non renseignée';
+        foreach ($game->getStatusUserInGames() as $status) {
+            if ($status->getUser()->contains($user)) {
+                $presence = $status->isIsPresent() ? 'Présent' : 'Absent';
+            }
         }
-        return 'Non spécifié';
+
+        $weekSlot = $this->determineWeekSlot($game);
+        $halfDaySlot = $this->determineHalfDaySlot($game);
+
+        return [
+            'Titre' => $game->getTitle(),
+            'Creneau' => $weekSlot. ' - '.$halfDaySlot,
+            'Presence'=>$presence,
+            'Role'=>$role,
+        ];
+    }
+
+    private function determineMemberCategory(\DateTimeInterface $birthday): string
+    {
+        $today = new \DateTime();
+        $age = $today->diff($birthday)->y;
+
+        if ($age < 15) {
+            return 'Membre enfant / mineur';
+        } elseif ($age <= 18) {
+            return 'Membre mineur / jeune adulte';
+        } else {
+            return 'Membre majeur';
+        }
+    }
+
+    private function determineWeekSlot(Game $game): string
+    {
+        if ($game->getWeekSlots() === "CRENEAU_1") {
+            return 'Semaine pair';
+        } else {
+            return 'Semaine impair';
+        }
+    }
+
+    private function determineHalfDaySlot(Game $game): string
+    {
+        if ($game->getHalfDaySlots() === "APREM") {
+            return 'Après midi';
+        } else {
+            return 'Soir';
+        }
     }
 }

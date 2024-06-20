@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QR Code Details{% endblock %}
+
+{% block section %}
+    <h1>Details of User</h1>
+    <p><strong>Name:</strong> {{ name }}</p>
+    <p><strong>Firstname:</strong> {{ firstname }}</p>
+    <p><strong>Username:</strong> {{ username }}</p>
+    <p><strong>Member Category:</strong> {{ memberCategory }}</p>
+    <p><strong>Registration Date:</strong> {{ registrationDate }}</p>
+    <p><strong>Last Updated:</strong> {{ updatedAt }}</p>
+    <p><strong>Birthday:</strong> {{ birthday }}</p>
+    <h2>Games</h2>
+    {% for gameData in gamesData %}
+            <ul>
+            <li>{{ gameData.Titre }}</li>
+            <li>{{ gameData.Creneau }}</li>
+            <li>{{ gameData.Presence }}</li>
+            <li>{{ gameData.Role }}</li>
+            </ul>
+    {% endfor %}
+
+{% endblock %}

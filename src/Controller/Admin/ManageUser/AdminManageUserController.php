@@ -48,7 +48,7 @@ class AdminManageUserController extends AbstractController
     public function index(): Response
     {
         return $this->render(
-            'admin/admin_manage_user/index.html.twig',
+            'admin/admin_manage_user/view.html.twig',
             [
                 'title' => $this->translator->trans('page.admin.list_user'),
                 'users' => $this->userRepository->findAll(),
