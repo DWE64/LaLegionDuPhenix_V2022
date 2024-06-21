@@ -81,7 +81,6 @@ class QrCodeController extends AbstractController
             'memberCategory' => $memberCategory,
             'registrationDate' => $user->getAssociationRegistrationDate()->format('d-m-y'),
             'updatedAt' => $user->getUpdatedAt() ? $user->getUpdatedAt()->format('d-m-y') : 'Non modifié',
-            'birthday' => $user->getBirthday()->format('d-m-y'),
             'games' => $games,
         ]);
     }

@@ -791,7 +791,7 @@
       </trans-unit>
       <trans-unit id="__elLnd" resname="member_category">
         <source>member_category</source>
-        <target>Catégorie d'âge </target>
+        <target>Catégorie d'âge</target>
       </trans-unit>
       <trans-unit id="sRmuGLX" resname="registration_date">
         <source>registration_date</source>
@@ -800,10 +800,6 @@
       <trans-unit id="u0hYk5U" resname="last_updated">
         <source>last_updated</source>
         <target>MAJ</target>
-      </trans-unit>
-      <trans-unit id="BCLULGi" resname="birthday">
-        <source>birthday</source>
-        <target>Anniverssaire</target>
       </trans-unit>
       <trans-unit id="zXrExh." resname="games">
         <source>games</source>

@@ -3,39 +3,27 @@
 {% block title %}{{ 'qr_code_details'|trans }}{% endblock %}
 
 {% block section %}
-    <div class="card">
-        <div class="card-body">
-            <h2 class="header-title mt-0 mb-3">{{ 'details_of_user'|trans }}</h2>
-
-            <div class="text-start">
-                <p class="text-muted"><strong>{{ 'common.fullname'|trans }} :</strong> <span
-                            class="ms-2 user-name-firstname-{{ app.user.id }}">{{ firstname }} {{ name }} </span>
-                </p>
-                <p class="text-muted"><strong>{{ 'common.username'|trans }} :</strong> <span
-                            class="ms-2 user-username-{{ app.user.id }}"> {{ app.user.username }}</span></p>
-
-                <p class="text-muted"><strong>{{ 'member_category'|trans }} :</strong> <span
-                            class="ms-2 user-city-{{ app.user.id }}">{{ memberCategory }}</span></p>
-
-                <p class="text-muted"><strong>{{ 'registration_date'|trans }} :</strong>
-                    <span class="ms-2 user-postal-code-{{ app.user.id }}"> {{ registrationDate }} </span>
-                </p>
-
-                <p class="text-muted"><strong>{{ 'last_updated'|trans }} :</strong> <span
-                            class="ms-2 ">{{ updatedAt }}</span></p>
-
-                <p class="text-muted"><strong>{{ birthday }} :</strong> <span
-                            class="ms-2 ">{{ birthday }}</span></p>
-
+    <h2 class="header-title mt-0 mb-3 px-3 pt-3">{{ 'details_of_user'|trans }}</h2>
+    <div class="row mx-0 px-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-start">
+                        <p class="text-muted"><strong>{{ 'common.fullname'|trans }}:</strong><span class="ms-1 user-name-firstname-{{ app.user.id }}">{{ firstname }} {{ name }}</span></p>
+                        <p class="text-muted"><strong>{{ 'common.username'|trans }}:</strong><span class="ms-1 user-username-{{ app.user.id }}">{{ app.user.username }}</span></p>
+                        <p class="text-muted"><strong>{{ 'member_category'|trans }}:</strong><span class="ms-1 user-city-{{ app.user.id }}">{{ memberCategory }}</span></p>
+                        <p class="text-muted"><strong>{{ 'registration_date'|trans }}:</strong><span class="ms-1 user-postal-code-{{ app.user.id }}">{{ registrationDate }}</span></p>
+                        <p class="text-muted"><strong>{{ 'last_updated'|trans }}:</strong><span class="ms-1">{{ updatedAt }}</span></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <h2 class="header-title mt-0 mb-3 px-3"> {{ 'games'|trans }}</h2>
+
+    <h2 class="header-title mt-0 mb-3 px-3">{{ 'games'|trans }}</h2>
     <div class="row mx-0 px-2 list-game">
         {% for game in games %}
-            <div class="col-md-6 col-xxl-3 js-filter js-manage-game-delete game-{{ game.id }}" id="game-{{ game.id }}"
-                 data-id="game-{{ game.id }}"
-                 data-value="{{ game.id }}">
+            <div class="col-md-6 col-xxl-3 mb-3">
                 <div class="card d-block">
                     <div class="card-body">
                         <h4 class="mt-0">{{ game.Titre }}</h4>
