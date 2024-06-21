@@ -11,6 +11,9 @@ docker-compose.override.yml
 .env.test
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
+/public/pictures/games/
+/public/pictures/qr_codes/
+/public/pictures/users/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
