@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QR Code{% endblock %}
+
+{% block section %}
+    <div style="text-align: center; margin-top: 50px;">
+        <h1>Votre QR Code</h1>
+        <img src="{{ asset(qrCodePath) }}" alt="QR Code">
+    </div>
+{% endblock %}

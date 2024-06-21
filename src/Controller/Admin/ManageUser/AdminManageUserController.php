@@ -37,7 +37,6 @@ class AdminManageUserController extends AbstractController
         UserRepository $userRepository
     ) {
         $this->translator = $translator;
-        $this->userDeletionService = $userDeletionService;
         $this->userRepository = $userRepository;
         $this->bus = $bus;
         $this->userDeletionService = $userDeletionService;

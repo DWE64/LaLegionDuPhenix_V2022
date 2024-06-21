@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'qr_code_details'|trans }}{% endblock %}
+
+{% block section %}
+    <h2 class="header-title mt-0 mb-3 px-3 pt-3">{{ 'details_of_user'|trans }}</h2>
+    <div class="row mx-0 px-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-start">
+                        <p class="text-muted"><strong>{{ 'common.fullname'|trans }}:</strong><span class="ms-1 user-name-firstname-{{ app.user.id }}">{{ firstname }} {{ name }}</span></p>
+                        <p class="text-muted"><strong>{{ 'common.username'|trans }}:</strong><span class="ms-1 user-username-{{ app.user.id }}">{{ app.user.username }}</span></p>
+                        <p class="text-muted"><strong>{{ 'member_category'|trans }}:</strong><span class="ms-1 user-city-{{ app.user.id }}">{{ memberCategory }}</span></p>
+                        <p class="text-muted"><strong>{{ 'registration_date'|trans }}:</strong><span class="ms-1 user-postal-code-{{ app.user.id }}">{{ registrationDate }}</span></p>
+                        <p class="text-muted"><strong>{{ 'last_updated'|trans }}:</strong><span class="ms-1">{{ updatedAt }}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="header-title mt-0 mb-3 px-3">{{ 'games'|trans }}</h2>
+    <div class="row mx-0 px-2 list-game">
+        {% for game in games %}
+            <div class="col-md-6 col-xxl-3 mb-3">
+                <div class="card d-block">
+                    <div class="card-body">
+                        <h4 class="mt-0">{{ game.Titre }}</h4>
+                        <p class="text-muted font-12 mb-3">{{ 'creneau'|trans }}: {{ game.Creneau }}</p>
+                        <p class="text-muted font-12 mb-3">{{ 'presence'|trans }}:
+                            {% if game.WithBadge is not null and game.WithBadge %}
+                                <span class="{{ game.WithBadge? 'badge bg-success' : 'badge bg-danger' }}">{{ game.Presence }}</span>
+                            {% else %}
+                                <span class="badge bg-light">{{ game.Presence }}</span>
+                            {% endif %}
+                        </p>
+                        <p class="text-muted font-12 mb-3">{{ 'role'|trans }}: {{ game.Role }}</p>
+                    </div> <!-- end card-body-->
+                </div> <!-- end card-->
+            </div> <!-- end col -->
+        {% endfor %}
+    </div>
+{% endblock %}

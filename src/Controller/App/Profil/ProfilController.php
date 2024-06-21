@@ -50,12 +50,14 @@ class ProfilController extends AbstractController
     #[Route('/profil', name: 'app_profil')]
     public function index(): Response
     {
+        $user = $this->getUser();
         $baseTemplate = ($this->isGranted('ROLE_STAFF')) ? 'admin/base.html.twig' : 'app/base.html.twig';
         return $this->render(
             'app/profil/index.html.twig',
             [
                 'title' => $this->translator->trans('page.app.profil_user'),
-                'baseTemplate' => $baseTemplate
+                'baseTemplate' => $baseTemplate,
+                'user' => $user
             ]
         );
     }

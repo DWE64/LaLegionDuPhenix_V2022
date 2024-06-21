@@ -77,7 +77,7 @@ class AppFixtures extends Fixture
         }
 
         $master = $this->userRep->find(1);
-        for ($i =0; $i<30; $i++) {
+        for ($i =0; $i<5; $i++) {
             $game = new Game();
             $game->setTitle($this->faker->title);
             $game->setGameStatus(StatusService::NEW_GAME);
