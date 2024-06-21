@@ -27,18 +27,6 @@ class QrCodeController extends AbstractController
     #[Route('/generate-qrcode/{user}', name: 'generate_qrcode')]
     public function generateQrCode(User $user): Response
     {
-        $memberCategory = $this->determineMemberCategory($user->getBirthday());
-
-        $gamesData = [];
-
-        foreach ($user->getPlayersGames() as $game) {
-            $gamesData[] = $this->formatGameData($user, $game, 'Player');
-        }
-
-        foreach ($user->getGames() as $game) {
-            $gamesData[] = $this->formatGameData($user, $game, 'Master');
-        }
-
         $viewQrCodeUrl = $this->generateUrl('view_qrcode', ['user' => $user->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $qrCodePath = $this->qrCodeService->generateQrCode($viewQrCodeUrl, $user->getId());
@@ -79,8 +67,8 @@ class QrCodeController extends AbstractController
             'firstname' => $user->getFirstname(),
             'username' => $user->getUsername(),
             'memberCategory' => $memberCategory,
-            'registrationDate' => $user->getAssociationRegistrationDate()->format('d-m-y'),
-            'updatedAt' => $user->getUpdatedAt() ? $user->getUpdatedAt()->format('d-m-y') : 'Non modifié',
+            'registrationDate' => ($user->getAssociationRegistrationDate() !== null)? $user->getAssociationRegistrationDate()->format('d-m-Y') : 'Non inscrit',
+            'updatedAt' => $user->getUpdatedAt() ? $user->getUpdatedAt()->format('d-m-Y') : 'Non modifié',
             'games' => $games,
         ]);
     }
@@ -88,9 +76,11 @@ class QrCodeController extends AbstractController
     private function formatGameData($user, $game, $role): array
     {
         $presence = 'Présence non renseignée';
+        $withBadge = null;
         foreach ($game->getStatusUserInGames() as $status) {
             if ($status->getUser()->contains($user)) {
                 $presence = $status->isIsPresent() ? 'Présent' : 'Absent';
+                $withBadge = $status->isIsPresent() ? true : false;
             }
         }
 
@@ -99,6 +89,7 @@ class QrCodeController extends AbstractController
             'Titre' => $game->getTitle(),
             'Creneau' => $game->getWeekSlots() . ' - ' . $game->getHalfDaySlots(),
             'Presence' => $presence,
+            'WithBadge' => $withBadge,
             'Role' => $role,
         ];
     }
