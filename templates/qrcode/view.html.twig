@@ -26,16 +26,16 @@
             <div class="col-md-6 col-xxl-3 mb-3">
                 <div class="card d-block">
                     <div class="card-body">
-                        <h4 class="mt-0">{{ game.Titre }}</h4>
-                        <p class="text-muted font-12 mb-3">{{ 'creneau'|trans }}: {{ game.Creneau }}</p>
-                        <p class="text-muted font-12 mb-3">{{ 'presence'|trans }}:
-                            {% if game.WithBadge is not null and game.WithBadge %}
+                        <h3 class="mt-0">{{ game.Titre }}</h3>
+                        <p class="text-muted mb-3"><strong>{{ 'creneau'|trans }}:</strong> {{ game.Creneau }}</p>
+                        <p class="text-muted mb-3"><strong>{{ 'presence'|trans }}:</strong>
+                            {% if game.WithBadge is not null %}
                                 <span class="{{ game.WithBadge? 'badge bg-success' : 'badge bg-danger' }}">{{ game.Presence }}</span>
                             {% else %}
-                                <span class="badge bg-light">{{ game.Presence }}</span>
+                                <span class="badge bg-secondary">{{ game.Presence }}</span>
                             {% endif %}
                         </p>
-                        <p class="text-muted font-12 mb-3">{{ 'role'|trans }}: {{ game.Role }}</p>
+                        <p class="text-muted mb-3"><strong>{{ 'role'|trans }}:</strong> {{ game.Role }}</p>
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
             </div> <!-- end col -->

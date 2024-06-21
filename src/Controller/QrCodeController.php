@@ -79,8 +79,13 @@ class QrCodeController extends AbstractController
         $withBadge = null;
         foreach ($game->getStatusUserInGames() as $status) {
             if ($status->getUser()->contains($user)) {
-                $presence = $status->isIsPresent() ? 'Présent' : 'Absent';
-                $withBadge = $status->isIsPresent() ? true : false;
+                if($status->isIsPresent() === null){
+                    $presence = 'Présence non renseignée';
+                    $withBadge = null;
+                }else{
+                    $presence = $status->isIsPresent() ? 'Présent' : 'Absent';
+                    $withBadge = $status->isIsPresent() ? true : false;
+                }
             }
         }
 
