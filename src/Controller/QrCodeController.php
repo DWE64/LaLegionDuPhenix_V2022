@@ -27,7 +27,6 @@ class QrCodeController extends AbstractController
     #[Route('/generate-qrcode/{user}', name: 'generate_qrcode')]
     public function generateQrCode(User $user): Response
     {
-
         $memberCategory = $this->determineMemberCategory($user->getBirthday());
 
         $gamesData = [];
@@ -41,7 +40,6 @@ class QrCodeController extends AbstractController
         }
 
         $viewQrCodeUrl = $this->generateUrl('view_qrcode', ['user' => $user->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-
 
         $qrCodePath = $this->qrCodeService->generateQrCode($viewQrCodeUrl, $user->getId());
 
@@ -66,14 +64,14 @@ class QrCodeController extends AbstractController
     {
         $memberCategory = $this->determineMemberCategory($user->getBirthday());
 
-        $gamesData = [];
+        $games = [];
 
         foreach ($user->getPlayersGames() as $game) {
-            $gamesData[] = $this->formatGameData($user, $game, 'Player');
+            $games[] = $this->formatGameData($user, $game, 'Player');
         }
 
         foreach ($user->getGames() as $game) {
-            $gamesData[] = $this->formatGameData($user, $game, 'Master');
+            $games[] = $this->formatGameData($user, $game, 'Master');
         }
 
         return $this->render('qrcode/view.html.twig', [
@@ -84,13 +82,12 @@ class QrCodeController extends AbstractController
             'registrationDate' => $user->getAssociationRegistrationDate()->format('d-m-y'),
             'updatedAt' => $user->getUpdatedAt() ? $user->getUpdatedAt()->format('d-m-y') : 'Non modifié',
             'birthday' => $user->getBirthday()->format('d-m-y'),
-            'gamesData' => $gamesData,
+            'games' => $games,
         ]);
     }
 
     private function formatGameData($user, $game, $role): array
     {
-
         $presence = 'Présence non renseignée';
         foreach ($game->getStatusUserInGames() as $status) {
             if ($status->getUser()->contains($user)) {
@@ -98,14 +95,12 @@ class QrCodeController extends AbstractController
             }
         }
 
-        $weekSlot = $this->determineWeekSlot($game);
-        $halfDaySlot = $this->determineHalfDaySlot($game);
-
         return [
+            'id' => $game->getId(),
             'Titre' => $game->getTitle(),
-            'Creneau' => $weekSlot. ' - '.$halfDaySlot,
-            'Presence'=>$presence,
-            'Role'=>$role,
+            'Creneau' => $game->getWeekSlots() . ' - ' . $game->getHalfDaySlots(),
+            'Presence' => $presence,
+            'Role' => $role,
         ];
     }
 
@@ -115,29 +110,11 @@ class QrCodeController extends AbstractController
         $age = $today->diff($birthday)->y;
 
         if ($age < 15) {
-            return 'Membre enfant / mineur';
+            return 'Mineur';
         } elseif ($age <= 18) {
-            return 'Membre mineur / jeune adulte';
+            return 'Jeune adulte';
         } else {
-            return 'Membre majeur';
-        }
-    }
-
-    private function determineWeekSlot(Game $game): string
-    {
-        if ($game->getWeekSlots() === "CRENEAU_1") {
-            return 'Semaine pair';
-        } else {
-            return 'Semaine impair';
-        }
-    }
-
-    private function determineHalfDaySlot(Game $game): string
-    {
-        if ($game->getHalfDaySlots() === "APREM") {
-            return 'Après midi';
-        } else {
-            return 'Soir';
+            return 'Adulte';
         }
     }
 }

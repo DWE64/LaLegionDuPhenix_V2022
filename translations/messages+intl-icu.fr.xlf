@@ -763,11 +763,63 @@
       </trans-unit>
       <trans-unit id="jvIhkrp" resname="user.profil.username">
         <source>user.profil.username</source>
-        <target>__user.profil.username</target>
+        <target>Pseudo Discord</target>
       </trans-unit>
       <trans-unit id=".zXmG6z" resname="common.username">
         <source>common.username</source>
         <target>Pseudo Discord</target>
+      </trans-unit>
+      <trans-unit id="sKuOZJe" resname="qr_code_details">
+        <source>qr_code_details</source>
+        <target>Détails du Qr Code</target>
+      </trans-unit>
+      <trans-unit id="wpny4g1" resname="details_of_user">
+        <source>details_of_user</source>
+        <target>Détails utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="gqNTf.D" resname="name">
+        <source>name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="TP3eab3" resname="firstname">
+        <source>firstname</source>
+        <target>Prénom</target>
+      </trans-unit>
+      <trans-unit id="FveKfWM" resname="username">
+        <source>username</source>
+        <target>Pseudo discord</target>
+      </trans-unit>
+      <trans-unit id="__elLnd" resname="member_category">
+        <source>member_category</source>
+        <target>Catégorie d'âge </target>
+      </trans-unit>
+      <trans-unit id="sRmuGLX" resname="registration_date">
+        <source>registration_date</source>
+        <target>Date d'inscription</target>
+      </trans-unit>
+      <trans-unit id="u0hYk5U" resname="last_updated">
+        <source>last_updated</source>
+        <target>MAJ</target>
+      </trans-unit>
+      <trans-unit id="BCLULGi" resname="birthday">
+        <source>birthday</source>
+        <target>Anniverssaire</target>
+      </trans-unit>
+      <trans-unit id="zXrExh." resname="games">
+        <source>games</source>
+        <target>Listes des jeux</target>
+      </trans-unit>
+      <trans-unit id="8nnARIB" resname="creneau">
+        <source>creneau</source>
+        <target>créneau</target>
+      </trans-unit>
+      <trans-unit id="3.Bmm03" resname="presence">
+        <source>presence</source>
+        <target>présence</target>
+      </trans-unit>
+      <trans-unit id="SxaNiNy" resname="role">
+        <source>role</source>
+        <target>role</target>
       </trans-unit>
     </body>
   </file>
