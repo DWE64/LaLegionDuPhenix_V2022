@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialiser votre mot de passe{% endblock %}
+
+{% block body %}
+    <body class="loading authentication-bg">
+    <div class="wrapper">
+        {% include 'basicTemplate/navbar_app/_navbar_left.html.twig' with {'text_color': 'text-dark'} %}
+
+        <div class="content-page">
+            <div class="content">
+                {% include 'basicTemplate/navbar_app/_navbar_top.html.twig' %}
+                <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-4 col-lg-5">
+                                <div class="card">
+                                    <div class="card-header pt-2 pb-2 text-center bg-primary">
+                                        <a href="{{ path('app_home') }}">
+                                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="125"></span>
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body p-4">
+                                        <div class="text-center w-75 m-auto">
+                                            <h4 class="text-dark-50 text-center pb-0 fw-bold">Réinitialiser votre mot de passe</h4>
+                                            <p class="text-muted mb-4">
+                                                Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+                                            </p>
+                                        </div>
+
+                                        {% for flash_error in app.flashes('reset_password_error') %}
+                                            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                                        {% endfor %}
+
+                                        {{ form_start(requestForm) }}
+                                        {{ form_row(requestForm.email) }}
+                                        <div class="mb-3 mb-0 text-center">
+                                            <button class="btn btn-primary" type="submit">Envoyer un email de réinitialisation de mot de passe</button>
+                                        </div>
+                                        {{ form_end(requestForm) }}
+                                    </div> <!-- end card-body -->
+                                </div>
+                                <!-- end card -->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end container -->
+                </div>
+            </div>
+            <!-- content -->
+
+            {% include 'basicTemplate/footer/_footer.html.twig' %}
+        </div>
+    </div>
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('vendor') }}
+        {{ encore_entry_script_tags('app_template') }}
+    {% endblock %}
+    </body>
+{% endblock %}

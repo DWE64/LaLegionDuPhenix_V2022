@@ -12,6 +12,7 @@ use App\Repository\UserRepository;
 use App\Service\FileUploader;
 use DateTime;
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,19 +29,22 @@ class ProfilController extends AbstractController
     private FileUploader $fileUploader;
     private StatusUserInGameRepository $repo_status_user;
     private GameRepository $gameRepo;
+    private EntityManagerInterface $em;
 
     public function __construct(
         TranslatorInterface $translator,
         UserRepository $userRepository,
         FileUploader $fileUploader,
         StatusUserInGameRepository $repo_status_user,
-        GameRepository $gameRepo
+        GameRepository $gameRepo,
+        EntityManagerInterface $em
     ) {
         $this->translator = $translator;
         $this->userRepository = $userRepository;
         $this->fileUploader = $fileUploader;
         $this->repo_status_user = $repo_status_user;
         $this->gameRepo = $gameRepo;
+        $this->em = $em;
     }
 
     #[Route('/profil', name: 'app_profil')]
@@ -168,31 +172,41 @@ class ProfilController extends AbstractController
     }
 
     #[Route('/profil/edit/game/player_or_master/change_status/{idStatus}', name: 'app_profil_user_change_status_player_or_master_game')]
-    public function changePlayersOrMasterStatusGame(
-        Request $request,
-        StatusUserInGame $idStatus
-    ): JsonResponse {
+    public function changePlayersOrMasterStatusGame(Request $request, StatusUserInGame $idStatus): JsonResponse
+    {
         if ($request->isXmlHttpRequest()) {
             $status = $this->repo_status_user->find($idStatus);
 
-            if($status->isIsPresent()){
-                $status->setIsPresent(false);
-            }else{
-                $status->setIsPresent(true);
+            if (!$status) {
+                return new JsonResponse(['error' => 'Status not found'], Response::HTTP_NOT_FOUND);
             }
 
-            $this->repo_status_user->add($status, true);
-            $message=[
-                'message'=>$this->translator->trans('page.profil.message_success_status_change')
+            $newStatus = $request->request->get('status');
+            $playerId = $request->request->get('playerid');
+
+            // Debugging
+            dump($newStatus, $playerId);
+
+            $status->setIsPresent(json_decode($newStatus));
+
+            $this->em->persist($status);
+            $this->em->flush();
+
+            // Check if the status is updated
+            $updatedStatus = $this->repo_status_user->find($idStatus);
+            dump($updatedStatus);
+
+            $response = [
+                'playerid' => $playerId,
+                'status' => $newStatus
             ];
-            return new JsonResponse($message, Response::HTTP_OK, []);
+            return new JsonResponse($response, Response::HTTP_OK);
         } else {
-            $message = [
-                'message'=> Response::HTTP_NOT_MODIFIED.' - '.$this->translator->trans('page.profil.message_error_status_change')
-            ];
-            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
+            $message = Response::HTTP_NOT_MODIFIED;
+            return new JsonResponse($message, Response::HTTP_NOT_MODIFIED);
         }
     }
+
 
     #[Route('/profil/edit/game/{idGame}/master/post_message', name: 'app_profil_user_post_message_game_master')]
     public function postMessageGameMaster(

@@ -816,6 +816,9 @@
       <trans-unit id="SxaNiNy" resname="role">
         <source>role</source>
         <target>role</target>
+      <trans-unit id="XM_7LMg" resname="common.remember_me">
+        <source>common.remember_me</source>
+        <target>Se souvenir de moi</target>
       </trans-unit>
     </body>
   </file>
