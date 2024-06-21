@@ -21,18 +21,12 @@ const jQuery = require('jquery');
 
         handleChangePlayersStatus: function (e) {
             let $input = $(e.currentTarget);
-
-            console.log('Sending data:', {
-                status: $input.data('custom-switch'),
-                playerid: $input.data('playerid')
-            });
-
             $.ajax({
                 url: $input.data('url'),
                 method: 'POST',
                 data: {
                     status: $input.data('custom-switch'),
-                    playerid: $input.data('playerid')
+                    playerid: $input.data('userid')
                 },
                 success: function(data) {
                     console.log('Status changed for user: ', data.playerid, ' to status: ', data.status);
