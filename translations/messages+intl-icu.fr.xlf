@@ -769,6 +769,10 @@
         <source>common.username</source>
         <target>Pseudo Discord</target>
       </trans-unit>
+      <trans-unit id="XM_7LMg" resname="common.remember_me">
+        <source>common.remember_me</source>
+        <target>Se souvenir de moi</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

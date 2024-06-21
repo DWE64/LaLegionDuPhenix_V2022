@@ -25,19 +25,19 @@
 
                     <!-- form -->
                     {{ form_start(registrationForm) }}
-                        
-                        {{ form_row(registrationForm.name) }}
-                        {{ form_row(registrationForm.firstname) }}
-                        {{ form_row(registrationForm.username) }}
-                        {{ form_row(registrationForm.birthday) }}
-                        {{ form_row(registrationForm.address) }}
-                        {{ form_row(registrationForm.postalCode) }}
-                        {{ form_row(registrationForm.city) }}
-                        {{ form_row(registrationForm.email) }}
-                        {{ form_row(registrationForm.plainPassword) }}
-                        <div class="mb-0 d-grid text-center">
-                            <button class="btn btn-lpd" type="submit"><i class="mdi mdi-account-circle"></i> {{ 'common.register'|trans }}</button>
-                        </div>
+
+                    {{ form_row(registrationForm.name) }}
+                    {{ form_row(registrationForm.firstname) }}
+                    {{ form_row(registrationForm.username) }}
+                    {{ form_row(registrationForm.birthday) }}
+                    {{ form_row(registrationForm.address) }}
+                    {{ form_row(registrationForm.postalCode) }}
+                    {{ form_row(registrationForm.city) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword) }}
+                    <div class="mb-0 d-grid text-center">
+                        <button class="btn btn-lpd" type="submit"><i class="mdi mdi-account-circle"></i> {{ 'common.register'|trans }}</button>
+                    </div>
                     {{ form_end(registrationForm) }}
                     <!-- end form-->
 

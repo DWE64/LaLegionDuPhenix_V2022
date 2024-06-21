@@ -769,6 +769,10 @@
         <source>common.username</source>
         <target>__common.username</target>
       </trans-unit>
+      <trans-unit id="XM_7LMg" resname="common.remember_me">
+        <source>common.remember_me</source>
+        <target>Remember Me</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
