@@ -185,7 +185,6 @@ class ProfilController extends AbstractController
             $playerId = $request->request->get('playerid');
 
             // Debugging
-            dump($newStatus, $playerId);
 
             $status->setIsPresent(json_decode($newStatus));
 
@@ -194,7 +193,7 @@ class ProfilController extends AbstractController
 
             // Check if the status is updated
             $updatedStatus = $this->repo_status_user->find($idStatus);
-            dump($updatedStatus);
+
 
             $response = [
                 'playerid' => $playerId,
