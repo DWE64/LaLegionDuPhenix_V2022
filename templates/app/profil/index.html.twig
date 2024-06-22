@@ -159,6 +159,7 @@
                                                 <tbody>
                                                 {% if game.statusUserInGames is not empty %}
                                                     {% for status in game.statusUserInGames %}
+
                                                         {% for player in status.user %}
                                                             <tr>
                                                                 <td>{{ player.firstname }} {{ player.name }}
@@ -168,20 +169,26 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="toggle-switch" id="toggle-user-{{ player.id }}" {% if app.user != player %}style="opacity: 0.5;"{% endif %}>
-                                                                        <input type="radio" id="off-{{ player.id }}" name="toggle-{{ player.id }}" data-custom-switch=false
-                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game',{idStatus: status.id}) }}"
-                                                                               data-userid="{{ player.id }}" {% if app.user != player %}disabled{% endif %} {% if not status.ispresent %}checked{% endif %}>
-                                                                        <label for="off-{{ player.id }}">NON</label>
+                                                                        <input type="radio" id="off-game{{ game.id }}-{{ player.id }}" name="toggle-{{ game.id }}-{{ player.id }}" data-custom-switch="false"
+                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game', {idStatus: status.id}) }}"
+                                                                               data-playerid="{{ player.id }}"
+                                                                               {% if app.user != player %}disabled{% endif %}
+                                                                                {% if not status.isPresent %}checked{% endif %}>
+                                                                        <label for="off-game{{ game.id }}-{{ player.id }}">NON</label>
 
-                                                                        <input type="radio" id="neutral-{{ player.id }}" name="toggle-{{ player.id }}" data-custom-switch="null"
-                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game',{idStatus: status.id}) }}"
-                                                                               data-userid="{{ player.id }}" {% if app.user != player %}disabled{% endif %} {% if status.ispresent is null %}checked{% endif %}>
-                                                                        <label for="neutral-{{ player.id }}">-</label>
+                                                                        <input type="radio" id="neutral-game{{ game.id }}-{{ player.id }}" name="toggle-{{ game.id }}-{{ player.id }}" data-custom-switch="null"
+                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game', {idStatus: status.id}) }}"
+                                                                               data-playerid="{{ player.id }}"
+                                                                               {% if app.user != player %}disabled{% endif %}
+                                                                                {% if status.isPresent is null %}checked{% endif %}>
+                                                                        <label for="neutral-game{{ game.id }}-{{ player.id }}">-</label>
 
-                                                                        <input type="radio" id="on-{{ player.id }}" name="toggle-{{ player.id }}" data-custom-switch=true
-                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game',{idStatus: status.id}) }}"
-                                                                               data-userid="{{ player.id }}" {% if app.user != player %}disabled{% endif %} {% if status.ispresent %}checked{% endif %}>
-                                                                        <label for="on-{{ player.id }}">OUI</label>
+                                                                        <input type="radio" id="on-game{{ game.id }}-{{ player.id }}" name="toggle-{{ game.id }}-{{ player.id }}" data-custom-switch="true"
+                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game', {idStatus: status.id}) }}"
+                                                                               data-playerid="{{ player.id }}"
+                                                                               {% if app.user != player %}disabled{% endif %}
+                                                                                {% if status.isPresent %}checked{% endif %}>
+                                                                        <label for="on-game{{ game.id }}-{{ player.id }}">OUI</label>
 
                                                                         <div class="toggle-slider"></div>
                                                                     </div>
@@ -243,20 +250,26 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="toggle-switch" id="toggle-user-{{ player.id }}" {% if app.user != player %}style="opacity: 0.5;"{% endif %}>
-                                                                        <input type="radio" id="off-{{ player.id }}" name="toggle-{{ player.id }}" data-custom-switch="false"
-                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game',{idStatus: status.id}) }}"
-                                                                               data-playerid="{{ player.id }}" {% if app.user != player %}disabled{% endif %} {% if status.isPresent is same as(false) %}checked{% endif %}>
-                                                                        <label for="off-{{ player.id }}">NON</label>
+                                                                        <input type="radio" id="off-game{{ game.id }}-{{ player.id }}" name="toggle-{{ game.id }}-{{ player.id }}" data-custom-switch="false"
+                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game', {idStatus: status.id}) }}"
+                                                                               data-playerid="{{ player.id }}"
+                                                                               {% if app.user != player %}disabled{% endif %}
+                                                                                {% if not status.isPresent %}checked{% endif %}>
+                                                                        <label for="off-game{{ game.id }}-{{ player.id }}">NON</label>
 
-                                                                        <input type="radio" id="neutral-{{ player.id }}" name="toggle-{{ player.id }}" data-custom-switch="null"
-                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game',{idStatus: status.id}) }}"
-                                                                               data-playerid="{{ player.id }}" {% if app.user != player %}disabled{% endif %} {% if status.isPresent is null %}checked{% endif %}>
-                                                                        <label for="neutral-{{ player.id }}">-</label>
+                                                                        <input type="radio" id="neutral-game{{ game.id }}-{{ player.id }}" name="toggle-{{ game.id }}-{{ player.id }}" data-custom-switch="null"
+                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game', {idStatus: status.id}) }}"
+                                                                               data-playerid="{{ player.id }}"
+                                                                               {% if app.user != player %}disabled{% endif %}
+                                                                                {% if status.isPresent is null %}checked{% endif %}>
+                                                                        <label for="neutral-game{{ game.id }}-{{ player.id }}">-</label>
 
-                                                                        <input type="radio" id="on-{{ player.id }}" name="toggle-{{ player.id }}" data-custom-switch="true"
-                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game',{idStatus: status.id}) }}"
-                                                                               data-playerid="{{ player.id }}" {% if app.user != player %}disabled{% endif %} {% if status.isPresent is same as(true) %}checked{% endif %}>
-                                                                        <label for="on-{{ player.id }}">OUI</label>
+                                                                        <input type="radio" id="on-game{{ game.id }}-{{ player.id }}" name="toggle-{{ game.id }}-{{ player.id }}" data-custom-switch="true"
+                                                                               data-url="{{ path('app_profil_user_change_status_player_or_master_game', {idStatus: status.id}) }}"
+                                                                               data-playerid="{{ player.id }}"
+                                                                               {% if app.user != player %}disabled{% endif %}
+                                                                                {% if status.isPresent %}checked{% endif %}>
+                                                                        <label for="on-game{{ game.id }}-{{ player.id }}">OUI</label>
 
                                                                         <div class="toggle-slider"></div>
                                                                     </div>

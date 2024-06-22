@@ -21,6 +21,7 @@ const jQuery = require('jquery');
 
         handleChangePlayersStatus: function (e) {
             let $input = $(e.currentTarget);
+            console.log($input);
             $.ajax({
                 url: $input.data('url'),
                 method: 'POST',
@@ -36,7 +37,6 @@ const jQuery = require('jquery');
                 }
             });
         },
-
 
         handleFormPostGameMasterCommentarySubmit: function (e) {
             e.preventDefault();
