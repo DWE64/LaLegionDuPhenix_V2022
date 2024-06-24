@@ -509,7 +509,7 @@ class AdminManageGameController extends AbstractController
 
                 if ($request->request->get('player')) {
                     $user = $this->user_repo->find($request->request->get('player'));
-                    if(!$game->getPlayers()->contains($user)) {
+                    if (!$game->getPlayers()->contains($user)) {
                         $game->addPlayer($user);
                         $placeAssigned++;
                         $game->setAssignedPlace($placeAssigned);
@@ -535,6 +535,12 @@ class AdminManageGameController extends AbstractController
                                 $game->getTitle()
                             )
                         );
+
+
+                        if (!in_array('ROLE_PLAYER', $user->getRoles())) {
+                            $user->setRoles(array_merge($user->getRoles(), ['ROLE_PLAYER']));
+                            $this->user_repo->add($user, true);
+                        }
                     }
                 }
 
@@ -554,6 +560,7 @@ class AdminManageGameController extends AbstractController
             return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
         }
     }
+
 
     #[Route('/admin/manage/game/{gameId}/get_players', name: 'app_admin_manage_game_get_player', methods: ['GET'])]
     public function getPlayerGame(Request $request, Game $gameId): JsonResponse
