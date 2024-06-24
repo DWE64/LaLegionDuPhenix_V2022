@@ -240,6 +240,11 @@
                                                 </thead>
                                                 <tbody>
                                                 {% if game.statusUserInGames is not empty %}
+                                                    {% if game.gameMasterCommentary is not null %}
+                                                        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                                            {{ game.gameMasterCommentary }}
+                                                        </div>
+                                                    {% endif %}
                                                     {% for status in game.statusUserInGames %}
                                                         {% for player in status.user %}
                                                             <tr>
