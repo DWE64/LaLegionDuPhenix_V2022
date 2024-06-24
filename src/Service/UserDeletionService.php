@@ -35,16 +35,19 @@ class UserDeletionService
 
     public function removeUserFromGames(User $user): void
     {
-        $statusUserInGames = $this->statusUserInGameRepository->findAll();
+
+        $statusUserInGames = $user->getStatusUserInGames();
 
         foreach ($statusUserInGames as $statusUserInGame) {
             $games = $statusUserInGame->getGames();
 
             foreach ($games as $game) {
-                $game->removePlayer($user);
-                $assignedPlace = $game->getAssignedPlace();
-                $game->setAssignedPlace(max(0, $assignedPlace - 1));
-                $this->gameRepository->add($game, true);
+                if($game -> getPlayers()->contains($user)) {
+                    $game->removePlayer($user);
+                    $assignedPlace = $game->getAssignedPlace();
+                    $this->gameRepository->add($game, true);
+                    $game->setAssignedPlace(max(0, $assignedPlace - 1));
+                }
             }
             $this->statusUserInGameRepository->remove($statusUserInGame, true);
         }
