@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+{% use 'admin/modalAdmin/_modal_manage_user.html.twig' %}
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    {% use 'admin/modalAdmin/_modal_manage_role_user.html.twig' %}
+{% endif %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block section %}
+    <div id="root-user-manage" data-role = "{{ user.role }}">
+
+    </div>
+{% endblock %}

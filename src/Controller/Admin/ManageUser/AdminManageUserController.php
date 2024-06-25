@@ -65,6 +65,27 @@ class AdminManageUserController extends AbstractController
         );
     }
 
+    #[Route('/api/admin/manage/user', name: 'api_admin_manage_user')]
+    public function test(): Response
+    {
+        return $this->render(
+            'admin/admin_manage_user/test.html.twig',
+            [
+                'users' => $this->userRepository->findAll(),
+                'seniorityStatus' => [
+                    StatusService::MEMBER_NEW,
+                    StatusService::MEMBER_OLD
+                ],
+                'allRoles' => [
+                    'ROLE_PLAYER',
+                    'ROLE_GAMEMASTER',
+                    'ROLE_MEMBER_REPRESENT',
+                    'ROLE_STAFF'
+                ]
+            ]
+        );
+    }
+
     #[Route('/admin/manager/user/{id}/change_status_is_association_member',
         name: 'app_admin_manage_user_change_status_member_association',
         methods: [
