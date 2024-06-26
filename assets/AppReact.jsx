@@ -1,25 +1,31 @@
 import React from 'react';
-/*
-import {ManageUser} from 'js/adminReact/ManageUser'
-*/
+import {ManageUser} from './js/adminReact/ManageUser';
 
 class AppReact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             ...this.props.state,
-            isLoading: true
+            isLoading: false
         };
     }
+
+    componentDidMount() {
+        // Simulate loading data
+        setTimeout(() => {
+            this.setState({ isLoading: true });
+        }, 1000);
+    }
+
     render() {
-        if(!this.state.isLoading){
+        if (!this.state.isLoading) {
             return (
                 <div>
                     <p>Veuillez patienter svp...</p>
                     <p>Chargement de la page...</p>
                 </div>
             );
-        }else {
+        } else {
             return (
                 <div className="container-fluid">
                     <div className="row">
@@ -29,14 +35,11 @@ class AppReact extends React.Component {
                             </div>
                         </div>
                     </div>
-{/*
-                    <ManageUser state={this.state}/>
-*/}
-
+                    <ManageUser state={this.state} />
                 </div>
             );
         }
     }
 }
 
-export default AppReact;
+export {AppReact};

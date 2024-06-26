@@ -6,7 +6,10 @@
 
 {% block title %}{{ title }}{% endblock %}
 {% block section %}
-    <div id="root-user-manage" data-role = "{{ user.role }}">
-
+    <div id="root-user-manage" data-role="{{ app.user.role }}" data-initial-state='{{ initialState|json_encode }}'>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('mainReactManageUser') }}
 {% endblock %}

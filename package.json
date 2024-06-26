@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "apexcharts": "^3.35.3",
+        "axios": "^1.7.2",
         "chart": "^0.1.2",
         "datatables.net": "^1.12.1",
         "datatables.net-bs5": "^1.12.1",
