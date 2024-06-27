@@ -1,20 +1,32 @@
 import React from 'react';
-import {ManageUser} from './js/adminReact/ManageUser';
+import { ManageUser } from './js/adminReact/ManageUser';
+import { UserApi } from "./js/api/userApi";
 
 class AppReact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             ...this.props.state,
-            isLoading: false
+            isLoading: false,
+            users: []  // Initialize users state
         };
+        this.apiUser = new UserApi();
     }
 
     componentDidMount() {
-        // Simulate loading data
-        setTimeout(() => {
-            this.setState({ isLoading: true });
-        }, 1000);
+        if (this.state.role === "ROLE_STAFF" || this.state.role === "ROLE_SUPER_ADMIN") {
+            this.apiUser.getUsers().then((data) => {
+                const parsedData = JSON.parse(data.data);  // Parse the JSON string
+                this.setState({
+                    users: parsedData.listUsers,
+                    listRole: parsedData.allRoles,
+                    listSeniority: parsedData.seniorityStatus,
+                    isLoading: true
+                });
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
     }
 
     render() {
@@ -23,6 +35,13 @@ class AppReact extends React.Component {
                 <div>
                     <p>Veuillez patienter svp...</p>
                     <p>Chargement de la page...</p>
+                </div>
+            );
+        } else if (!(this.state.role === "ROLE_STAFF" || this.state.role === "ROLE_SUPER_ADMIN")) {
+            return (
+                <div>
+                    <p>Accès refusé !</p>
+                    <p>Droit d'accès insuffisant !</p>
                 </div>
             );
         } else {
@@ -42,4 +61,4 @@ class AppReact extends React.Component {
     }
 }
 
-export {AppReact};
+export { AppReact };

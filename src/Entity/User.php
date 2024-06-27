@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -18,60 +19,79 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['admin_manage_user'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(['admin_manage_user'])]
     private $email;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(['admin_manage_user'])]
     private $roles = [];
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $username;
 
     #[ORM\Column(type: 'string')]
+    #[Groups(['admin_manage_user'])]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $firstname;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $birthday;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $postalCode;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $city;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $address;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $memberStatus;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $memberSeniority;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $associationRegistrationDate;
 
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Groups(['admin_manage_user'])]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $updatedAt;
 
     #[ORM\Column(type: 'boolean')]
+    #[Groups(['admin_manage_user'])]
     private $isAssociationMember;
 
     #[ORM\OneToMany(mappedBy: 'gameMaster', targetEntity: Game::class)]
+    #[Groups(['admin_manage_user'])]
     private $games;
 
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'players')]
+    #[Groups(['admin_manage_user'])]
     private $playersGames;
 
     #[ORM\ManyToMany(targetEntity: StatusUserInGame::class, mappedBy: 'user', cascade: ['persist', 'remove'])]

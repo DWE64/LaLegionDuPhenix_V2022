@@ -11,7 +11,6 @@ use App\Service\StatusService;
 use App\Service\UserDeletionService;
 use DateTime;
 use DateTimeImmutable;
-use JetBrains\PhpStorm\Deprecated;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,6 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+
 
 #[IsGranted('ROLE_STAFF')]
 class AdminManageUserController extends AbstractController
@@ -28,28 +29,40 @@ class AdminManageUserController extends AbstractController
     private UserRepository $userRepository;
     private MessageBusInterface $bus;
     private UserDeletionService $userDeletionService;
-
+    private SerializerInterface $serializer;
 
     public function __construct(
         TranslatorInterface $translator,
         MessageBusInterface $bus,
         UserDeletionService $userDeletionService,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        SerializerInterface $serializer
     ) {
         $this->translator = $translator;
         $this->userRepository = $userRepository;
         $this->bus = $bus;
         $this->userDeletionService = $userDeletionService;
-
+        $this->serializer = $serializer;
     }
 
     #[Route('/admin/manage/user', name: 'app_admin_manage_user')]
     public function index(): Response
     {
+        $user = $this->getUser();
+        $roles = $user->getRoles();
+        $roleUser = 'ROLE_USER';
+
+        if (in_array('ROLE_SUPER_ADMIN', $roles)) {
+            $roleUser = 'ROLE_SUPER_ADMIN';
+        } if (in_array('ROLE_STAFF', $roles)) {
+            $roleUser = 'ROLE_STAFF';
+        }
+
         return $this->render(
-            'admin/admin_manage_user/index.html.twig',
+            'admin/admin_manage_user/test.html.twig',
             [
                 'title' => $this->translator->trans('page.admin.list_user'),
+                'roleUser' => $roleUser,
                 'users' => $this->userRepository->findAll(),
                 'seniorityStatus' => [
                     StatusService::MEMBER_NEW,
@@ -65,13 +78,13 @@ class AdminManageUserController extends AbstractController
         );
     }
 
-    #[Route('/api/admin/manage/user', name: 'api_admin_manage_user')]
-    public function test(): Response
+    #[Route('/api/admin/manage/users', name: 'api_admin_manage_users')]
+    public function test(): JsonResponse
     {
-        return $this->render(
-            'admin/admin_manage_user/test.html.twig',
+        $users = $this->userRepository->findAll();
+        $data = $this->serializer->serialize(
             [
-                'users' => $this->userRepository->findAll(),
+                'listUsers' => $users,
                 'seniorityStatus' => [
                     StatusService::MEMBER_NEW,
                     StatusService::MEMBER_OLD
@@ -82,8 +95,44 @@ class AdminManageUserController extends AbstractController
                     'ROLE_MEMBER_REPRESENT',
                     'ROLE_STAFF'
                 ]
-            ]
+            ],
+            'json',
+            ['groups' => 'admin_manage_user']
         );
+//        $data = [
+////            'listUsers' => array_map(function ($user) {
+////                return [
+////                    'id' => $user->getId(),
+////                    'email' => $user->getEmail(),
+////                    'name' => $user->getName(),
+////                    'firstname' => $user->getFirstname(),
+////                    'roles' => $user->getRoles(),
+////                    'memberStatus' => $user->getMemberStatus(),
+////                    'associationRegistrationDate' => $user->getAssociationRegistrationDate(),
+////                    'isAssociationMember' => $user->isIsAssociationMember(),
+////                    'createdAt' => $user->getCreatedAt(),
+////                    'updatedAt' => $user->getUpdatedAt(),
+////                    'username' => $user->getUsername(),
+////                    'birthday' => $user->getBirthday(),
+////                    'address' => $user->getAddress(),
+////                    'postalCode' => $user->getPostalCode(),
+////                    'city' => $user->getCity(),
+////                    'memberSeniority' => $user->getMemberSeniority(),
+////                ];
+////            }, $users),
+//            'listUsers' => $users,
+//            'seniorityStatus' => [
+//                StatusService::MEMBER_NEW,
+//                StatusService::MEMBER_OLD
+//            ],
+//            'allRoles' => [
+//                'ROLE_PLAYER',
+//                'ROLE_GAMEMASTER',
+//                'ROLE_MEMBER_REPRESENT',
+//                'ROLE_STAFF'
+//            ]
+//        ];
+        return new JsonResponse($data, Response::HTTP_OK);
     }
 
     #[Route('/admin/manager/user/{id}/change_status_is_association_member',
@@ -328,17 +377,17 @@ class AdminManageUserController extends AbstractController
             return new JsonResponse($message, Response::HTTP_NOT_MODIFIED, []);
         }
     }
-    #[Route('/admin/manager/user/{id}/delete', name: 'app_admin_delete_user', methods: ['POST'])]
-    #[IsGranted('ROLE_SUPER_ADMIN')]
-    public function deleteUser(User $user, Request $request): Response
-    {
 
+    #[Route('/api/admin/manage/user/{id}/delete', name: 'app_admin_delete_user', methods: ['POST'])]
+    public function deleteUser(User $user, Request $request): JsonResponse
+    {
         $this->userDeletionService->deleteUser($user);
 
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse(['id' => $user->getId()], Response::HTTP_OK);
         }
-
-        return $this->redirectToRoute('app_admin_manage_user');
+        else{
+            return new JsonResponse(['id' => $user->getId()], Response::HTTP_NOT_MODIFIED, []);
+        }
     }
 }
