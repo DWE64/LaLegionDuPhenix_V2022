@@ -78,60 +78,29 @@ class AdminManageUserController extends AbstractController
         );
     }
 
-    #[Route('/api/admin/manage/users', name: 'api_admin_manage_users')]
-    public function test(): JsonResponse
+    #[Route('/api/admin/manage/users', name: 'api_admin_manage_users', methods: ['GET'])]
+    public function getUsers(Request $request): JsonResponse
     {
+        $role = $request->query->get('role');
+        if ($role !== 'ROLE_STAFF' && $role !== 'ROLE_SUPER_ADMIN') {
+            return new JsonResponse(['error' => 'Accès refusé !'], Response::HTTP_FORBIDDEN);
+        }
+
         $users = $this->userRepository->findAll();
-        $data = $this->serializer->serialize(
-            [
-                'listUsers' => $users,
-                'seniorityStatus' => [
-                    StatusService::MEMBER_NEW,
-                    StatusService::MEMBER_OLD
-                ],
-                'allRoles' => [
-                    'ROLE_PLAYER',
-                    'ROLE_GAMEMASTER',
-                    'ROLE_MEMBER_REPRESENT',
-                    'ROLE_STAFF'
-                ]
+        $data = [
+            'listUsers' => $users,
+            'seniorityStatus' => [
+                StatusService::MEMBER_NEW,
+                StatusService::MEMBER_OLD
             ],
-            'json',
-            ['groups' => 'admin_manage_user']
-        );
-//        $data = [
-////            'listUsers' => array_map(function ($user) {
-////                return [
-////                    'id' => $user->getId(),
-////                    'email' => $user->getEmail(),
-////                    'name' => $user->getName(),
-////                    'firstname' => $user->getFirstname(),
-////                    'roles' => $user->getRoles(),
-////                    'memberStatus' => $user->getMemberStatus(),
-////                    'associationRegistrationDate' => $user->getAssociationRegistrationDate(),
-////                    'isAssociationMember' => $user->isIsAssociationMember(),
-////                    'createdAt' => $user->getCreatedAt(),
-////                    'updatedAt' => $user->getUpdatedAt(),
-////                    'username' => $user->getUsername(),
-////                    'birthday' => $user->getBirthday(),
-////                    'address' => $user->getAddress(),
-////                    'postalCode' => $user->getPostalCode(),
-////                    'city' => $user->getCity(),
-////                    'memberSeniority' => $user->getMemberSeniority(),
-////                ];
-////            }, $users),
-//            'listUsers' => $users,
-//            'seniorityStatus' => [
-//                StatusService::MEMBER_NEW,
-//                StatusService::MEMBER_OLD
-//            ],
-//            'allRoles' => [
-//                'ROLE_PLAYER',
-//                'ROLE_GAMEMASTER',
-//                'ROLE_MEMBER_REPRESENT',
-//                'ROLE_STAFF'
-//            ]
-//        ];
+            'allRoles' => [
+                'ROLE_PLAYER',
+                'ROLE_GAMEMASTER',
+                'ROLE_MEMBER_REPRESENT',
+                'ROLE_STAFF'
+            ]
+        ];
+
         return new JsonResponse($data, Response::HTTP_OK);
     }
 
@@ -139,7 +108,8 @@ class AdminManageUserController extends AbstractController
         name: 'app_admin_manage_user_change_status_member_association',
         methods: [
             'GET',
-            'POST'
+            'POST',
+            'PUT'
         ]
     )]
     public function changeStatusMemberAssociation(
@@ -381,12 +351,13 @@ class AdminManageUserController extends AbstractController
     #[Route('/api/admin/manage/user/{id}/delete', name: 'app_admin_delete_user', methods: ['POST'])]
     public function deleteUser(User $user, Request $request): JsonResponse
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
         $this->userDeletionService->deleteUser($user);
 
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse(['id' => $user->getId()], Response::HTTP_OK);
-        }
-        else{
+        } else {
             return new JsonResponse(['id' => $user->getId()], Response::HTTP_NOT_MODIFIED, []);
         }
     }
