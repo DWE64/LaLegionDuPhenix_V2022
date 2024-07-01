@@ -49,17 +49,17 @@ class APICore {
             }
         };
         const queryString = params ? Object.keys(params).map((key) => `${key}=${params[key]}`).join('&') : '';
-        return axios.get(`${configApp.API_URL}${url}?${queryString}`, config);
+        return axios.get(`${url}?${queryString}`, config);
     }
 
     getFile(url, params) {
         const queryString = params ? Object.keys(params).map((key) => `${key}=${params[key]}`).join('&') : '';
-        return axios.get(`${configApp.API_URL}${url}?${queryString}`, { responseType: 'blob' });
+        return axios.get(`${url}?${queryString}`, { responseType: 'blob' });
     }
 
     getMultiple(urls, params) {
         const queryString = params ? Object.keys(params).map((key) => `${key}=${params[key]}`).join('&') : '';
-        const requests = urls.map((url) => axios.get(`${configApp.API_URL}${url}?${queryString}`));
+        const requests = urls.map((url) => axios.get(`${url}?${queryString}`));
         return axios.all(requests);
     }
 
@@ -71,19 +71,19 @@ class APICore {
                 'Accept': '*/*'
             }
         };
-        return axios.post(`${configApp.API_URL}${url}`, data, config);
+        return axios.post(url, data, config);
     }
 
     updatePatch(url, data) {
-        return axios.patch(`${configApp.API_URL}${url}`, data);
+        return axios.patch(url, data);
     }
 
     update(url, data) {
-        return axios.put(`${configApp.API_URL}${url}`, data);
+        return axios.put(url, data);
     }
 
     delete(url) {
-        return axios.delete(`${configApp.API_URL}${url}`);
+        return axios.delete(url);
     }
 
     createWithFile(url, data) {
@@ -98,7 +98,7 @@ class APICore {
                 'Accept': '*/*'
             }
         };
-        return axios.post(`${configApp.API_URL}${url}`, formData, config);
+        return axios.post(url, formData, config);
     }
 
     updateWithFile(url, data) {
@@ -112,7 +112,7 @@ class APICore {
                 'Content-Type': 'multipart/form-data'
             }
         };
-        return axios.patch(`${configApp.API_URL}${url}`, formData, config);
+        return axios.patch(url, formData, config);
     }
 }
 

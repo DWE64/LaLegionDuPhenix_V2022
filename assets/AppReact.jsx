@@ -8,7 +8,7 @@ class AppReact extends React.Component {
         this.state = {
             ...this.props.state,
             isLoading: false,
-            users: []  // Initialize users state
+            users: []
         };
         this.apiUser = new UserApi();
     }
@@ -16,7 +16,7 @@ class AppReact extends React.Component {
     componentDidMount() {
         if (this.state.role === "ROLE_STAFF" || this.state.role === "ROLE_SUPER_ADMIN") {
             this.apiUser.getUsers().then((data) => {
-                const parsedData = JSON.parse(data.data);  // Parse the JSON string
+                const parsedData = JSON.parse(data.data);
                 this.setState({
                     users: parsedData.listUsers,
                     listRole: parsedData.allRoles,
@@ -54,7 +54,7 @@ class AppReact extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <ManageUser state={this.state} />
+                    <ManageUser state={this.state} role={this.state.role} />
                 </div>
             );
         }
