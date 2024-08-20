@@ -18,3 +18,4 @@ require('./styles/themeHyper/js/vendor/Chart.bundle.min.js');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+

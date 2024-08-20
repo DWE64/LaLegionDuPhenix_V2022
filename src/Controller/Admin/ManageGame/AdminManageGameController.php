@@ -74,8 +74,12 @@ class AdminManageGameController extends AbstractController
                     StatusService::FINISH_GAME
                 ],
                 'weekSlot'=>[
+                    StatusService::SLOT_FULL_YEARS,
                     StatusService::SLOT_WEEK_PAIR,
-                    StatusService::SLOT_WEEK_ODD
+                    StatusService::SLOT_WEEK_ODD,
+                    StatusService::SLOT_SPECIAL_OS,
+                    StatusService::SLOT_SPECIAL_MINEUR,
+                    StatusService::SLOT_IN_WEEK
                 ],
                 'hourSlot'=>[
                     StatusService::SLOT_AFTERNOON,
@@ -103,8 +107,12 @@ class AdminManageGameController extends AbstractController
                     StatusService::FINISH_GAME
                 ],
                 'weekSlot'=>[
+                    StatusService::SLOT_FULL_YEARS,
                     StatusService::SLOT_WEEK_PAIR,
-                    StatusService::SLOT_WEEK_ODD
+                    StatusService::SLOT_WEEK_ODD,
+                    StatusService::SLOT_SPECIAL_OS,
+                    StatusService::SLOT_SPECIAL_MINEUR,
+                    StatusService::SLOT_IN_WEEK
                 ],
                 'hourSlot'=>[
                     StatusService::SLOT_AFTERNOON,
@@ -148,11 +156,23 @@ class AdminManageGameController extends AbstractController
                 ];
             }
             if($request->request->get('weekSlot')){
+                if($request->request->get('weekSlot')===StatusService::SLOT_FULL_YEARS){
+                    $game->setWeekSlots(StatusService::SLOT_FULL_YEARS);
+                }
                 if($request->request->get('weekSlot')===StatusService::SLOT_WEEK_PAIR){
                     $game->setWeekSlots(StatusService::SLOT_WEEK_PAIR);
                 }
                 if($request->request->get('weekSlot')===StatusService::SLOT_WEEK_ODD){
                     $game->setWeekSlots(StatusService::SLOT_WEEK_ODD);
+                }
+                if($request->request->get('weekSlot')===StatusService::SLOT_SPECIAL_OS){
+                    $game->setWeekSlots(StatusService::SLOT_SPECIAL_OS);
+                }
+                if($request->request->get('weekSlot')===StatusService::SLOT_SPECIAL_MINEUR){
+                    $game->setWeekSlots(StatusService::SLOT_SPECIAL_MINEUR);
+                }
+                if($request->request->get('weekSlot')===StatusService::SLOT_IN_WEEK){
+                    $game->setWeekSlots(StatusService::SLOT_IN_WEEK);
                 }
                 $message += [
                     'weekSlot' => $game->getWeekSlots()
@@ -233,8 +253,12 @@ class AdminManageGameController extends AbstractController
                             StatusService::FINISH_GAME
                         ],
                         'weekSlot'=>[
+                            StatusService::SLOT_FULL_YEARS,
                             StatusService::SLOT_WEEK_PAIR,
-                            StatusService::SLOT_WEEK_ODD
+                            StatusService::SLOT_WEEK_ODD,
+                            StatusService::SLOT_SPECIAL_OS,
+                            StatusService::SLOT_SPECIAL_MINEUR,
+                            StatusService::SLOT_IN_WEEK
                         ],
                         'hourSlot'=>[
                             StatusService::SLOT_AFTERNOON,
@@ -367,11 +391,23 @@ class AdminManageGameController extends AbstractController
             }
 
             if($request->request->get('weekSlot')){
+                if($request->request->get('weekSlot')===StatusService::SLOT_FULL_YEARS){
+                    $game->setWeekSlots(StatusService::SLOT_FULL_YEARS);
+                }
                 if($request->request->get('weekSlot')===StatusService::SLOT_WEEK_PAIR){
                     $game->setWeekSlots(StatusService::SLOT_WEEK_PAIR);
                 }
                 if($request->request->get('weekSlot')===StatusService::SLOT_WEEK_ODD){
                     $game->setWeekSlots(StatusService::SLOT_WEEK_ODD);
+                }
+                if($request->request->get('weekSlot')===StatusService::SLOT_SPECIAL_OS){
+                    $game->setWeekSlots(StatusService::SLOT_SPECIAL_OS);
+                }
+                if($request->request->get('weekSlot')===StatusService::SLOT_SPECIAL_MINEUR){
+                    $game->setWeekSlots(StatusService::SLOT_SPECIAL_MINEUR);
+                }
+                if($request->request->get('weekSlot')===StatusService::SLOT_IN_WEEK){
+                    $game->setWeekSlots(StatusService::SLOT_IN_WEEK);
                 }
                 $message += [
                     'weekSlot' => $game->getWeekSlots()

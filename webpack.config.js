@@ -21,6 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('mainReactManagaUser', './assets/mainReactManageUser.js')
     .addEntry('vendor', './assets/styles/themeHyper/js/vendor.js')
     .addEntry('app_template', './assets/styles/themeHyper/js/app.js')
     .addEntry('demo_dashboard','./assets/styles/themeHyper/js/pages/demo.dashboard.js')
@@ -105,7 +106,7 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you use React
-    //.enableReactPreset()
+    .enableReactPreset()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher

@@ -31,8 +31,12 @@ class StatusService
     /*
      * Selection creneaux
      */
+    const SLOT_FULL_YEARS="TOUTE LES SEMAINES";
     const SLOT_WEEK_PAIR="CRENEAU_1";
     const SLOT_WEEK_ODD="CRENEAU_2";
+    const SLOT_SPECIAL_OS="CRENEAU OS";
+    const SLOT_SPECIAL_MINEUR="CRENEAU POUR MINEUR";
+    const SLOT_IN_WEEK="CRENEAU EN SEMAINE";
 
     const SLOT_AFTERNOON="APREM";
     const SLOT_EVENING="SOIR";

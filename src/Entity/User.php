@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -18,60 +20,79 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    #[Groups(['admin_manage_user'])]
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $email;
+    #[Groups(['admin_manage_user'])]
+    private string $email;
 
     #[ORM\Column(type: 'json')]
-    private $roles = [];
+    #[Groups(['admin_manage_user'])]
+    private array $roles = [];
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $username;
+    #[Groups(['admin_manage_user'])]
+    private ?string $username;
 
     #[ORM\Column(type: 'string')]
-    private $password;
+    #[Groups(['admin_manage_user'])]
+    private string  $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $name;
+    #[Groups(['admin_manage_user'])]
+    private ?string $name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $firstname;
+    #[Groups(['admin_manage_user'])]
+    private ?string $firstname;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $birthday;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $postalCode;
+    #[Groups(['admin_manage_user'])]
+    private ?string $postalCode;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $city;
+    #[Groups(['admin_manage_user'])]
+    private ?string $city;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $address;
+    #[Groups(['admin_manage_user'])]
+    private ?string $address;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $memberStatus;
+    #[Groups(['admin_manage_user'])]
+    private ?string $memberStatus;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $memberSeniority;
+    #[Groups(['admin_manage_user'])]
+    private ?string $memberSeniority;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $associationRegistrationDate;
 
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Groups(['admin_manage_user'])]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    #[Groups(['admin_manage_user'])]
     private $updatedAt;
 
     #[ORM\Column(type: 'boolean')]
-    private $isAssociationMember;
+    #[Groups(['admin_manage_user'])]
+    private bool $isAssociationMember;
 
     #[ORM\OneToMany(mappedBy: 'gameMaster', targetEntity: Game::class)]
+    #[Groups(['admin_manage_user'])]
     private $games;
 
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'players')]
+    #[Groups(['admin_manage_user'])]
     private $playersGames;
 
     #[ORM\ManyToMany(targetEntity: StatusUserInGame::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
@@ -216,7 +237,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->postalCode;
     }
 
-    public function setPostalCode(string $postalCode): self
+    public function setPostalCode(?string $postalCode): self
     {
         $this->postalCode = $postalCode;
 
@@ -228,7 +249,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity(?string $city): self
     {
         $this->city = $city;
 
@@ -240,7 +261,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
 
@@ -252,7 +273,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->memberStatus;
     }
 
-    public function setMemberStatus(string $memberStatus): self
+    public function setMemberStatus(?string $memberStatus): self
     {
         $this->memberStatus = $memberStatus;
 
@@ -264,7 +285,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->memberSeniority;
     }
 
-    public function setMemberSeniority(string $memberSeniority): self
+    public function setMemberSeniority(?string $memberSeniority): self
     {
         $this->memberSeniority = $memberSeniority;
 
@@ -300,7 +321,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -312,7 +333,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->isAssociationMember;
     }
 
-    public function setIsAssociationMember(bool $isAssociationMember): self
+    public function setIsAssociationMember(?bool $isAssociationMember): self
     {
         $this->isAssociationMember = $isAssociationMember;
 
