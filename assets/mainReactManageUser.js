@@ -5,7 +5,7 @@ import { AppReact } from "./AppReact";
 
 const element = document.getElementById('root-user-manage');
 if (element) {
-    const role = element.getAttribute('data-role');
+    let role = element.getAttribute('data-role');
     const root = createRoot(element);
 
     root.render(

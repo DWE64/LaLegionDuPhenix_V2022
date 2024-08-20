@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,31 +21,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     #[Groups(['admin_manage_user'])]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Groups(['admin_manage_user'])]
-    private $email;
+    private string $email;
 
     #[ORM\Column(type: 'json')]
     #[Groups(['admin_manage_user'])]
-    private $roles = [];
+    private array $roles = [];
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['admin_manage_user'])]
-    private $username;
+    private ?string $username;
 
     #[ORM\Column(type: 'string')]
     #[Groups(['admin_manage_user'])]
-    private $password;
+    private string  $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['admin_manage_user'])]
-    private $name;
+    private ?string $name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['admin_manage_user'])]
-    private $firstname;
+    private ?string $firstname;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     #[Groups(['admin_manage_user'])]
@@ -52,23 +53,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['admin_manage_user'])]
-    private $postalCode;
+    private ?string $postalCode;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['admin_manage_user'])]
-    private $city;
+    private ?string $city;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['admin_manage_user'])]
-    private $address;
+    private ?string $address;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['admin_manage_user'])]
-    private $memberStatus;
+    private ?string $memberStatus;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['admin_manage_user'])]
-    private $memberSeniority;
+    private ?string $memberSeniority;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     #[Groups(['admin_manage_user'])]
@@ -84,7 +85,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     #[Groups(['admin_manage_user'])]
-    private $isAssociationMember;
+    private bool $isAssociationMember;
 
     #[ORM\OneToMany(mappedBy: 'gameMaster', targetEntity: Game::class)]
     #[Groups(['admin_manage_user'])]
@@ -236,7 +237,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->postalCode;
     }
 
-    public function setPostalCode(string $postalCode): self
+    public function setPostalCode(?string $postalCode): self
     {
         $this->postalCode = $postalCode;
 
@@ -248,7 +249,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity(?string $city): self
     {
         $this->city = $city;
 
@@ -260,7 +261,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
 
@@ -272,7 +273,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->memberStatus;
     }
 
-    public function setMemberStatus(string $memberStatus): self
+    public function setMemberStatus(?string $memberStatus): self
     {
         $this->memberStatus = $memberStatus;
 
@@ -284,7 +285,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->memberSeniority;
     }
 
-    public function setMemberSeniority(string $memberSeniority): self
+    public function setMemberSeniority(?string $memberSeniority): self
     {
         $this->memberSeniority = $memberSeniority;
 
@@ -320,7 +321,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -332,7 +333,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->isAssociationMember;
     }
 
-    public function setIsAssociationMember(bool $isAssociationMember): self
+    public function setIsAssociationMember(?bool $isAssociationMember): self
     {
         $this->isAssociationMember = $isAssociationMember;
 

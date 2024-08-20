@@ -15,12 +15,11 @@ class AppReact extends React.Component {
 
     componentDidMount() {
         if (this.state.role === "ROLE_STAFF" || this.state.role === "ROLE_SUPER_ADMIN") {
-            this.apiUser.getUsers().then((data) => {
-                const parsedData = JSON.parse(data.data);
+            this.apiUser.getUsers(this.state.role).then((data) => {
                 this.setState({
-                    users: parsedData.listUsers,
-                    listRole: parsedData.allRoles,
-                    listSeniority: parsedData.seniorityStatus,
+                    users: data.data.listUsers,
+                    listRole: data.data.allRoles,
+                    listSeniority: data.data.seniorityStatus,
                     isLoading: true
                 });
             }).catch((error) => {
