@@ -66,6 +66,30 @@ class ResetPlayersGameStatusCommand extends Command
             foreach ($status->getGames() as $game){
                 $io->writeln('Game n°: '.$game->getId());
                 $refresh = false;
+                if($game->getWeekSlots()===StatusService::SLOT_FULL_YEARS && $status->isIsPresent()){
+                    $status->setIsPresent(null);
+                    $this->status_repo->add($status,true);
+                    $refresh =true;
+                    $io->writeln('Status n°: '.$status->getId().' refresh');
+                }
+                if($game->getWeekSlots()===StatusService::SLOT_SPECIAL_OS && $status->isIsPresent()){
+                    $status->setIsPresent(null);
+                    $this->status_repo->add($status,true);
+                    $refresh =true;
+                    $io->writeln('Status n°: '.$status->getId().' refresh');
+                }
+                if($game->getWeekSlots()===StatusService::SLOT_SPECIAL_MINEUR && $status->isIsPresent()){
+                    $status->setIsPresent(null);
+                    $this->status_repo->add($status,true);
+                    $refresh =true;
+                    $io->writeln('Status n°: '.$status->getId().' refresh');
+                }
+                if($game->getWeekSlots()===StatusService::SLOT_IN_WEEK && $status->isIsPresent()){
+                    $status->setIsPresent(null);
+                    $this->status_repo->add($status,true);
+                    $refresh =true;
+                    $io->writeln('Status n°: '.$status->getId().' refresh');
+                }
                 if ($date->format('W')%2 === 1 && $game->getWeekSlots()===StatusService::SLOT_WEEK_PAIR && $status->isIsPresent()) {
                     $status->setIsPresent(null);
                     $this->status_repo->add($status,true);
