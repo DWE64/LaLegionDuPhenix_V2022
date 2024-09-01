@@ -6,33 +6,54 @@
     <div class="auth-fluid">
         <!--Auth fluid left content -->
         <div class="auth-fluid-form-box">
-            <div class="align-items-center d-flex h-100">
-                <div class="card-body">
+            <!-- Logo -->
+            <div class="auth-brand text-center text-lg-center mt-1">
+                <a href="{{ path('app_home') }}" class="logo-dark">
+                    <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="85"></span>
+                </a>
+                <a href="{{ path('app_home') }}" class="logo-light">
+                    <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="85"></span>
+                </a>
+                <!-- title-->
+                <h4 class="mt-2">{{ title }}</h4>
+                <p class="text-muted mb-4">{{ 'registration.invit_to_create_account'|trans }}</p>
+            </div>
+            <div class="align-items-end d-flex h-100">
+                <div class="card-body my-2">
 
-                    <!-- Logo -->
-                    <div class="auth-brand text-center text-lg-center mb-4">
-                        <a href="{{ path('app_home') }}" class="logo-dark">
-                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="85"></span>
-                        </a>
-                        <a href="{{ path('app_home') }}" class="logo-light">
-                            <span><img src="{{ asset('/logo/logo_horizontal_black.svg') }}" alt="" height="85"></span>
-                        </a>
-                    </div>
 
-                    <!-- title-->
-                    <h4 class="mt-5">{{ title }}</h4>
-                    <p class="text-muted mb-4">{{ 'registration.invit_to_create_account'|trans }}</p>
+
+
 
                     <!-- form -->
-                    {{ form_start(registrationForm) }}
 
-                    {{ form_row(registrationForm.name) }}
-                    {{ form_row(registrationForm.firstname) }}
-                    {{ form_row(registrationForm.username) }}
-                    {{ form_row(registrationForm.birthday) }}
+                    {{ form_start(registrationForm, {'attr': {'class': 'mt-4'}}) }}
+
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            {{ form_row(registrationForm.name) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(registrationForm.firstname) }}
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            {{ form_row(registrationForm.username) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(registrationForm.birthday) }}
+                        </div>
+                    </div>
                     {{ form_row(registrationForm.address) }}
-                    {{ form_row(registrationForm.postalCode) }}
-                    {{ form_row(registrationForm.city) }}
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            {{ form_row(registrationForm.postalCode) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(registrationForm.city) }}
+                        </div>
+                    </div>
                     {{ form_row(registrationForm.email) }}
                     {{ form_row(registrationForm.plainPassword) }}
                     <div class="mb-0 d-grid text-center">
@@ -41,12 +62,13 @@
                     {{ form_end(registrationForm) }}
                     <!-- end form-->
 
+
                     <!-- Footer-->
-                    <footer class="footer footer-alt">
+                    <footer class="footer footer-alt my-0">
                         <p class="text-muted">{{ 'registration.already_account'|trans }} <a href="{{ path('app_login') }}" class="text-muted ms-1"><b>{{ 'login'|trans }}</b></a></p>
                     </footer>
-
                 </div> <!-- end .card-body -->
+
             </div> <!-- end .align-items-center.d-flex.h-100-->
         </div>
         <!-- end auth-fluid-form-box-->

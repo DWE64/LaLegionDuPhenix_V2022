@@ -43,7 +43,7 @@ class RegistrationController extends AbstractController
             $user->setName($form->get('name')->getData());
             $user->setFirstname($form->get('firstname')->getData());
             $user->setUsername($form->get('username')->getData());
-            $birthday=new DateTime($form->get('birthday')->getData());
+            $birthday=new DateTime($form->get('birthday')->getData()->format('Y-m-d H:i:s'));
             $user->setBirthday($birthday);
             $user->setAddress($form->get('address')->getData());
             $user->setPostalCode($form->get('postalCode')->getData());

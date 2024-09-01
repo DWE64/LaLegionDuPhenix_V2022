@@ -75,9 +75,14 @@
                                 <div class="mb-4">
                                     <h5>{{ 'common.game.slots'|trans }}</h5>
                                     <p class="text-muted mb-2">
-                                        <span class="game-weekSlot-{{ game.id }}">{{ game.weekSlots }}</span> -
-                                        <span class="game-hourSlot-{{ game.id }}">{{ game.halfDaySlots }}</span>
-                                    </p>
+                                        {% if game.weekSlots== 'CRENEAU_1' %}
+                                            <span class="game-weekSlot-{{ game.id }}">SEMAINES IMPAIRES</span>
+                                        {% elseif game.weekSlots== 'CRENEAU_2' %}
+                                            <span class="game-weekSlot-{{ game.id }}">SEMAINES PAIRES</span>
+                                        {% else %}
+                                            <span class="game-weekSlot-{{ game.id }}">{{ game.weekSlots }}</span>
+                                        {% endif %}
+                                        - <span class="game-hourSlot-{{ game.id }}">{{ game.halfDaySlots }}</span></p>
                                 </div>
                             </div>
                         </div>

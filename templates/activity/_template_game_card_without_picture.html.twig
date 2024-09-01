@@ -17,10 +17,15 @@
                 <div class="badge bg-warning mb-3 game-status-{{ game.id }}" data-value="{{ game.gameStatus }}">{{ 'activity.new'|trans }}</div>
             {% endif %}
 
-            <p class="text-muted font-12 mb-3">{{ 'activity.slots'|trans }} <span
-                        class="game-weekSlot-{{ game.id }}">{{ game.weekSlots }}</span> - <span
-                        class="game-hourSlot-{{ game.id }}">{{ game.halfDaySlots }}</span></p>
-
+            <p class="text-muted font-12 mb-3">{{ 'activity.slots'|trans }}
+                {% if game.weekSlots== 'CRENEAU_1' %}
+                    <span class="game-weekSlot-{{ game.id }}">SEMAINES IMPAIRES</span>
+                {% elseif game.weekSlots== 'CRENEAU_2' %}
+                    <span class="game-weekSlot-{{ game.id }}">SEMAINES PAIRES</span>
+                {% else %}
+                    <span class="game-weekSlot-{{ game.id }}">{{ game.weekSlots }}</span>
+                {% endif %}
+                - <span class="game-hourSlot-{{ game.id }}">{{ game.halfDaySlots }}</span></p>
             <p class="text-muted font-12 mb-3">{{ 'activity.master'|trans }} <span
                         class="game-gameMaster-{{ game.id }}">{{ game.gameMaster.firstname }} {{ game.gameMaster.name }} ({{ game.gameMaster.username }}) </span>
             </p>
