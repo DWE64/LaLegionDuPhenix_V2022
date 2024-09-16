@@ -26,6 +26,14 @@ class StatusUserInGameRepository extends ServiceEntityRepository
         }
     }
 
+    public function add(StatusUserInGame $statusUserInGame, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($statusUserInGame);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
 //    /**
 //     * @return StatusUserInGame[] Returns an array of StatusUserInGame objects
 //     */
