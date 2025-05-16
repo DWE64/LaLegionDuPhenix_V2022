@@ -216,7 +216,7 @@ class ManageUser extends React.Component {
                                     <th onClick={() => this.handleSort('roles')}>Rôle {sortConfig.key === 'roles' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}</th>}
                                 <th onClick={() => this.handleSort('associationRegistrationDate')}>Date
                                     d'inscription {sortConfig.key === 'associationRegistrationDate' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}</th>
-                                <th>Membre</th>
+                                <th onClick={() => this.handleSort('isAssociationMember')}>Membre {sortConfig.key === 'isAssociationMember' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}</th>
                                 <th onClick={() => this.handleSort('createdAt')}>Date de
                                     création {sortConfig.key === 'createdAt' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}</th>
                                 <th onClick={() => this.handleSort('updatedAt')}>Date de mise à
