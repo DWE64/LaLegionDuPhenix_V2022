@@ -18,7 +18,8 @@ class ManageUser extends React.Component {
                 direction: 'asc'
             },
             editingUserId: null,
-            editedUser: {}
+            editedUser: {},
+            searchQuery: ''
         };
     }
 
@@ -146,11 +147,16 @@ class ManageUser extends React.Component {
         let filteredUsers = users;
 
         if (searchQuery) {
-            filteredUsers = users.filter((user) =>
-                user.name.toLowerCase().includes(searchQuery) ||
-                user.email.toLowerCase().includes(searchQuery) ||
-                user.username.toLowerCase().includes(searchQuery)
-            );
+            const query = searchQuery.toLowerCase();
+            filteredUsers = users.filter(user => {
+                // On transforme chaque champ en chaîne non nulle
+                const name     = (user.name     || '').toLowerCase();
+                const email    = (user.email    || '').toLowerCase();
+                const username = (user.username || '').toLowerCase();
+                return name.includes(query)
+                    || email.includes(query)
+                    || username.includes(query);
+            });
         }
 
         if (sortConfig) {
